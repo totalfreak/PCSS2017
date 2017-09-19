@@ -1,0 +1,9 @@
+/home/daniel/Documents/PCSS2017/CMakeFiles/install/strip.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/install/local.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/install.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/list_install_components.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/rebuild_cache.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/edit_cache.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/package_source.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/package.dir
+/home/daniel/Documents/PCSS2017/CMakeFiles/client.dir

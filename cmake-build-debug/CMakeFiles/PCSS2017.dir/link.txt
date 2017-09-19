@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/PCSS2017.dir/Client/client.cpp.o  -o PCSS2017 

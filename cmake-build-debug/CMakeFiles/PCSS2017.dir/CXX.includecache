@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/daniel/Documents/PCSS2017/Client/client.cpp
+_G_config.h
+/home/daniel/Documents/PCSS2017/Client/_G_config.h
+iostream
+-
+SFML/Window.hpp
+-
+client.h
+/home/daniel/Documents/PCSS2017/Client/client.h
+
+/home/daniel/Documents/PCSS2017/Client/client.h
+
