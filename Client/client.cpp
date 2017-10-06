@@ -7,19 +7,14 @@ using namespace std;
 using namespace sf;
 
 
+
 int main() {
-
-
-
+    int wasRolled;
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
-    float circDiam = 100.f;
-    CircleShape circle(circDiam);
-    circle.setFillColor(Color::Cyan);
-
     //Making the initial dice object
-    Dice die1;
+    Dice die1 = Dice();
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -29,30 +24,27 @@ int main() {
         while (window.pollEvent(event))
         {
 
-            if(Mouse::isButtonPressed(Mouse::Button::Left)) {
-                die1.chooseDiceTex(die1.roll());
+            //Checking for left mouse press
+            if(event.type == Event::MouseButtonReleased) {
+                if (event.mouseButton.button == Mouse::Button::Left) {
+                    wasRolled = die1.roll();
+                    cout << " " << die1.rolled[0] << " " << die1.rolled[1] << " ";
+                }
             }
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed){
-                cout << die1.roll();
                 window.close();
             }
         }
 
-        //Setting position of dices
-        Vector2f dicePos1, dicePos2;
-        dicePos1.x = window.getSize().x/2;
-        dicePos1.y = window.getSize().y/2;
-        dicePos2.x = 100;
-        dicePos2.y = window.getSize().y/2;
-
-
-        die1.diceSprites[0].setPosition(dicePos1);
-        die1.diceSprites[1].setPosition(dicePos2);
-        window.clear();
+        Sprite dice1Spr, dice2Spr;
+        die1.diceSprites[0].setPosition(100, 100);
+        die1.diceSprites[1].setPosition(150, 100);
+        window.clear(Color::White);
         window.draw(die1.diceSprites[0]);
         window.draw(die1.diceSprites[1]);
         window.display();
+
     }
 
     return 0;
