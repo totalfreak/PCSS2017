@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "constants.cpp"
 #include "Dice.cpp"
 #include "Player.cpp"
 
@@ -35,6 +36,13 @@ int main() {
         cout << "Error loading player texture";
     }
     Player newPlayer("Steve",playerTexture);
+
+    //Making the field linked list
+    Fields fieldList;
+    for(int i = 0; i < NUMBER_OF_FIELDS; i++){
+        fieldList.createField(i, "regular");
+    }
+    fieldList.display();
 
     // run the program as long as the window is open
     while (window.isOpen())
