@@ -67,36 +67,6 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="package_source">
-				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 package_source"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="package">
-				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 package"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="client">
 				<Option output="/home/daniel/Documents/PCSS2017/client" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
@@ -145,11 +115,38 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="package_source">
+				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 package_source"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package">
+				<Option working_dir="/home/daniel/Documents/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 package"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/daniel/Documents/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
 		<Unit filename="/home/daniel/Documents/PCSS2017/Client/client.cpp">
-			<Option target="client"/>
-		</Unit>
-		<Unit filename="/home/daniel/Documents/PCSS2017/Client/client.h">
 			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/daniel/Documents/PCSS2017/CMakeLists.txt">
