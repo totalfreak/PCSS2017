@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "constants.cpp"
 #include "Dice.cpp"
 #include "Player.cpp"
 
@@ -19,19 +20,74 @@ int main() {
 
     //Temp background location
     Texture bgTex;
+    Sprite bgSpr;
 
     if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.png")) {
         cout << "Error loading BG texture";
     }
-
-    Sprite bgSpr;
 
     bgSpr.setTexture(bgTex);
 
     //Making the initial dice object
     Dice die1 = Dice();
 
-    Player newPlayer("Steve");
+    Texture textureAhmad;
+    if(!textureAhmad.loadFromFile("Client/Sprites/player_icons/Ahmad.png")) {
+        cout << "Error loading player texture Ahmad";
+    }
+    Player Ahmad("Ahmad",textureAhmad);
+
+    Texture textureAmanda;
+    if(!textureAmanda.loadFromFile("Client/Sprites/player_icons/Amanda.png")) {
+        cout << "Error loading player texture Amanda";
+    }
+    Player Amanda("Amanda",textureAmanda);
+
+    Texture textureKevin;
+    if(!textureKevin.loadFromFile("Client/Sprites/player_icons/Kevin.png")) {
+        cout << "Error loading player texture Kevin";
+    }
+    Player Kevin("Kevin",textureKevin);
+
+    Texture textureCarl;
+    if(!textureCarl.loadFromFile("Client/Sprites/player_icons/Carl.png")) {
+        cout << "Error loading player texture Carl";
+    }
+    Player Carl("Carl",textureCarl);
+
+    Texture textureSteve;
+    if(!textureSteve.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
+        cout << "Error loading player texture Steve";
+    }
+    Player Steve("Steve",textureSteve);
+
+    Player currentPlayer("Steve",textureSteve);
+    srand (time(NULL));
+
+    switch (rand()%5){
+        case 1:
+             currentPlayer = Steve;
+            break;
+        case 2:
+             currentPlayer = Ahmad;
+            break;
+        case 3:
+             currentPlayer = Amanda;
+            break;
+        case 4:
+             currentPlayer = Carl;
+            break;
+        case 5:
+             currentPlayer = Kevin;
+            break;
+    }
+
+    //Making the field linked list
+    Fields fieldList;
+    for(int i = 0; i < NUMBER_OF_FIELDS; i++){
+        fieldList.createField(i, "regular");
+    }
+    fieldList.display();
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -61,6 +117,7 @@ int main() {
         window.draw(bgSpr);
         window.draw(die1.diceSprites[0]);
         window.draw(die1.diceSprites[1]);
+        window.draw(currentPlayer.display());
         window.display();
 
     }

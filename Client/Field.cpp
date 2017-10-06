@@ -2,19 +2,47 @@
 
 using namespace std;
 
-class Field{
-private:
+struct field {
     int number;
-    string type;
+    string type; //regular - corner
+    field *next;
+};
+
+class Fields {
+private:
+    field *head, *tail;
 
 public:
-    int getNumber(){
-        return number;
+    void createField(int n, string s)
+    {
+        field *temp = new field;
+        temp->number = n;
+        temp->type = s;
+        temp->next = nullptr;
+
+        if(head == nullptr) {
+            head = temp;
+            tail = temp;
+
+        } else {
+            tail->next = temp;
+            tail = temp;
+        }
+
     }
 
-    string getType(){
-        return type;
+    void display() {
+        field *temp;
+        temp = head;
+        while(temp != nullptr) {
+            cout << temp->number << " - " << temp->type << "\n";
+            temp = temp->next;
+        }
+    }
+
+    Fields() {
+        head = nullptr;
+        tail = nullptr;
     }
 
 };
-
