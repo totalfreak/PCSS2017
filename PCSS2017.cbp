@@ -8,6 +8,7 @@
 		<Option virtualFolders="CMake Files\;CMake Files\cmake_modules\;"/>
 		<Build>
 			<Target title="all">
+<<<<<<< HEAD
 				<Option working_dir="/home/simone/Documents/PCSS2017"/>
 				<Option type="4"/>
 				<MakeCommands>
@@ -148,10 +149,105 @@
 			<Target title="clientExe">
 				<Option output="/home/simone/Documents/PCSS2017/clientExe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/simone/Documents/PCSS2017"/>
+=======
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package_source">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 package_source"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="package">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 package"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clientExe">
+				<Option output="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/clientExe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+>>>>>>> f9ccb841f81b5e1a818926e395c517f27279314a
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+<<<<<<< HEAD
 					<Add directory="/home/simone/Documents/PCSS2017"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
@@ -172,10 +268,32 @@
 			<Target title="clientExe/fast">
 				<Option output="/home/simone/Documents/PCSS2017/clientExe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/simone/Documents/PCSS2017"/>
+=======
+					<Add directory="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clientExe"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clientExe/fast">
+				<Option output="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/clientExe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+>>>>>>> f9ccb841f81b5e1a818926e395c517f27279314a
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+<<<<<<< HEAD
 					<Add directory="/home/simone/Documents/PCSS2017"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
@@ -216,6 +334,44 @@
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 		<Unit filename="/home/simone/Documents/PCSS2017/cmake_modules/FindSFML.cmake">
+=======
+					<Add directory="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../include/c++/7.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clientExe/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jjgaardbo/Documents/AAU/3rd/Programming\ of\ Complex\ Software\ Systems/miniProject/PCSS2017/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/Dice.cpp">
+			<Option target="clientExe"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/Player.cpp">
+			<Option target="clientExe"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/Player.h">
+			<Option target="clientExe"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/client.cpp">
+			<Option target="clientExe"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/config.h.in">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/cmake_modules/FindSFML.cmake">
+>>>>>>> f9ccb841f81b5e1a818926e395c517f27279314a
 			<Option virtualFolder="CMake Files\cmake_modules\"/>
 		</Unit>
 	</Project>

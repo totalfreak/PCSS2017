@@ -53,8 +53,10 @@ public:
                 break;
             case 5:
                 texes[0] = dice5;
+                break;
             case 6:
                 texes[0] = dice6;
+                break;
         }
         switch (whatIsRolled[1]) {
             case 1:
@@ -71,8 +73,10 @@ public:
                 break;
             case 5:
                 texes[1] = dice5;
+                break;
             case 6:
                 texes[1] = dice6;
+                break;
         }
         diceTexes[0] = texes[0];
         diceTexes[1] = texes[1];
