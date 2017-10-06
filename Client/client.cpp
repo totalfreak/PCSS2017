@@ -7,8 +7,6 @@
 using namespace std;
 using namespace sf;
 
-Sp
-
 int main() {
 
     Texture dice1, dice2, dice3, dice4, dice5, dice6;
