@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Dice.cpp"
+#include "Field.cpp"
 
 using namespace std;
 using namespace sf;
