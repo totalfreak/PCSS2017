@@ -1,6 +1,6 @@
 #include "_G_config.h"
 #include <iostream>
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "client.h"
 
 

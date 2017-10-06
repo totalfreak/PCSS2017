@@ -1,17 +1,5 @@
 /home/daniel/clion-2017.2.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/daniel/Documents/PCSS2017
-CMake Error at cmake_modules/FindSFML.cmake:91 (FILE):
-  file failed to open for reading (No such file or directory):
-
-    /usr/include/SFML/Config.hpp
-Call Stack (most recent call first):
-  CMakeLists.txt:25 (find_package)
-
-
-CMake Error at cmake_modules/FindSFML.cmake:355 (message):
-  SFML found but version too low (requested: 2, found: 1.x.x)
-Call Stack (most recent call first):
-  CMakeLists.txt:25 (find_package)
-
-
--- Configuring incomplete, errors occurred!
-See also "/home/daniel/Documents/PCSS2017/CMakeFiles/CMakeOutput.log".
+-- Found SFML 2.4.2 in /usr/include
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/daniel/Documents/PCSS2017
