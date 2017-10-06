@@ -150,9 +150,6 @@
 		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/client.cpp">
 			<Option target="client"/>
 		</Unit>
-		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/Client/client.h">
-			<Option target="client"/>
-		</Unit>
 		<Unit filename="/home/jjgaardbo/Documents/AAU/3rd/Programming of Complex Software Systems/miniProject/PCSS2017/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

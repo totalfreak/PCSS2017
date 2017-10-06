@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
         Client/client.cpp
-        Client/client.h)
+        )
 
 configure_file(
         "${PROJECT_SOURCE_DIR}/config.h.in"

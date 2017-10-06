@@ -1,14 +1,17 @@
-#include "_G_config.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "client.h"
 #include "Dice.cpp"
+#include <SFML/Main.hpp>
 
 using namespace std;
 using namespace sf;
 
 int main() {
-    sf::Window window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+
+    float circDiam = 100.f;
+    CircleShape circle(circDiam);
+    circle.setFillColor(Color::Cyan);
 
 
     Dice die1;
@@ -26,6 +29,15 @@ int main() {
                 window.close();
             }
         }
+        Vector2f mousePos;
+
+        mousePos.x = (int) Mouse::getPosition(window).x-circDiam;
+        mousePos.y = (int) Mouse::getPosition(window).y-circDiam;
+
+        circle.setPosition(mousePos);
+        window.clear();
+        window.draw(circle);
+        window.display();
     }
 
     return 0;
