@@ -9,10 +9,11 @@ class Player {
     int points;
     Texture playerTexture;
     Sprite playerSprite;
-    Texture playerBrickTex;
-    Sprite playerBrickSpr;
+
 
 public:
+    Texture playerBrickTex;
+    Sprite playerBrickSpr;
     bool turnTaken;
     bool isPlayersTurn;
     //Bool containing whether or not a player actually contains a person playing
@@ -20,7 +21,7 @@ public:
     bool hasPlayer = false;
     Vector2i position;
 
-    Player(string name, Texture picTex, Texture brickTex){
+    Player(string name, Texture picTex, Texture brickTex) {
         playerName = name;
         playerTexture = picTex;
         playerSprite.setTexture(playerTexture);
@@ -33,9 +34,8 @@ public:
         hasPlayer = true;
     }
     Player() = default;
-    void setPlayersTurn(bool x)
-    {
-        isPlayersTurn = x;
+    void setPlayersTurn() {
+        isPlayersTurn = true;
         cout << endl << this->playerName << "'s turn began" << endl;
     }
     Vector2i getPosition(){
@@ -48,7 +48,7 @@ public:
         this->position = Vector2i(tempX, tempY);
     }
     Sprite display(){
-        this->playerBrickSpr.setPosition(getPosition().x, getPosition().y);
+        this->playerBrickSpr.setPosition(20, 100);
         return this->playerBrickSpr;
     }
 

@@ -92,10 +92,10 @@ public:
         //If there are no next player to go to, then go to beginning of array of players
         if(players[currentPlayer].hasPlayer) {
             currentPlayer++;
-            players[currentPlayer - 1].setPlayersTurn(true);
+            players[currentPlayer - 1].setPlayersTurn();
         } else {
             currentPlayer = 1;
-            players[currentPlayer - 1].setPlayersTurn(true);
+            players[currentPlayer - 1].setPlayersTurn();
         }
 
     }
