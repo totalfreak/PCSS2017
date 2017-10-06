@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Dice.cpp"
+#include "Player.cpp"
+
+
 #include "Field.cpp"
 
 using namespace std;
@@ -21,10 +24,13 @@ int main() {
 
     //Making the initial dice object
     Dice die1;
+    Player newPlayer("Steve");
+
 
     // run the program as long as the window is open
     while (window.isOpen())
     {
+
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event))
