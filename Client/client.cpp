@@ -34,20 +34,42 @@ int main() {
         sf::Event event;
         while (window.pollEvent(event))
         {
+
+            if(Mouse::isButtonPressed(Mouse::Button::Left)) {
+
+                switch (die1.roll()) {
+                    case 1:
+                        dice.setTexture(dice1);
+                        break;
+                    case 2:
+                        dice.setTexture(dice2);
+                        break;
+                    case 3:
+                        dice.setTexture(dice3);
+                        break;
+                    case 4:
+                        dice.setTexture(dice4);
+                        break;
+                    case 5:
+                        dice.setTexture(dice5);
+                    case 6:
+                        dice.setTexture(dice6);
+                }
+
+            }
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed){
                 cout << die1.roll();
                 window.close();
             }
         }
-        Vector2f mousePos;
+        Vector2f dicePos;
 
-        dice.setTexture(dice1);
+        dicePos.x = window.getSize().x/2;
+        dicePos.y = window.getSize().y/2;
 
-        mousePos.x = (int) Mouse::getPosition(window).x-16;
-        mousePos.y = (int) Mouse::getPosition(window).y-16;
 
-        dice.setPosition(mousePos);
+        dice.setPosition(dicePos);
         window.clear();
         window.draw(dice);
         window.display();
