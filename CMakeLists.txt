@@ -14,7 +14,7 @@ configure_file(
 include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
-set(EXECUTABLE_NAME "client")
+set(EXECUTABLE_NAME "clientExe")
 add_executable(${EXECUTABLE_NAME} Client/client.cpp Client/Dice.cpp)
 
 
