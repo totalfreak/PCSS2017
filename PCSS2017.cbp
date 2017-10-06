@@ -105,12 +105,13 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/daniel/Documents/PCSS2017"/>
-					<Add directory="/usr/include/c++/5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
-					<Add directory="/usr/include/c++/5/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
@@ -129,12 +130,13 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/home/daniel/Documents/PCSS2017"/>
-					<Add directory="/usr/include/c++/5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
-					<Add directory="/usr/include/c++/5/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
@@ -146,10 +148,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/daniel/Documents/PCSS2017/Client/client.cpp">
+		<Unit filename="/home/daniel/Documents/PCSS2017/Client/Dice.cpp">
 			<Option target="client"/>
 		</Unit>
-		<Unit filename="/home/daniel/Documents/PCSS2017/Client/client.h">
+		<Unit filename="/home/daniel/Documents/PCSS2017/Client/client.cpp">
 			<Option target="client"/>
 		</Unit>
 		<Unit filename="/home/daniel/Documents/PCSS2017/CMakeLists.txt">

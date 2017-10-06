@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
         Client/client.cpp
-        Client/client.h)
+        )
 
 configure_file(
         "${PROJECT_SOURCE_DIR}/config.h.in"
@@ -15,7 +15,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "client")
-add_executable(${EXECUTABLE_NAME} Client/client.cpp)
+add_executable(${EXECUTABLE_NAME} Client/client.cpp Client/Dice.cpp)
 
 
 # Detect and add SFML
