@@ -2,8 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "constants.cpp"
-#include "Dice.cpp"
-#include "Player.cpp"
+#include "GameManager.cpp"
 
 
 #include "Field.cpp"
@@ -12,9 +11,27 @@ using namespace std;
 using namespace sf;
 
 
+GameManager gameManager;
+bool gameStarted = false;
+
+void initGame() {
+    //Making new game manager with desired amount of players
+    cout << "How many players are playing at this time?" << endl;
+    int amountOfPlayers;
+    cin >> amountOfPlayers;
+    if(amountOfPlayers <= 6 && amountOfPlayers > 0) {
+        gameManager = GameManager(amountOfPlayers);
+        gameManager.players[0].setPlayersTurn(true);
+        gameStarted = true;
+    } else {
+        cout << "Try one more time" << endl;
+        initGame();
+    }
+}
+
 
 int main() {
-    int wasRolled;
+
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
@@ -22,65 +39,12 @@ int main() {
     Texture bgTex;
     Sprite bgSpr;
 
+    //Loading the background image
     if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.jpg")) {
         cout << "Error loading BG texture";
     }
-
     bgSpr.setTexture(bgTex);
 
-    //Making the initial dice object
-    Dice die1 = Dice();
-
-    Texture textureAhmad;
-    if(!textureAhmad.loadFromFile("Client/Sprites/player_icons/Ahmad.png")) {
-        cout << "Error loading player texture Ahmad";
-    }
-    Player Ahmad("Ahmad",textureAhmad);
-
-    Texture textureAmanda;
-    if(!textureAmanda.loadFromFile("Client/Sprites/player_icons/Amanda.png")) {
-        cout << "Error loading player texture Amanda";
-    }
-    Player Amanda("Amanda",textureAmanda);
-
-    Texture textureKevin;
-    if(!textureKevin.loadFromFile("Client/Sprites/player_icons/Kevin.png")) {
-        cout << "Error loading player texture Kevin";
-    }
-    Player Kevin("Kevin",textureKevin);
-
-    Texture textureCarl;
-    if(!textureCarl.loadFromFile("Client/Sprites/player_icons/Carl.png")) {
-        cout << "Error loading player texture Carl";
-    }
-    Player Carl("Carl",textureCarl);
-
-    Texture textureSteve;
-    if(!textureSteve.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
-        cout << "Error loading player texture Steve";
-    }
-    Player Steve("Steve",textureSteve);
-
-    Player currentPlayer("Steve",textureSteve);
-    srand (time(NULL));
-
-    switch (rand()%5){
-        case 1:
-             currentPlayer = Steve;
-            break;
-        case 2:
-             currentPlayer = Ahmad;
-            break;
-        case 3:
-             currentPlayer = Amanda;
-            break;
-        case 4:
-             currentPlayer = Carl;
-            break;
-        case 5:
-             currentPlayer = Kevin;
-            break;
-    }
 
     //Making the field linked list
     Fields fieldList;
@@ -94,14 +58,13 @@ int main() {
     {
 
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
+        Event event;
         while (window.pollEvent(event))
         {
-
             //Checking for left mouse press
             if(event.type == Event::MouseButtonReleased) {
                 if (event.mouseButton.button == Mouse::Button::Left) {
-                    wasRolled = die1.roll();
+                    gameManager.takeTurn();
                 }
             }
             // "close requested" event: we close the window
@@ -110,18 +73,24 @@ int main() {
             }
         }
 
+        if(!gameStarted) {
+            initGame();
+        }
+
         Sprite dice1Spr, dice2Spr;
-        die1.diceSprites[0].setPosition(100, 100);
-        die1.diceSprites[1].setPosition(150, 100);
+        gameManager.die.diceSprites[0].setPosition(100, 100);
+        gameManager.die.diceSprites[1].setPosition(150, 100);
         window.clear(Color::Black);
         window.draw(bgSpr);
-        window.draw(die1.diceSprites[0]);
-        window.draw(die1.diceSprites[1]);
-        window.draw(currentPlayer.display());
+        window.draw(gameManager.die.diceSprites[0]);
+        window.draw(gameManager.die.diceSprites[1]);
+        //window.draw(currentPlayer.display());
         window.display();
 
     }
 
     return 0;
 }
+
+
 

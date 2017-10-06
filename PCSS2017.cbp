@@ -201,6 +201,9 @@
 		<Unit filename="/home/daniel/Documents/PCSS2017/Client/Dice.cpp">
 			<Option target="clientExe"/>
 		</Unit>
+		<Unit filename="/home/daniel/Documents/PCSS2017/Client/GameManager.cpp">
+			<Option target="clientExe"/>
+		</Unit>
 		<Unit filename="/home/daniel/Documents/PCSS2017/Client/Player.cpp">
 			<Option target="clientExe"/>
 		</Unit>
