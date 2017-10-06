@@ -7,24 +7,27 @@
 using namespace std;
 using namespace sf;
 
-int main() {
+Sp
 
+int main() {
 
     Texture dice1, dice2, dice3, dice4, dice5, dice6;
 
     if(!dice1.loadFromFile("Client/Sprites/spr_dice1.png") || !dice2.loadFromFile("Client/Sprites/spr_dice2.png") || !dice3.loadFromFile("Client/Sprites/spr_dice3.png") || !dice4.loadFromFile("Client/Sprites/spr_dice4.png") || !dice5.loadFromFile("Client/Sprites/spr_dice5.png") || !dice6.loadFromFile("Client/Sprites/spr_dice6.png")) {
         cout << "Error loading sprites";
     }
+
+    //
     Sprite dice;
 
-
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    //Making window
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
     float circDiam = 100.f;
     CircleShape circle(circDiam);
     circle.setFillColor(Color::Cyan);
 
-
+    //Making the initial dice object
     Dice die1;
 
     // run the program as long as the window is open
@@ -36,7 +39,8 @@ int main() {
         {
 
             if(Mouse::isButtonPressed(Mouse::Button::Left)) {
-
+                /*
+                //Switch case, showing the right dice texture, dependent on what was rolled
                 switch (die1.roll()) {
                     case 1:
                         dice.setTexture(dice1);
@@ -55,6 +59,7 @@ int main() {
                     case 6:
                         dice.setTexture(dice6);
                 }
+                 */
 
             }
             // "close requested" event: we close the window
