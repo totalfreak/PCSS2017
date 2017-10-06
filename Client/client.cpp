@@ -22,7 +22,7 @@ int main() {
     Texture bgTex;
     Sprite bgSpr;
 
-    if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.png")) {
+    if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.jpg")) {
         cout << "Error loading BG texture";
     }
 
@@ -113,7 +113,7 @@ int main() {
         Sprite dice1Spr, dice2Spr;
         die1.diceSprites[0].setPosition(100, 100);
         die1.diceSprites[1].setPosition(150, 100);
-        window.clear(Color::White);
+        window.clear(Color::Black);
         window.draw(bgSpr);
         window.draw(die1.diceSprites[0]);
         window.draw(die1.diceSprites[1]);
