@@ -3,20 +3,13 @@
 #include <SFML/Window.hpp>
 #include "Dice.cpp"
 
-
 using namespace std;
 using namespace sf;
 
+
 int main() {
 
-    Texture dice1, dice2, dice3, dice4, dice5, dice6;
 
-    if(!dice1.loadFromFile("Client/Sprites/spr_dice1.png") || !dice2.loadFromFile("Client/Sprites/spr_dice2.png") || !dice3.loadFromFile("Client/Sprites/spr_dice3.png") || !dice4.loadFromFile("Client/Sprites/spr_dice4.png") || !dice5.loadFromFile("Client/Sprites/spr_dice5.png") || !dice6.loadFromFile("Client/Sprites/spr_dice6.png")) {
-        cout << "Error loading sprites";
-    }
-
-    //
-    Sprite dice;
 
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
@@ -37,28 +30,7 @@ int main() {
         {
 
             if(Mouse::isButtonPressed(Mouse::Button::Left)) {
-                /*
-                //Switch case, showing the right dice texture, dependent on what was rolled
-                switch (die1.roll()) {
-                    case 1:
-                        dice.setTexture(dice1);
-                        break;
-                    case 2:
-                        dice.setTexture(dice2);
-                        break;
-                    case 3:
-                        dice.setTexture(dice3);
-                        break;
-                    case 4:
-                        dice.setTexture(dice4);
-                        break;
-                    case 5:
-                        dice.setTexture(dice5);
-                    case 6:
-                        dice.setTexture(dice6);
-                }
-                 */
-
+                die1.chooseDiceTex(die1.roll());
             }
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed){
@@ -72,11 +44,55 @@ int main() {
         dicePos.y = window.getSize().y/2;
 
 
-        dice.setPosition(dicePos);
+        die1.diceSprites[0].setPosition(dicePos);
         window.clear();
-        window.draw(dice);
+        window.draw(die1.diceSprites[0]);
         window.display();
     }
 
     return 0;
+}
+
+Texture chooseDiceTex(int* whatIsRolled) {
+    //Switch case, showing the right dice texture, dependent on what was rolled
+
+    Texture texes[2];
+    switch (whatIsRolled[0]) {
+        case 1:
+            texes[0] = dice1;
+            break;
+        case 2:
+            texes[0] = dice2;
+            break;
+        case 3:
+            texes[0] = dice3;
+            break;
+        case 4:
+            texes[0] = dice4;
+            break;
+        case 5:
+            texes[0] = dice5;
+        case 6:
+            texes[0] = dice6;
+    }
+    switch (whatIsRolled[1]) {
+        case 1:
+            texes[1] = dice1;
+            break;
+        case 2:
+            texes[1] = dice2;
+            break;
+        case 3:
+            texes[1] = dice3;
+            break;
+        case 4:
+            texes[1] = dice4;
+            break;
+        case 5:
+            texes[1] = dice5;
+        case 6:
+            texes[1] = dice6;
+    }
+
+    return *texes;
 }
