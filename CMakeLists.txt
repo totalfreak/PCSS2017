@@ -1,7 +1,15 @@
 cmake_minimum_required(VERSION 3.5)
 project(PCSS2017)
 
+#Something something everyone else here
+if(UNIX OR APPLE)
 set(CMAKE_CXX_STANDARD 11)
+endif()
+
+#Something something Windooze stuff here
+if(WIN32)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -pedantic ")
+endif()
 
 set(SOURCE_FILES
         Client/client.cpp
