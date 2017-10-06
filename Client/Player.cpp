@@ -5,13 +5,13 @@ using namespace std;
 using namespace sf;
 
 class Player {
-    String playerName;
+    string playerName;
     int position; //between 0 and 39
     int points;
     bool isPlayersTurn;
 
 public:
-    Player(String name){
+    Player(string name){
         playerName = name;
         position = 0;
         points = 0;
@@ -29,7 +29,7 @@ private:
     void chooseAction(){
         if(isPlayersTurn)
         {
-            cout << playerName+"'s turn began" << endl;
+            cout << this->playerName << "'s turn began" << endl;
             // roll dice
             endTurn();
         }
