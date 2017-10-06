@@ -6,7 +6,7 @@ using namespace sf;
 
 class Player {
     String playerName;
-    int position;
+    int position; //between 0 and 39
     int points;
     bool isPlayersTurn;
 
@@ -20,7 +20,12 @@ public:
     void setPlayersTurn(bool x)
     {
         isPlayersTurn = x;
+        chooseAction();
     }
+    int getPosition(){
+        return position;
+    }
+private:
     void chooseAction(){
         if(isPlayersTurn)
         {
