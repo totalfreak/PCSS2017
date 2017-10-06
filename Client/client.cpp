@@ -46,7 +46,6 @@ int main() {
             if(event.type == Event::MouseButtonReleased) {
                 if (event.mouseButton.button == Mouse::Button::Left) {
                     wasRolled = die1.roll();
-                    cout << " " << die1.rolled[0] << " " << die1.rolled[1] << " ";
                 }
             }
             // "close requested" event: we close the window
