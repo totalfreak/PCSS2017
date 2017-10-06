@@ -9,10 +9,14 @@ class Player {
     int position; //between 0 and 39
     int points;
     bool isPlayersTurn;
+    Texture playerTexture;
+    Sprite playerSprite;
 
 public:
-    Player(string name){
+    Player(string name, Texture tex){
         playerName = name;
+        playerTexture = tex;
+        playerSprite.setTexture(playerTexture);
         position = 0;
         points = 0;
         isPlayersTurn = false;
@@ -24,6 +28,10 @@ public:
     }
     int getPosition(){
         return position;
+    }
+    Sprite display(){
+        playerSprite.setPosition(600, 0);
+        return playerSprite;
     }
 private:
     void chooseAction(){
@@ -39,7 +47,7 @@ private:
     }
     void endTurn(){
         isPlayersTurn = false;
-        cout << playerName+"'s turn ended" << endl;
+        cout << this->playerName << "'s turn ended" << endl;
         //inform server
     }
 };

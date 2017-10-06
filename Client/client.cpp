@@ -30,7 +30,11 @@ int main() {
     //Making the initial dice object
     Dice die1 = Dice();
 
-    Player newPlayer("Steve");
+    Texture playerTexture;
+    if(!playerTexture.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
+        cout << "Error loading player texture";
+    }
+    Player newPlayer("Steve",playerTexture);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -61,6 +65,7 @@ int main() {
         window.draw(bgSpr);
         window.draw(die1.diceSprites[0]);
         window.draw(die1.diceSprites[1]);
+        window.draw(newPlayer.display());
         window.display();
 
     }
