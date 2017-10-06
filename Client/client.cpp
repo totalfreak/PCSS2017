@@ -2,13 +2,16 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "client.h"
-
+#include "Dice.cpp"
 
 using namespace std;
 using namespace sf;
 
 int main() {
     sf::Window window(sf::VideoMode(800, 600), "My window");
+
+
+    Dice die1;
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -18,8 +21,10 @@ int main() {
         while (window.pollEvent(event))
         {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
+                cout << die1.roll();
                 window.close();
+            }
         }
     }
 
