@@ -6,24 +6,27 @@ using namespace sf;
 
 class Player {
     string playerName;
-    int position; //between 0 and 39
     int points;
     Texture playerTexture;
     Sprite playerSprite;
+    Texture playerBrickTex;
+    Sprite playerBrickSpr;
 
 public:
-
     bool turnTaken;
     bool isPlayersTurn;
     //Bool containing whether or not a player actually contains a person playing
     //Will also be used by server
-    bool hasPlayer;
+    bool hasPlayer = false;
+    Vector2i position;
 
-    Player(string name, Texture tex){
+    Player(string name, Texture picTex, Texture brickTex){
         playerName = name;
-        playerTexture = tex;
+        playerTexture = picTex;
         playerSprite.setTexture(playerTexture);
-        position = 0;
+        playerBrickTex = brickTex;
+        playerBrickSpr.setTexture(playerBrickTex);
+        position = Vector2i(0,0);
         points = 0;
         isPlayersTurn = false;
         turnTaken = false;
@@ -35,12 +38,18 @@ public:
         isPlayersTurn = x;
         cout << endl << this->playerName << "'s turn began" << endl;
     }
-    int getPosition(){
+    Vector2i getPosition(){
         return position;
     }
+    void setPosition(Vector2i pos) {
+        this->position = pos;
+    }
+    void setPosition(int tempX, int tempY) {
+        this->position = Vector2i(tempX, tempY);
+    }
     Sprite display(){
-        playerSprite.setPosition(600, 0);
-        return playerSprite;
+        this->playerBrickSpr.setPosition(getPosition().x, getPosition().y);
+        return this->playerBrickSpr;
     }
 
 
@@ -49,6 +58,7 @@ public:
         cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
         //TODO Make fit into whatever model we make the doubly linked list of Fields be
         //position += rolled;
+        setPosition(getPosition().x+100, getPosition().y+200);
     }
     void endTurn(){
         isPlayersTurn = false;

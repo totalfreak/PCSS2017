@@ -40,6 +40,8 @@ public:
     Texture texAhmad, texAmanda, texKevin, texCarl, texSteve;
     Texture texes[6] = {texAhmad, texAmanda, texKevin, texCarl, texSteve};
 
+    Texture texBrickFrog;
+
     int currentPlayer = 1;
 
     int playersInGame;
@@ -49,23 +51,26 @@ public:
         if(!texAhmad.loadFromFile("Client/Sprites/player_icons/Ahmad.png") || !texAmanda.loadFromFile("Client/Sprites/player_icons/Amanda.png") || !texKevin.loadFromFile("Client/Sprites/player_icons/Kevin.png") || !texCarl.loadFromFile("Client/Sprites/player_icons/Carl.png") ||!texSteve.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
             cout << "Error loading player textures";
         }
+        if(!texBrickFrog.loadFromFile("Client/Sprites/spr_frogTemp.png")) {
+            cout << "Error loading player brick textures";
+        }
 
         //Making the desired amount of players
         for (int i = 0; i < playersToMake; ++i) {
             cout << "Enter a name for player " << i+1 <<  endl;
             string desiredName; cin >> desiredName;
-            players[i] = createPlayer(desiredName, texes[i]);
+            players[i] = createPlayer(desiredName, texes[i], texBrickFrog);
         }
     }
     //Creating a new player
-    Player createPlayer(string tempName, Texture tempTex) {
-        Player tempPlayer = Player(tempName, tempTex);
+    Player createPlayer(string tempName, Texture tempTex, Texture tempBrickTex) {
+        Player tempPlayer = Player(tempName, tempTex, tempBrickTex);
         return tempPlayer;
     }
 
     void takeTurn() {
         //Making sure only players that are here and hasn't played yet can play
-        if(!players[currentPlayer - 1].turnTaken && players[currentPlayer - 1].isPlayersTurn) {
+        if(!players[currentPlayer - 1].turnTaken && players[currentPlayer - 1].isPlayersTurn && players[currentPlayer - 1].hasPlayer) {
             roll();
         }
     }
@@ -85,12 +90,12 @@ public:
 
     void nextTurn() {
         //If there are no next player to go to, then go to beginning of array of players
-        if(players[currentPlayer+1].hasPlayer || players[currentPlayer].hasPlayer) {
+        if(players[currentPlayer].hasPlayer) {
             currentPlayer++;
             players[currentPlayer - 1].setPlayersTurn(true);
         } else {
             currentPlayer = 1;
-            players[0].setPlayersTurn(true);
+            players[currentPlayer - 1].setPlayersTurn(true);
         }
 
     }

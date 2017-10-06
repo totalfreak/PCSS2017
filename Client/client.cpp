@@ -21,7 +21,8 @@ void initGame() {
     cin >> amountOfPlayers;
     if(amountOfPlayers <= 6 && amountOfPlayers > 0) {
         gameManager = GameManager(amountOfPlayers);
-        gameManager.players[0].setPlayersTurn(true);
+        gameManager.currentPlayer = 1;
+        gameManager.players[gameManager.currentPlayer - 1].setPlayersTurn(true);
         gameStarted = true;
     } else {
         cout << "Try one more time" << endl;
@@ -29,6 +30,12 @@ void initGame() {
     }
 }
 
+
+void drawDices(RenderWindow) {
+    gameManager.die.diceSprites[0].setPosition(100, 100);
+    gameManager.die.diceSprites[1].setPosition(150, 100);
+
+}
 
 int main() {
 
@@ -78,13 +85,12 @@ int main() {
         }
 
         Sprite dice1Spr, dice2Spr;
-        gameManager.die.diceSprites[0].setPosition(100, 100);
-        gameManager.die.diceSprites[1].setPosition(150, 100);
+
         window.clear(Color::Black);
         window.draw(bgSpr);
         window.draw(gameManager.die.diceSprites[0]);
         window.draw(gameManager.die.diceSprites[1]);
-        //window.draw(currentPlayer.display());
+        window.draw(gameManager.players[gameManager.currentPlayer-1].display());
         window.display();
 
     }
