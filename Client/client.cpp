@@ -19,12 +19,11 @@ int main() {
 
     //Temp background location
     Texture bgTex;
+    Sprite bgSpr;
 
     if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.png")) {
         cout << "Error loading BG texture";
     }
-
-    Sprite bgSpr;
 
     bgSpr.setTexture(bgTex);
 
