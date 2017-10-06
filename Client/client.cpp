@@ -1,11 +1,22 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Main.hpp>
 
 using namespace std;
 using namespace sf;
 
 int main() {
+
+
+    Texture dice1, dice2, dice3, dice4, dice5, dice6;
+
+    if(!dice1.loadFromFile("Client/Sprites/spr_dice1.png") || !dice2.loadFromFile("Client/Sprites/spr_dice2.png") || !dice3.loadFromFile("Client/Sprites/spr_dice3.png") || !dice4.loadFromFile("Client/Sprites/spr_dice4.png") || !dice5.loadFromFile("Client/Sprites/spr_dice5.png") || !dice6.loadFromFile("Client/Sprites/spr_dice6.png")) {
+        cout << "Error loading sprites";
+    }
+    Sprite dice;
+
+
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
     float circDiam = 100.f;
@@ -25,12 +36,14 @@ int main() {
         }
         Vector2f mousePos;
 
-        mousePos.x = (int) Mouse::getPosition(window).x-circDiam;
-        mousePos.y = (int) Mouse::getPosition(window).y-circDiam;
+        dice.setTexture(dice1);
 
-        circle.setPosition(mousePos);
+        mousePos.x = (int) Mouse::getPosition(window).x-16;
+        mousePos.y = (int) Mouse::getPosition(window).y-16;
+
+        dice.setPosition(mousePos);
         window.clear();
-        window.draw(circle);
+        window.draw(dice);
         window.display();
     }
 
