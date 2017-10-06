@@ -17,6 +17,17 @@ int main() {
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
+    //Temp background location
+    Texture bgTex;
+
+    if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.png")) {
+        cout << "Error loading BG texture";
+    }
+
+    Sprite bgSpr;
+
+    bgSpr.setTexture(bgTex);
+
     //Making the initial dice object
     Dice die1 = Dice();
 
@@ -48,6 +59,7 @@ int main() {
         die1.diceSprites[0].setPosition(100, 100);
         die1.diceSprites[1].setPosition(150, 100);
         window.clear(Color::White);
+        window.draw(bgSpr);
         window.draw(die1.diceSprites[0]);
         window.draw(die1.diceSprites[1]);
         window.display();
