@@ -3,9 +3,15 @@
 using namespace std;
 
 class Dice {
+
+    int rolled[2];
+
 public:
-    int roll(){
+    int* roll(){
         srand (time(NULL));
-        return rand()%6+1;
+
+        rolled[0] = rand()%6+1;
+        rolled[1] = rand()%6+1;
+        return rolled;
     };
 };
