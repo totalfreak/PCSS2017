@@ -15,7 +15,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "client")
-add_executable(${EXECUTABLE_NAME} Client/client.cpp)
+add_executable(${EXECUTABLE_NAME} Client/client.cpp Client/Dice.cpp)
 
 
 # Detect and add SFML

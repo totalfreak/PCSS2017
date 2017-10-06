@@ -1,7 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <SFML/Main.hpp>
+#include "Dice.cpp"
+
 
 using namespace std;
 using namespace sf;
@@ -23,6 +24,9 @@ int main() {
     CircleShape circle(circDiam);
     circle.setFillColor(Color::Cyan);
 
+
+    Dice die1;
+
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -31,8 +35,10 @@ int main() {
         while (window.pollEvent(event))
         {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
+                cout << die1.roll();
                 window.close();
+            }
         }
         Vector2f mousePos;
 
