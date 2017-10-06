@@ -38,15 +38,20 @@ int main() {
                 window.close();
             }
         }
-        Vector2f dicePos;
 
-        dicePos.x = window.getSize().x/2;
-        dicePos.y = window.getSize().y/2;
+        //Setting position of dices
+        Vector2f dicePos1, dicePos2;
+        dicePos1.x = window.getSize().x/2;
+        dicePos1.y = window.getSize().y/2;
+        dicePos2.x = 100;
+        dicePos2.y = window.getSize().y/2;
 
 
-        die1.diceSprites[0].setPosition(dicePos);
+        die1.diceSprites[0].setPosition(dicePos1);
+        die1.diceSprites[1].setPosition(dicePos2);
         window.clear();
         window.draw(die1.diceSprites[0]);
+        window.draw(die1.diceSprites[1]);
         window.display();
     }
 
