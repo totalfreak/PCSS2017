@@ -53,6 +53,7 @@ public:
                 break;
             case 5:
                 texes[0] = dice5;
+                break;
             case 6:
                 texes[0] = dice6;
                 break;
@@ -72,6 +73,7 @@ public:
                 break;
             case 5:
                 texes[1] = dice5;
+                break;
             case 6:
                 texes[1] = dice6;
                 break;
