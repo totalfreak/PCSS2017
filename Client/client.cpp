@@ -91,8 +91,10 @@ int main() {
         setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
         window.draw(gameManager.die.diceSprites[1]);
+        for (int i = 0; i < 6; i++) {
+            window.draw(gameManager.drawPlayer(i));
+        }
 
-        window.draw(gameManager.players[gameManager.currentPlayer-1].display());
         window.display();
 
     }

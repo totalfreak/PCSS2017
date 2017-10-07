@@ -27,7 +27,7 @@ public:
         playerSprite.setTexture(playerTexture);
         playerBrickTex = brickTex;
         playerBrickSpr.setTexture(playerBrickTex);
-        position = Vector2i(0,0);
+        position = Vector2i(540,540);
         points = 0;
         isPlayersTurn = false;
         turnTaken = false;
@@ -48,7 +48,8 @@ public:
         this->position = Vector2i(tempX, tempY);
     }
     Sprite display(){
-        this->playerBrickSpr.setPosition(20, 100);
+        playerBrickSpr.setTexture(playerBrickTex);
+        this->playerBrickSpr.setPosition(getPosition().x, getPosition().y);
         return this->playerBrickSpr;
     }
 
@@ -58,7 +59,7 @@ public:
         cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
         //TODO Make fit into whatever model we make the doubly linked list of Fields be
         //position += rolled;
-        setPosition(getPosition().x+100, getPosition().y+200);
+        setPosition(getPosition().x-rolled, getPosition().y);
     }
     void endTurn(){
         isPlayersTurn = false;

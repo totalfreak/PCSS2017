@@ -34,9 +34,11 @@ class GameManager {
 public:
 
     Dice die = Dice();
+    //Making the player objects and storing them in the player array
     Player player1, player2, player3, player4, player5, player6;
     Player players[6] = {player1, player2, player3, player4, player5, player6};
 
+    //Player picture textures
     Texture texAhmad, texAmanda, texKevin, texCarl, texSteve;
     Texture texes[6] = {texAhmad, texAmanda, texKevin, texCarl, texSteve};
 
@@ -44,7 +46,6 @@ public:
 
     int currentPlayer = 1;
 
-    int playersInGame;
 
     GameManager() = default;
     explicit GameManager(int playersToMake) {
@@ -69,12 +70,13 @@ public:
     }
 
     void takeTurn() {
-        //Making sure only players that are here and hasn't played yet can play
+        //Making sure only players that are here and hasn't played yet, can play
         if(!players[currentPlayer - 1].turnTaken && players[currentPlayer - 1].isPlayersTurn && players[currentPlayer - 1].hasPlayer) {
             roll();
         }
     }
 
+    //Rolling the dice for the current player
     void roll() {
         //If the turn hasn't been taken, then roll
         if(!players[currentPlayer - 1].turnTaken) {
@@ -84,20 +86,35 @@ public:
             //Do whatever is on the landed field
             players[currentPlayer - 1].chooseAction();
             //Next turn
-            nextTurn();
+            nextTurn(currentPlayer);
         }
     }
 
-    void nextTurn() {
+
+    //Serverproof recursive nextTurn function
+    void nextTurn(int curPlayer) {
         //If there are no next player to go to, then go to beginning of array of players
-        if(players[currentPlayer].hasPlayer) {
+        if(players[curPlayer].hasPlayer) {
             currentPlayer++;
             players[currentPlayer - 1].setPlayersTurn();
-        } else {
+            //If end of array has been reached, then restart
+        } else if(curPlayer > 6){
             currentPlayer = 1;
             players[currentPlayer - 1].setPlayersTurn();
+        } else {
+            //If the end hasn't been reached, to make sure that if player 3 leaves, but player 4 and 5 are still playing
+            //it should keep looking for players all the way through the loop, but still only pick up actual players
+            nextTurn(curPlayer+1);
         }
 
+    }
+
+    Sprite drawPlayer(int curPlayer) {
+        Sprite playerSpr;
+            if(players[curPlayer].hasPlayer) {
+                playerSpr = players[curPlayer].display();
+            }
+        return playerSpr;
     }
 
 };
