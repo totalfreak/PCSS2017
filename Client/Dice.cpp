@@ -21,8 +21,7 @@ public:
         }
     }
     int roll(){
-        //Seeding random function
-        srand (time(NULL));
+
 
         //Doing two dice rolls
         rolled[0] = rand()%6+1;

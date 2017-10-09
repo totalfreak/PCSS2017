@@ -15,6 +15,8 @@ GameManager gameManager;
 bool gameStarted = false;
 
 void initGame() {
+    //Seeding random function
+    srand (time(NULL));
     //Making new game manager with desired amount of players
     cout << "How many players are playing at this time?" << endl;
     int amountOfPlayers;
