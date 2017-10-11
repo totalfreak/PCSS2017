@@ -3,7 +3,7 @@ project(PCSS2017)
 
 #Something something everyone else here
 if(UNIX OR APPLE)
-set(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
 endif()
 
 #Something something Windooze stuff here
