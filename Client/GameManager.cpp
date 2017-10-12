@@ -5,32 +5,6 @@
 
 class GameManager {
 
-    /*
-    Player Steve("Steve",textureSteve);
-
-    Player currentPlayer("Steve",textureSteve);
-    srand (time(NULL));
-
-    switch (rand()%5){
-        case 1:
-            currentPlayer = Steve;
-        break;
-        case 2:
-            currentPlayer = Ahmad;
-        break;
-        case 3:
-            currentPlayer = Amanda;
-        break;
-        case 4:
-            currentPlayer = Carl;
-        break;
-        case 5:
-            currentPlayer = Kevin;
-        break;
-    }
-    */
-
-
 public:
 
     Dice die = Dice();

@@ -14,7 +14,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "constants.cpp"
+#include "Server/Server.cpp"
 #include "GameManager.cpp"
+
+
 
 
 #include "Field.cpp"
@@ -25,6 +28,7 @@ using namespace sf;
 
 GameManager gameManager;
 bool gameStarted = false;
+bool lobbyMade = false;
 int sock;
 struct sockaddr_in server;
 char message[1000], serverReply[2000];
@@ -34,10 +38,9 @@ void error(const char *msg) {
     exit(0);
 }
 
-void initGame() {
-    //Seeding random function
-    srand (time(NULL));
 
+
+void initGame() {
     //Temp server connection here
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == -1) {
@@ -49,40 +52,52 @@ void initGame() {
     cout << "Do you want to host a server, or join one?\n1: Host server\n2: Join server" << endl;
     cin >> answer;
     switch (answer) {
-        case 1:
+        case '1':
+            //Making new game manager with desired amount of players
+            cout << "How many players will be playing?" << endl;
+            int amountOfPlayers;
+            cin >> amountOfPlayers;
+            if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
+                //Creating a new server object
+                Server server1(amountOfPlayers);
 
-        //Making new game manager with desired amount of players
-        cout << "How many players will be playing?" << endl;
-        int amountOfPlayers;
-        cin >> amountOfPlayers;
-        if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
-            gameManager = GameManager(amountOfPlayers);
-            gameManager.currentPlayer = 1;
-            gameManager.players[gameManager.currentPlayer - 1].setPlayersTurn();
-            gameStarted = true;
-        } else {
-            cout << "Try one more time" << endl;
-            initGame();
-        }
+                server.sin_addr.s_addr = inet_addr("127.0.0.1");
+                server.sin_family = AF_INET;
+                server.sin_port = htons( 2222 );
+
+                //Connect to server
+                if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
+                    error("connect failed. Error");
+                }
+                puts("Connected\n");
+                gameManager = GameManager(amountOfPlayers);
+                gameManager.currentPlayer = 1;
+                gameManager.players[0].setPlayersTurn();
+                lobbyMade = true;
+            } else {
+                cout << "Try one more time" << endl;
+                initGame();
+            }
             break;
-        case 2:
-        string ipAddr;
-            cout << "What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)" << endl;
+        case '2':
+            std::string ipAddr;
+            puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
             std::getline(std::cin, ipAddr);
             if(ipAddr.length() < 7) {
-                error("Not a proper ip address mate");
+                ipAddr = "127.0.0.1";
             }
             const char* ip = ipAddr.c_str();
             server.sin_addr.s_addr = inet_addr(ip);
             server.sin_family = AF_INET;
             server.sin_port = htons( 2222 );
 
-            //Connect to remote server
+            //Connect to server
             if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
                 error("connect failed. Error");
             }
             puts("Connected\n");
 
+            gameStarted = true;
 
             //Do some server stuff here.
             break;
@@ -96,8 +111,10 @@ void setDicePos() {
 }
 
 int main() {
+    //Seeding random function
+    srand (time(NULL));
 
-    if(!gameStarted) {
+    if(!gameStarted && !lobbyMade) {
         initGame();
     }
 
@@ -162,6 +179,8 @@ int main() {
 
     return 0;
 }
+
+
 
 
 
