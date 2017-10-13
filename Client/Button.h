@@ -6,6 +6,4 @@
 #define PCSS2017_BUTTON_H
 
 
-
-
 #endif //PCSS2017_BUTTON_H
