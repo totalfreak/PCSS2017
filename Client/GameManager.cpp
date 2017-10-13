@@ -1,7 +1,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "constants.cpp"
+#include "Field.cpp"
 #include "Player.cpp"
 #include "Dice.cpp"
+
 
 class GameManager {
 
@@ -11,6 +14,9 @@ public:
     //Making the player objects and storing them in the player array
     Player player1, player2, player3, player4, player5, player6;
     Player players[6] = {player1, player2, player3, player4, player5, player6};
+
+    //Making the field linked list
+    Fields fieldList;
 
     //Player picture textures
     Texture texAhmad, texAmanda, texKevin, texCarl, texSteve;
@@ -30,12 +36,16 @@ public:
             cout << "Error loading player brick textures";
         }
 
+        //Setting up the fields
+        fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
+
         //Making the desired amount of players
         for (int i = 0; i < playersToMake; ++i) {
             cout << "Enter a name for player " << i+1 <<  endl;
             string desiredName; cin >> desiredName;
             players[i] = createPlayer(desiredName, texes[i], texBrickFrog);
         }
+
     }
     //Creating a new player
     Player createPlayer(string tempName, Texture tempTex, Texture tempBrickTex) {

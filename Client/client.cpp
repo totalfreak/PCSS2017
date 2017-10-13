@@ -12,14 +12,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "constants.cpp"
 #include "Server/Server.cpp"
 #include "GameManager.cpp"
 #include "Server/Lobby.cpp"
-
-
-
-#include "Field.cpp"
 
 using namespace std;
 using namespace sf;
@@ -131,10 +126,6 @@ int main() {
     bgSpr.setTexture(bgTex);
 
 
-    //Making the field linked list
-    Fields fieldList;
-    fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
-
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -162,7 +153,7 @@ int main() {
         window.clear(Color::Black);
         window.draw(bgSpr);
 
-        fieldList.display(window, fieldList, NUMBER_OF_FIELDS);
+        gameManager.fieldList.display(window, gameManager.fieldList, NUMBER_OF_FIELDS);
 
         //Drawing the dices
         setDicePos();
