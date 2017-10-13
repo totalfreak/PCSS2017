@@ -57,7 +57,7 @@ bool initGame() {
             //Making new game manager with desired amount of players
             cout << "How many players will be playing?" << endl;
             int amountOfPlayers;
-            cin >> amountOfPlayers;
+            amountOfPlayers = menu.getPlayerNum();
             if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
                 //Creating a new server object
                 Server server1(amountOfPlayers);
