@@ -134,10 +134,7 @@ int main() {
 
     //Making the field linked list
     Fields fieldList;
-    for(int i = 0; i < NUMBER_OF_FIELDS; i++){
-        fieldList.createField(i, "regular");
-    }
-    fieldList.display();
+    fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -165,6 +162,9 @@ int main() {
 
         window.clear(Color::Black);
         window.draw(bgSpr);
+
+        fieldList.display(window, fieldList, NUMBER_OF_FIELDS);
+
         //Drawing the dices
         setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
