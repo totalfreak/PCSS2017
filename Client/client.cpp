@@ -22,6 +22,7 @@ using namespace sf;
 
 MainMenu menu;
 GameManager gameManager;
+Lobby lobby;
 bool gameStarted = false;
 bool lobbyMade = false;
 int sock;
@@ -116,7 +117,7 @@ void setDicePos() {
 int main() {
     //Seeding random function
     srand (time(NULL));
-
+    lobby = Lobby();
     if(!gameStarted && !lobbyMade) {
         if(!initGame()){
             return 0;
@@ -173,7 +174,7 @@ int main() {
         for (int i = 0; i < 6; i++) {
             window.draw(gameManager.drawPlayer(i));
         }
-
+        window.draw(lobby.showTitle());
         window.display();
 
     }
