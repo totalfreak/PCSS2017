@@ -46,10 +46,8 @@ class Server {
         server.sin_port = htons(2222);
 
         //Bind the socket
-        if (bind(socket_desc, (struct sockaddr *) &server, sizeof(server)) < 0) {
-            //print the error message
-            perror("bind failed. Error");
-        }
+        bind(socket_desc, (struct sockaddr *) &server, sizeof(server));
+
         puts("bind done");
 
         listen(socket_desc, 5);
@@ -135,7 +133,7 @@ public:
 
             //Creating the thread
             //TODO Fix crashing, and fucking fix C++
-                //thread t(&Server::connection_handler, client_sock);
+                //thread t(&Server::connection_handler, (void *)&client_sock);
                 //t.join();
             /*if (pthread_create(&sniffer_thread, nullptr, &Server::connection_handler, (void *) new_sock) < 0) {
                 perror("could not create thread");

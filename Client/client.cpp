@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <pthread.h>
 #include <sstream>
 #include <iostream>
 #include <SFML/Graphics.hpp>
