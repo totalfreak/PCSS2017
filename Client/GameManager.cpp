@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "constants.cpp"
-#include "Field.cpp"
+#include "Fields.h"
 #include "Player.cpp"
 #include "Dice.cpp"
 
