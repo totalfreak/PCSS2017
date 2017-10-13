@@ -1,7 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
+
 #include <cmath>
+#include "Fields.h"
 
 using namespace std;
 using namespace sf;
@@ -23,9 +24,9 @@ public:
     //Will also be used by server
     bool hasPlayer = false;
     Vector2f position;
-    Vector2f goal; // position that this player is moving towards
     float speed;
-    int playerID;
+    int myID;
+    field tile; // the current tile this player is heading towards
 
     Player(string name, Texture picTex, Texture brickTex, int ID) {
         playerName = name;
@@ -34,13 +35,12 @@ public:
         playerBrickTex = brickTex;
         playerBrickSpr.setTexture(playerBrickTex);
         position = Vector2f(540,540);
-        goal = position;
         points = 0;
         isPlayersTurn = false;
         turnTaken = false;
         hasPlayer = true;
         speed = DEFAULTSPEED;
-        playerID = ID;
+        myID = ID;
     }
     Player() = default;
     void setPlayersTurn() {
@@ -58,21 +58,33 @@ public:
         this->position = Vector2f(tempX, tempY);
     }
 
-    void setGoal(Vector2f goal){// used to make the player move towards the position
-        position = goal;
-    }
-    Vector2f getGoal(){ // return the location the player is moving towards
-        return goal;
-    }
+
 
     void physics(){
+        if(&tile == nullptr){return;}
+        int nrOnField;
+        int myNr;
+        int playerID;
+        for(int i = 0; i < 6 ; i ++){
+            if(playerID = tile.playersOnField + i != nullptr){
+                nrOnField++;
+                if(playerID == myID){myNr = nrOnField;}
+            }
+        }
+        nrOnField++; // we increment to avoid having people at the ends of the tile
+        Vector2f goal;
+        if(nrOnField < 3){
+            goal = Vector2f(tile.position.x + tile.size.x/2 , tile.position.y + tile.position.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile.size.y );
+        }else{
+
+        }
 
         float dist;
-        if(dist = distance(getGoal() , getPosition()) < speed){
+        if(dist = distance(goal, getPosition()) < speed){
             if(dist < 1){return;}
             setPosition(goal);
         }
-        Vector2f moveDirection = Vector2f(getGoal() - getPosition());
+        Vector2f moveDirection = Vector2f(goal - getPosition());
         normalize(moveDirection);
         moveDirection *= speed;
         setPosition( getPosition() + moveDirection);
@@ -101,10 +113,38 @@ public:
 
         cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
         //TODO Make fit into whatever model we make the doubly linked list of Fields be
-        //position += rolled;
-        Vector2f moveDistance = Vector2f(0,100);
-        setGoal(getPosition() + moveDistance);
+
+        field * dest = &tile;
+        //iterate throught he field
+        for(int i = 0 ; i < rolled ; i++){
+
+            if(dest->next != nullptr) {
+                dest = dest->next;
+            }
+        }
+        moveTo(dest);
     }
+
+    void moveTo(field * dest){
+        if(dest != nullptr){
+            //delete us on the field we are on
+            for(int i = 0 ; i < 6 ; i++) {
+                if ( *(tile.playersOnField + i) == myID) {
+                    *(tile.playersOnField + i) = -1; // we use -1 to denote that no players are on the this index of the array
+                }
+            }
+            // then add us at the destination
+            tile = *dest;
+            for(int i = 0 ; i < 6 ; i++) {
+                if ( *(tile.playersOnField + i) == -1) {
+                    *(tile.playersOnField + i) = myID;
+                }
+            }
+
+        }
+    }
+
+
     void endTurn(){
         isPlayersTurn = false;
         cout << endl << this->playerName << "'s turn ended" << endl;

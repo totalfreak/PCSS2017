@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
+
 using namespace std;
 using namespace sf;
 
@@ -22,7 +23,7 @@ struct field {
     int number;
     Vector2f position;
     Vector2f size;
-    //Player* playersOnField = new Player[6]; //todo: Fixes #12 : We need to separate headers and classes in order to be able to include them in different files properly
+    int * playersOnField = new int[6]; //todo: Fixes #12 : We need to separate headers and classes in order to be able to include them in different files properly
     string type; //regular - corner
     field *next;
 };
@@ -35,7 +36,7 @@ public:
     void createField(int n, string s, Vector2f size, Vector2f pos);
     void setupFields(Fields& fieldListRef, int numberOfFields);
 
-    void display(RenderWindow& windowRef, Fields& fieldListRef, int numberOfFields);
+    void display(RenderWindow &windowRef, Fields &fieldListRef, int numberOfFields);
     Fields();
 
 };
