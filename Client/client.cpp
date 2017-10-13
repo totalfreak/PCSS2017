@@ -16,15 +16,14 @@
 #include "Server/Server.cpp"
 #include "GameManager.cpp"
 #include "Server/Lobby.cpp"
-
-
+#include "MainMenu.cpp"
 
 #include "Field.cpp"
 
 using namespace std;
 using namespace sf;
 
-
+MainMenu menu;
 GameManager gameManager;
 bool gameStarted = false;
 bool lobbyMade = false;
@@ -39,7 +38,9 @@ void error(const char *msg) {
 
 
 
-void initGame() {
+bool initGame() {
+
+
     //Temp server connection here
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == -1) {
@@ -47,11 +48,15 @@ void initGame() {
     }
     puts("Socket created");
 
-    char answer;
+    int answer;
     cout << "Do you want to host a server, or join one?\n1: Host server\n2: Join server" << endl;
-    cin >> answer;
+    answer = menu.start();
+
     switch (answer) {
-        case '1':
+        case 0:
+            return false;
+            break;
+        case 1:
             //Making new game manager with desired amount of players
             cout << "How many players will be playing?" << endl;
             int amountOfPlayers;
@@ -78,7 +83,7 @@ void initGame() {
                 initGame();
             }
             break;
-        case '2':
+        case 2:
             std::string ipAddr;
             puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
             std::getline(std::cin, ipAddr);
@@ -100,7 +105,9 @@ void initGame() {
 
             //Do some server stuff here.
             break;
+
     }
+    return true;
 }
 
 
@@ -114,7 +121,9 @@ int main() {
     srand (time(NULL));
 
     if(!gameStarted && !lobbyMade) {
-        initGame();
+        if(!initGame()){
+            return 0;
+        }
     }
 
     //Making window
