@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "constants.h"
 #include "Fields.h"
-#include "Player.cpp"
+#include "Player.h"
 #include "Dice.cpp"
 
 
