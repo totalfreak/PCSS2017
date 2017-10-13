@@ -79,8 +79,9 @@ public:
                 } else if(i > 10 && i < 20){
                     tempPos = Vector2f(10 , startPos.y-((tempSize.y*k)*2)+k*6);
                 } else if(i > 20 && i < 30){
-                    tempPos = Vector2f(cornerFieldSize.x + ((tempSize.x*k)*2), 10);
-                    cout << i << ":" << tempPos.x << "," << tempPos.y << endl;
+                    tempPos = Vector2f(cornerFieldSize.x-15 + ((tempSize.x*k)*2)-k*6, 10);
+                } else if(i > 30 && i < 40){
+                    tempPos = Vector2f(startPos.x, cornerFieldSize.y-15 +((tempSize.y*k)*2)-k*6);
                 }
 
                 fieldListRef.createField(i, "regular", tempSize, tempPos);
