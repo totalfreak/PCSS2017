@@ -43,13 +43,13 @@ public:
         for (int i = 0; i < playersToMake; ++i) {
             cout << "Enter a name for player " << i+1 <<  endl;
             string desiredName; cin >> desiredName;
-            players[i] = createPlayer(desiredName, texes[i], texBrickFrog);
+            players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i);
         }
 
     }
     //Creating a new player
-    Player createPlayer(string tempName, Texture tempTex, Texture tempBrickTex) {
-        Player tempPlayer = Player(tempName, tempTex, tempBrickTex);
+    Player createPlayer(string tempName, Texture tempTex, Texture tempBrickTex, int playerID) {
+        Player tempPlayer = Player(tempName, tempTex, tempBrickTex, playerID);
         return tempPlayer;
     }
 
