@@ -16,6 +16,7 @@ using namespace std;
 using namespace sf;
 
 class Player {
+
     string playerName;
     int points;
     Texture playerTexture;
@@ -38,7 +39,6 @@ public:
 
 
     //constructors
-    Player(string name, Texture picTex, Texture brickTex, int ID);
     Player() = default;
 
 
@@ -64,6 +64,7 @@ public:
     void moveTo(field * dest);      //deletes spot at current tile and gives them a spot at the destinaiton
 
 
+    Player(string name, Texture picTex, Texture brickTex, int ID, field *pos);
 };
 
 #endif //PCSS2017_PLAYER_H

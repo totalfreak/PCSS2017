@@ -34,6 +34,10 @@ Fields::Fields() {
 
 }
 
+field * Fields::getHead(){
+    return head;
+}
+
 void Fields::display(RenderWindow &windowRef, Fields &fieldListRef, int numberOfFields) {
     field *temp;
     temp = head;

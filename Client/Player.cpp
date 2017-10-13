@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(string name, Texture picTex, Texture brickTex, int ID) {
+Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * pos) {
     playerName = name;
     playerTexture = picTex;
     playerSprite.setTexture(playerTexture);
@@ -15,6 +15,7 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID) {
     hasPlayer = true;
     speed = DEFAULTSPEED;
     myID = ID;
+    tile = *pos;
 }
 
 void Player::setPlayersTurn() {

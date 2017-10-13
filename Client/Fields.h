@@ -39,6 +39,7 @@ public:
     void display(RenderWindow &windowRef, Fields &fieldListRef, int numberOfFields);
     Fields();
 
+    field *getHead();
 };
 
 #endif //PCSS2017_FIELDS_H
