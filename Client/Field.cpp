@@ -8,14 +8,26 @@ const Vector2f startPos = Vector2f(518.f, 518.f);
 const Vector2f cornerFieldSize = Vector2f(72.f, 72.f);
 const Vector2f regularFieldSizeX = Vector2f(26.f, 72.f);
 const Vector2f regularFieldSizeY = Vector2f(72.f, 26.f);
-
+const vector<string> stdRules = {
+        "Question",
+        "Dog bite",
+        "Question",
+        "Challenge",
+        "Prison",
+        "Go back 4 fields",
+        "Horse",
+        "Pick card",
+        "Back to start",
+        "Prison"
+};
 
 struct field {
     int number;
     Vector2f position;
     Vector2f size;
-    //Player* playersOnField = new Player[6]; //todo: Fixes #12 : We need to separate headers and classes in order to be able to include them in different files properly
     string type; //regular - corner
+    //Player* playersOnField = new Player[6]; //todo: Fixes #12 : We need to separate headers and classes in order to be able to include them in different files properly
+    string rule;
     field *next;
 };
 
@@ -24,11 +36,12 @@ private:
     field *head, *tail;
 
 public:
-    void createField(int n, string s, Vector2f size, Vector2f pos)
+    void createField(int n, string s, string r, Vector2f size, Vector2f pos)
     {
         field *temp = new field;
         temp->number = n;
         temp->type = s;
+        temp->rule = r;
         temp->size = size;
         temp->position = pos;
         temp->next = nullptr;
@@ -66,7 +79,7 @@ public:
                         tempPos = Vector2f(startPos.x, 10);
                         break;
                 }
-                fieldListRef.createField(i, "corner", cornerFieldSize,tempPos);
+                fieldListRef.createField(i, "corner", stdRules[i%10], cornerFieldSize,tempPos);
             } else {
                 if(i > 0 && i < 10 || i > 20 && i < 30){
                     tempSize = regularFieldSizeX;
@@ -84,7 +97,7 @@ public:
                     tempPos = Vector2f(startPos.x, cornerFieldSize.y-15 +((tempSize.y*k)*2)-k*6);
                 }
 
-                fieldListRef.createField(i, "regular", tempSize, tempPos);
+                fieldListRef.createField(i, "regular", stdRules[i%10],tempSize, tempPos);
             }
         }
     }
@@ -96,6 +109,7 @@ public:
         field *temp;
         temp = head;
         Color color;
+        bool printRules = false;
         while(temp != nullptr) {
             RectangleShape rectangle;
             rectangle.setSize(temp->size);
@@ -108,10 +122,8 @@ public:
             rectangle.setFillColor(color);
             rectangle.setOutlineColor(color);
             rectangle.setOutlineThickness(9);
-
-
             windowRef.draw(rectangle);
-
+            if(printRules){cout << temp->number << " : " << temp->rule << endl;}
             temp = temp->next;
         }
 
