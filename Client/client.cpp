@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <pthread.h>
 #include <sstream>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -16,7 +15,7 @@
 #include "constants.cpp"
 #include "Server/Server.cpp"
 #include "GameManager.cpp"
-
+#include "Server/Lobby.cpp"
 
 
 
