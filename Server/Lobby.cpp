@@ -1,6 +1,4 @@
-//
-// Created by simone on 10/13/17.
-//
+
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -11,9 +9,22 @@ using namespace sf;
 
 class Lobby {
 
+public:
+    sf::Font font;
     Lobby() {
-        sf::Font font;
-        if (!font.loadFromFile("../Fonts/TheLightFont.ttf")) {
+
+        if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
             perror("Font couldn't load");
-        }}
+        }
+    }
+
+        Text showTitle(){
+        Text text;
+        text.setFont(font);
+        text.setString("Lobby");
+        text.setCharacterSize(40);
+        text.setColor(Color::Red);
+        text.setPosition(650, 50);
+        return text;
+    }
 };
