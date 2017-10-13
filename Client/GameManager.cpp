@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "constants.cpp"
+#include "constants.h"
 #include "Fields.h"
 #include "Player.cpp"
 #include "Dice.cpp"

@@ -8,7 +8,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-
+#include "constants.h"
 
 using namespace std;
 using namespace sf;

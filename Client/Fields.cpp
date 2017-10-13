@@ -12,11 +12,11 @@ void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
     temp->size = size;
     temp->position = pos;
     temp->next = nullptr;
-/*
+
     for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
         *(temp->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
     }
-*/
+
     if(head == nullptr) {
         head = temp;
         tail = temp;
