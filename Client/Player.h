@@ -21,7 +21,7 @@ class Player {
     int points;
     Texture playerTexture;
     Sprite playerSprite;
-    float DEFAULTSPEED = 20;
+    float DEFAULTSPEED = 5;
 
 
 public:
@@ -59,7 +59,7 @@ public:
     //game things
     void physics();     //move player
     float distance(Vector2f one, Vector2f two); // computes distance
-    Vector2f normalize(Vector2f in);    //normalizes a vector
+    void normalize(Vector2f * in);    //normalizes a vector
     void movePlayer(int rolled);    //tell a player to move to a place
     void moveTo(field * dest);      //deletes spot at current tile and gives them a spot at the destinaiton
 

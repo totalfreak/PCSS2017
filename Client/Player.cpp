@@ -8,14 +8,14 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     playerSprite.setTexture(playerTexture);
     playerBrickTex = brickTex;
     playerBrickSpr.setTexture(playerBrickTex);
-    position = Vector2f(540,540);
+    position = Vector2f(300,300);
     points = 0;
     isPlayersTurn = false;
     turnTaken = false;
     hasPlayer = true;
     speed = DEFAULTSPEED;
     myID = ID;
-    tile = *pos;
+    moveTo(pos);
 }
 
 void Player::setPlayersTurn() {
@@ -32,32 +32,36 @@ void Player::setPosition(int tempX, int tempY) {
 }
 
 void Player::physics() {
+    if(!hasPlayer){return;}
     if(&tile == nullptr){return;}
-    int nrOnField;
-    int myNr;
+    int nrOnField = 0;
+    int myNr = 0;
     int playerID;
     for(int i = 0; i < 6 ; i ++){
-        if(playerID = tile.playersOnField + i != nullptr){
+        playerID = *tile.playersOnField + i;
+        if( playerID != FIELD_EMPTY){
             nrOnField++;
-            if(playerID == myID){myNr = nrOnField;}
+            if(playerID == myID){
+                myNr = nrOnField;
+            }
         }
     }
     nrOnField++; // we increment to avoid having people at the ends of the tile
     Vector2f goal;
-    if(nrOnField < 3){
-        goal = Vector2f(tile.position.x + tile.size.x/2 , tile.position.y + tile.position.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile.size.y );
-    }else{
+    goal = Vector2f(tile.position.x + tile.size.x/2 , tile.position.y + tile.size.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile.size.y );
 
-    }
 
-    float dist;
-    if(dist = distance(goal, getPosition()) < speed){
-        if(dist < 1){return;}
+    float dist = distance(goal, getPosition());
+    if(dist  < speed){
         setPosition(goal);
+        return;
     }
+
     Vector2f moveDirection = Vector2f(goal - getPosition());
-    normalize(moveDirection);
+    normalize(&moveDirection);
+    cout << "NRMLZ : " << moveDirection.x << "   " << moveDirection.y << endl;
     moveDirection *= speed;
+    cout << moveDirection.x << "   " << moveDirection.y << endl;
     setPosition( getPosition() + moveDirection);
 }
 
@@ -66,11 +70,10 @@ float Player::distance(Vector2f one, Vector2f two) {
     return sqrt(dist); // now we have the length of the hypotenus
 }
 
-Vector2f Player::normalize(Vector2f in) {
-    float length = pow(in.x,2) + pow(in.y,2); //phythaoran theorem
+void Player::normalize(Vector2f * in) {
+    float length = pow(in->x,2) + pow(in->y,2); //phythaoran theorem
     length = sqrt(length); // now we have the length of the hypotenuse
-    in *= 1/length;
-    return in;
+    *in *= 1/length;
 }
 
 Sprite Player::display() {
