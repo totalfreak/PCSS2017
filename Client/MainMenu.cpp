@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "Button.cpp"
+#include "Button.h"
 
 
 using namespace std;
