@@ -34,12 +34,13 @@ void Player::setPosition(int tempX, int tempY) {
 
 void Player::physics() {
     if(!hasPlayer){return;}
-    if(&tile == nullptr){return;}
+    if( tile == nullptr){return;}
+
     int nrOnField = 0;
     int myNr = 0;
     int playerID;
     for(int i = 0; i < 6 ; i ++){
-        playerID = *tile.playersOnField + i;
+        playerID = *tile->playersOnField + i;
         if( playerID != FIELD_EMPTY){
             nrOnField++;
             if(playerID == myID){
@@ -49,7 +50,7 @@ void Player::physics() {
     }
     nrOnField++; // we increment to avoid having people at the ends of the tile
     Vector2f goal;
-    goal = Vector2f(tile.position.x + tile.size.x/2 , tile.position.y + tile.size.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile.size.y );
+    goal = Vector2f(tile->position.x + tile->size.x/2 , tile->position.y + tile->size.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile->size.y );
 
     float dist = distance(goal, getPosition());
 
@@ -107,7 +108,7 @@ void Player::movePlayer(int rolled) {
 
     cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
     //TODO Make fit into whatever model we make the doubly linked list of Fields be
-    field * dest = &tile;
+    field * dest = tile;
     //iterate throught he field
     for(int i = 0 ; i < rolled ; i++){
 
@@ -119,18 +120,21 @@ void Player::movePlayer(int rolled) {
 }
 
 void Player::moveTo(field *dest) {
-    if(dest != nullptr){
+    if(dest != nullptr) {
         //delete us on the field we are on
-        for(int i = 0 ; i < 6 ; i++) {
-            if ( *(tile.playersOnField + i) == myID) {
-                *(tile.playersOnField + i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
+        if (tile != nullptr) {
+        for (int i = 0; i < 6; i++) {
+            if (*(tile->playersOnField + i) == myID) {
+                *(tile->playersOnField +
+                  i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
             }
         }
+    }
         // then add us at the destination
-        tile = *dest;
+        tile = dest;
         for(int i = 0 ; i < 6 ; i++) {
-            if ( *(tile.playersOnField + i) == FIELD_EMPTY) {
-                *(tile.playersOnField + i) = myID;
+            if ( *(tile->playersOnField + i) == FIELD_EMPTY) {
+                *(tile->playersOnField + i) = myID;
             }
         }
 
