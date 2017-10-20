@@ -10,10 +10,12 @@
 
 #include <cmath>
 #include "Fields.h"
+#include <chrono>
 
 
 using namespace std;
 using namespace sf;
+using namespace std::chrono;
 
 class Player {
 
@@ -21,7 +23,14 @@ class Player {
     int points;
     Texture playerTexture;
     Sprite playerSprite;
-    float DEFAULTSPEED = 5;
+
+
+    //physics stuff
+    float DEFAULTSPEED = 100;
+    high_resolution_clock::time_point LastMove = high_resolution_clock::now();
+    high_resolution_clock::time_point tempTime;
+    float movescaleAdjust = 100; // prevents the sprite from being to big during move
+
 
 
 public:
@@ -33,7 +42,13 @@ public:
     //Will also be used by server
     bool hasPlayer = false;
     Vector2f position;
-    float speed;
+
+    //physics
+    float speed;//
+    float distanceFactor = 1.5;
+    float currentSpeed;
+
+
     int myID;
     field tile; // the current tile this player is heading towards
 
@@ -62,7 +77,7 @@ public:
     void normalize(Vector2f * in);    //normalizes a vector
     void movePlayer(int rolled);    //tell a player to move to a place
     void moveTo(field * dest);      //deletes spot at current tile and gives them a spot at the destinaiton
-
+    double getMoveTime();
 
     Player(string name, Texture picTex, Texture brickTex, int ID, field *pos);
 };

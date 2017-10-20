@@ -16,6 +16,7 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     speed = DEFAULTSPEED;
     myID = ID;
     moveTo(pos);
+
 }
 
 void Player::setPlayersTurn() {
@@ -50,19 +51,37 @@ void Player::physics() {
     Vector2f goal;
     goal = Vector2f(tile.position.x + tile.size.x/2 , tile.position.y + tile.size.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile.size.y );
 
-
     float dist = distance(goal, getPosition());
-    if(dist  < speed){
+
+    double timeSinceLastMove = getMoveTime();
+
+    currentSpeed = (speed + dist  * distanceFactor);
+
+    float moveSpeed = (float)(timeSinceLastMove * currentSpeed );
+
+
+
+    if(dist  < moveSpeed){
         setPosition(goal);
+
         return;
     }
 
     Vector2f moveDirection = Vector2f(goal - getPosition());
     normalize(&moveDirection);
-    cout << "NRMLZ : " << moveDirection.x << "   " << moveDirection.y << endl;
-    moveDirection *= speed;
-    cout << moveDirection.x << "   " << moveDirection.y << endl;
+
+    moveDirection *= moveSpeed;
+
+
     setPosition( getPosition() + moveDirection);
+}
+
+double Player::getMoveTime(){// gets time in microseconds since last move
+    tempTime = high_resolution_clock::now();
+    duration<double> timeSince =  tempTime - LastMove;
+
+    LastMove = tempTime;
+    return timeSince.count();
 }
 
 float Player::distance(Vector2f one, Vector2f two) {
@@ -79,6 +98,8 @@ void Player::normalize(Vector2f * in) {
 Sprite Player::display() {
     playerBrickSpr.setTexture(playerBrickTex);
     this->playerBrickSpr.setPosition(getPosition().x, getPosition().y);
+    float scaleFactor = (currentSpeed+movescaleAdjust)/(DEFAULTSPEED+movescaleAdjust) ;
+    playerBrickSpr.setScale(scaleFactor,scaleFactor);
     return this->playerBrickSpr;
 }
 
@@ -86,7 +107,6 @@ void Player::movePlayer(int rolled) {
 
     cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
     //TODO Make fit into whatever model we make the doubly linked list of Fields be
-
     field * dest = &tile;
     //iterate throught he field
     for(int i = 0 ; i < rolled ; i++){
