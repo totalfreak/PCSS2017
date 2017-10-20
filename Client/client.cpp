@@ -12,7 +12,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "Server/Server.h"
+#include "../Server/Server.h"
 #include "GameManager.cpp"
 #include "Lobby.h"
 #include "MainMenu.cpp"

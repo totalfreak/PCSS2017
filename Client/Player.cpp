@@ -15,6 +15,7 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     hasPlayer = true;
     speed = DEFAULTSPEED;
     myID = ID;
+    tile = pos;
     moveTo(pos);
 
 }
@@ -124,7 +125,7 @@ void Player::moveTo(field *dest) {
         //delete us on the field we are on
         if (tile != nullptr) {
         for (int i = 0; i < 6; i++) {
-            if (*(tile->playersOnField + i) == myID) {
+            if (tile && *(tile->playersOnField + i) == myID) {
                 *(tile->playersOnField +
                   i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
             }
