@@ -14,7 +14,7 @@
 #include <SFML/Window.hpp>
 #include "Server/Server.h"
 #include "GameManager.cpp"
-#include "Server/Lobby.cpp"
+#include "Lobby.h"
 #include "MainMenu.cpp"
 
 using namespace std;
@@ -119,13 +119,13 @@ int main() {
     srand (time(NULL));
     gameManager = GameManager(1);
 
-    /*lobby = Lobby();
+    /* lobby = Lobby();
     if(!gameStarted && !lobbyMade) {
-        if(!initGame()){
-            return 0;
-        }
-    }
-*/
+         if(!initGame()){
+             return 0;
+         }
+     }*/
+
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
