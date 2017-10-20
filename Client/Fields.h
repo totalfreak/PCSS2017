@@ -23,7 +23,7 @@ struct field {
     int number;
     Vector2f position;
     Vector2f size;
-    int * playersOnField = new int[6]; //todo: Fixes #12 : We need to separate headers and classes in order to be able to include them in different files properly
+    int * playersOnField = new int[6];
     string type; //regular - corner
     field *next;
 };
