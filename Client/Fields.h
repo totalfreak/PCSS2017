@@ -36,7 +36,7 @@ public:
     void createField(int n, string s, Vector2f size, Vector2f pos);
     void setupFields(Fields& fieldListRef, int numberOfFields);
 
-    void display(RenderWindow &windowRef, Fields &fieldListRef, int numberOfFields);
+    void display(RenderWindow &windowRef, Fields &fieldListRef);
     Fields();
 
     field *getHead();

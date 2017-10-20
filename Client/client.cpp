@@ -117,12 +117,15 @@ void setDicePos() {
 int main() {
     //Seeding random function
     srand (time(NULL));
+    /*
     lobby = Lobby();
     if(!gameStarted && !lobbyMade) {
         if(!initGame()){
             return 0;
         }
     }
+    */
+    gameManager = GameManager(1);
 
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
@@ -165,7 +168,7 @@ int main() {
         window.clear(Color::Black);
         window.draw(bgSpr);
 
-        gameManager.fieldList.display(window, gameManager.fieldList, NUMBER_OF_FIELDS);
+        gameManager.fieldList.display(window, gameManager.fieldList);
 
         //Drawing the dices
         setDicePos();

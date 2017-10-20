@@ -38,7 +38,7 @@ field * Fields::getHead(){
     return head;
 }
 
-void Fields::display(RenderWindow &windowRef, Fields &fieldListRef, int numberOfFields) {
+void Fields::display(RenderWindow &windowRef, Fields &fieldListRef) {
     field *temp;
     temp = head;
     Color color;
