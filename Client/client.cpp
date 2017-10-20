@@ -13,7 +13,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Server/Server.h"
-
 #include "GameManager.cpp"
 #include "Server/Lobby.cpp"
 #include "MainMenu.cpp"
