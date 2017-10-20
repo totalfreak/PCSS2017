@@ -50,7 +50,7 @@ public:
 
 
     int myID;
-    field tile; // the current tile this player is heading towards
+    field * tile; // the current tile this player is heading towards
 
 
     //constructors

@@ -20,6 +20,7 @@ const Vector2f regularFieldSizeY = Vector2f(72.f, 26.f);
 
 
 struct field {
+public:
     int number;
     Vector2f position;
     Vector2f size;
