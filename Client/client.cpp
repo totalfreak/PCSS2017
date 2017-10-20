@@ -12,7 +12,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "Server/Server.cpp"
+#include "Server/Server.h"
+
 #include "GameManager.cpp"
 #include "Server/Lobby.cpp"
 #include "MainMenu.cpp"
@@ -169,7 +170,7 @@ int main() {
         window.clear(Color::Black);
         window.draw(bgSpr);
 
-        gameManager.fieldList.display(window, gameManager.fieldList, NUMBER_OF_FIELDS);
+        gameManager.fieldList.display(window, gameManager.fieldList);
 
         //Drawing the dices
         setDicePos();
