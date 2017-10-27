@@ -19,6 +19,7 @@ class Lobby {
 
 public:
     sf::Font font;
+    sf::Music music;
     Sprite sprites[6];
     Texture texBrickFrog;
     Sprite tempSprite;

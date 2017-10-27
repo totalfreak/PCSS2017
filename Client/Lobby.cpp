@@ -23,10 +23,11 @@ Text Lobby::showPlayerName(String pName, int yPos) {
 }
 
 void Lobby::playMusic(){
-    sf::Music music;
-    if (!music.openFromFile("Audio/lobbymusic.wav")) {
+    if (!music.openFromFile("Client/Audio/lobbymusic.wav")) {
         // error
     }
+    music.setLoop(true);
+    music.setVolume(50);
     music.play();
 }
 
@@ -36,6 +37,7 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos){
 }
 
 int Lobby::start() {
+    playMusic();
     int numberOfButtons = 1;
     Button buttons[1];
     // Create one button to continue to game
@@ -91,6 +93,7 @@ int Lobby::start() {
                         // if mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
+                            music.stop();
                             return 1;
                         }
                     }
@@ -115,7 +118,9 @@ int Lobby::start() {
         window.draw(showTitle());
         window.display();
     }
+
     return 0;
+
 }
 
 Lobby::Lobby() {
