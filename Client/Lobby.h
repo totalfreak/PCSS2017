@@ -18,10 +18,14 @@ class Lobby {
 
 public:
     sf::Font font;
+    Sprite sprites[6];
+    Texture texBrickFrog;
+    Sprite tempSprite;
     Lobby();
 
     Text showTitle();
     Text showPlayerName(String pName, int yPos);
+    Sprite spritesShow(Sprite sprite, int yPos);
 
     RenderWindow window;
 
