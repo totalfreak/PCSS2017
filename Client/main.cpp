@@ -31,8 +31,10 @@ int main() {
     srand (time(NULL));
 
     if(!gameStarted) {
-         if(!gameManager.initGame()){
+         if(!gameManager.initGame()) {
              return 0;
+         } else {
+             gameStarted = true;
          }
      }
 
@@ -61,16 +63,16 @@ int main() {
             //Checking for left mouse press
             if(event.type == Event::MouseButtonReleased) {
                 if (event.mouseButton.button == Mouse::Button::Left) {
-                    gameManager.takeTurn();
+                    gameManager.roll();
                 }
             }
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
         }
 
-        for(int i = 0 ; i < 6 ; i++){
+        for(int i = 0 ; i < 6 ; i++) {
             gameManager.players[i].physics();
         }
 

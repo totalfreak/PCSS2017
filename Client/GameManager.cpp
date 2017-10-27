@@ -38,10 +38,11 @@ public:
 
     Texture texBrickFrog;
 
-    int currentPlayer = 1;
+    int myOwnPlayerNumber = 1;
 
-
+    //
     GameManager() = default;
+
     explicit GameManager(int playersToMake) {
         if(!texAhmad.loadFromFile("Client/Sprites/player_icons/Ahmad.png") || !texAmanda.loadFromFile("Client/Sprites/player_icons/Amanda.png") || !texKevin.loadFromFile("Client/Sprites/player_icons/Kevin.png") || !texCarl.loadFromFile("Client/Sprites/player_icons/Carl.png") ||!texSteve.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
             cout << "Error loading player textures";
@@ -53,9 +54,11 @@ public:
         //Setting up the fields
         fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
 
-            //cout << "Enter a name for player " << i+1 <<  endl;
-            //string desiredName; cin >> desiredName;
-            //players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i, fieldList.getHead());
+
+
+        //cout << "Enter a name for player " << i+1 <<  endl;
+        //string desiredName; cin >> desiredName;
+        //players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i, fieldList.getHead());
 
     }
     //Creating a new player
@@ -64,28 +67,13 @@ public:
         return tempPlayer;
     }
 
-    void takeTurn() {
-        //Making sure only players that are here and hasn't played yet, can play
-        if(!players[currentPlayer - 1].turnTaken && players[currentPlayer - 1].isPlayersTurn && players[currentPlayer - 1].hasPlayer) {
-            roll();
-        }
-    }
-
     //Rolling the dice for the current player
     void roll() {
-        //If the turn hasn't been taken, then roll
-        if(!players[currentPlayer - 1].turnTaken) {
-            int move = die.roll();
-            //Move the player the rolled amount
-            players[currentPlayer - 1].movePlayer(move);
-            //Do whatever is on the landed field
-            players[currentPlayer - 1].chooseAction();
-            //Next turn
-            nextTurn(currentPlayer);
-        }
+        //Send roll to server
+
     }
 
-
+/*
     //Serverproof recursive nextTurn function
     void nextTurn(int curPlayer) {
         //If there are no next player to go to, then go to beginning of array of players
@@ -101,9 +89,8 @@ public:
             //it should keep looking for players all the way through the loop, but still only pick up actual players
             nextTurn(curPlayer+1);
         }
-
     }
-
+    */
     Sprite drawPlayer(int curPlayer) {
         Sprite playerSpr;
             if(players[curPlayer].hasPlayer) {
@@ -124,7 +111,6 @@ public:
         puts("Socket created");
 
         int answer;
-        cout << "Do you want to host a server, or join one?\n1: Host server\n2: Join server" << endl;
         answer = menu.start();
 
         switch (answer) {
@@ -138,18 +124,18 @@ public:
                 amountOfPlayers = menu.getPlayerNum();
                 if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
                     //Creating a new server object
-                    Server server1(amountOfPlayers);
+                    //Server server1(amountOfPlayers);
 
                     server.sin_addr.s_addr = inet_addr("127.0.0.1");
                     server.sin_family = AF_INET;
                     server.sin_port = htons( 2222 );
 
                     //Connect to server
-                    if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
+                    /*if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
                         perror("connect failed. Error");
-                    }
+                    }*/
                     puts("Connected\n");
-                    currentPlayer = 1;
+                    //currentPlayer = 1;
                     players[0].setPlayersTurn();
                 } else {
                     cout << "Try one more time" << endl;
