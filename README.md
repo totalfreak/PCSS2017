@@ -58,7 +58,7 @@ This is a list of the requirements in order to be able to run this program
 
 3. When it's your turn, roll the dice and watch the magic happen
 
-## Program information
+## Program description
 The program uses TCP (Transmission Control Protocol) to send data to and from the server and clients.
 [*] More info to come
 
