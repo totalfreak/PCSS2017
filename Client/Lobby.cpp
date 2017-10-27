@@ -6,8 +6,9 @@ Text Lobby::showTitle() {
     text.setFont(font);
     text.setString("Lobby");
     text.setCharacterSize(45);
-    text.setFillColor(Color::Red);
-    text.setPosition(350, 40);
+    text.setFillColor(Color::Black);
+    text.setPosition(350, 30);
+    text.setOutlineThickness(1);
     return text;
 
 }
@@ -22,6 +23,18 @@ Text Lobby::showPlayerName(String pName, int yPos) {
     return text;
 }
 
+Text Lobby::showPlayers(){
+    Text text;
+    text.setFont(font);
+    text.setString("Players waiting...");
+    text.setCharacterSize(20);
+    text.setFillColor(Color::Black);
+    text.setPosition(48, 70);
+    return text;
+}
+
+
+
 void Lobby::playMusic(){
     if (!music.openFromFile("Client/Audio/lobbymusic.wav")) {
         // error
@@ -31,17 +44,20 @@ void Lobby::playMusic(){
     music.play();
 }
 
-Sprite Lobby::spritesShow(Sprite sprite, int yPos) {
-    sprite.setPosition(90, yPos);
+
+Sprite Lobby::spritesShow(Sprite sprite, int yPos){
+    sprite.setPosition(73, yPos);
+
     return sprite;
 }
+
 
 int Lobby::start() {
     playMusic();
     int numberOfButtons = 1;
     Button buttons[1];
     // Create one button to continue to game
-    buttons[0].create(550.0f, 500.0f, "continue");
+    buttons[0].create(580.0f, 530.0f, "continue");
     window.create(sf::VideoMode(800, 600), "Lobby");
 
     while (window.isOpen()) {
@@ -104,16 +120,18 @@ int Lobby::start() {
             }
         }
         window.clear(Color::White);
+        window.draw(bgSprite);
         for (int i = 0; i < numberOfButtons; i++) {
             window.draw(buttons[i].getSprite());
         }
+        window.draw(rectangle);
         window.draw(showPlayerName("Jeffery", 120));
         window.draw(showPlayerName("Horse Penis", 160));
         window.draw(showPlayerName("Mr. Dick Jail", 200));
         window.draw(spritesShow(tempSprite, 120));
         window.draw(spritesShow(tempSprite, 160));
         window.draw(spritesShow(tempSprite, 200));
-
+        window.draw(showPlayers());
 
         window.draw(showTitle());
         window.display();
@@ -133,4 +151,18 @@ Lobby::Lobby() {
         cout << "Error loading player brick textures";
     }
     tempSprite.setTexture(texBrickFrog);
+
+    if(!texBg.loadFromFile("Client/Sprites/lobbybg.png")) {
+        cout << "Error loading player brick textures";
+    }
+    bgSprite.setTexture(texBg);
+
+
+    rectangle = RectangleShape(sf::Vector2f(120, 50));
+    rectangle.setOutlineColor(sf::Color(117, 117, 117));
+    rectangle.setSize(sf::Vector2f(300, 400));
+    rectangle.setPosition(50, 100);
+    rectangle.setFillColor(sf::Color(255, 255, 255, 100));
+    rectangle.setOutlineThickness(1);
+
 }
