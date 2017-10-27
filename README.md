@@ -52,11 +52,15 @@ This is a list of the requirements in order to be able to run this program
 
     a. When hosting a game you will be asked to set how many players should play
 
-    b. ***[*] To be specified [*]***
+    b. * To be specified
 
 2. The lobby is where you wait for the other players to join
 
 3. When it's your turn, roll the dice and watch the magic happen
+
+## Program information
+The program uses TCP (Transmission Control Protocol) to send data to and from the server and clients.
+[*] More info to come
 
 # Assignment issues
 The assignment says to make two repositories, one for the client and one for the server, but we have only made one repository.
