@@ -6,7 +6,7 @@ Text Lobby::showTitle() {
     text.setFont(font);
     text.setString("Lobby");
     text.setCharacterSize(45);
-    text.setColor(Color::Red);
+    text.setFillColor(Color::Red);
     text.setPosition(350, 40);
     return text;
 
@@ -17,17 +17,27 @@ Text Lobby::showPlayerName(String pName, int yPos) {
     text.setFont(font);
     text.setString(pName);
     text.setCharacterSize(30);
-    text.setColor(Color(155, 89, 182));
+    text.setFillColor(Color(155, 89, 182));
     text.setPosition(130, yPos);
     return text;
 }
 
-Sprite Lobby::spritesShow(Sprite sprite, int yPos){
+void Lobby::playMusic(){
+    if (!music.openFromFile("Client/Audio/lobbymusic.wav")) {
+        // error
+    }
+    music.setLoop(true);
+    music.setVolume(50);
+    music.play();
+}
+
+Sprite Lobby::spritesShow(Sprite sprite, int yPos) {
     sprite.setPosition(90, yPos);
     return sprite;
 }
 
 int Lobby::start() {
+    playMusic();
     int numberOfButtons = 1;
     Button buttons[1];
     // Create one button to continue to game
@@ -64,7 +74,6 @@ int Lobby::start() {
                     Vector2f mousePosF(static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ));
                     Sprite button;
                     for (int i = 0; i < numberOfButtons; i++) {
-
                         button = buttons[i].getSprite();
                         // if button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
@@ -83,6 +92,8 @@ int Lobby::start() {
                         // if mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
+                            music.stop();
+                            window.close();
                             return 1;
                         }
                     }
@@ -107,7 +118,9 @@ int Lobby::start() {
         window.draw(showTitle());
         window.display();
     }
+
     return 0;
+
 }
 
 Lobby::Lobby() {

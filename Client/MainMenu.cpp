@@ -72,6 +72,7 @@ public:
                             // if mouse is released, change button texture to 1 (highlighted)
                             if (button.getGlobalBounds().contains(mousePosF)) {
                                 buttons[i].setTex(1);
+                                window.close();
                                 return(i+1);
                             }
                         }
