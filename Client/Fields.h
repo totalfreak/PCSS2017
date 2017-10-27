@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "constants.h"
+#include "FieldAction.h"
 
 using namespace std;
 using namespace sf;
@@ -27,6 +28,7 @@ public:
     int * playersOnField = new int[6];
     string type; //regular - corner
     field *next;
+    FieldAction action;
 };
 
 class Fields {

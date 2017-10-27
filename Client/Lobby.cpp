@@ -5,9 +5,9 @@ Text Lobby::showTitle() {
     Text text;
     text.setFont(font);
     text.setString("Lobby");
-    text.setCharacterSize(40);
+    text.setCharacterSize(45);
     text.setColor(Color::Red);
-    text.setPosition(350, 50);
+    text.setPosition(350, 40);
     return text;
 
 }
@@ -16,10 +16,15 @@ Text Lobby::showPlayerName(String pName, int yPos) {
     Text text;
     text.setFont(font);
     text.setString(pName);
-    text.setCharacterSize(20);
+    text.setCharacterSize(30);
     text.setColor(Color(155, 89, 182));
-    text.setPosition(120, yPos);
+    text.setPosition(130, yPos);
     return text;
+}
+
+Sprite Lobby::spritesShow(Sprite sprite, int yPos){
+    sprite.setPosition(90, yPos);
+    return sprite;
 }
 
 int Lobby::start() {
@@ -92,8 +97,11 @@ int Lobby::start() {
             window.draw(buttons[i].getSprite());
         }
         window.draw(showPlayerName("Jeffery", 120));
-        window.draw(showPlayerName("Horse Penis", 150));
-        window.draw(showPlayerName("Mr. Dick Jail", 180));
+        window.draw(showPlayerName("Horse Penis", 160));
+        window.draw(showPlayerName("Mr. Dick Jail", 200));
+        window.draw(spritesShow(tempSprite, 120));
+        window.draw(spritesShow(tempSprite, 160));
+        window.draw(spritesShow(tempSprite, 200));
 
 
         window.draw(showTitle());
@@ -107,4 +115,9 @@ Lobby::Lobby() {
     if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
         perror("Font couldn't load");
     }
+
+    if(!texBrickFrog.loadFromFile("Client/Sprites/spr_frogTemp.png")) {
+        cout << "Error loading player brick textures";
+    }
+    tempSprite.setTexture(texBrickFrog);
 }

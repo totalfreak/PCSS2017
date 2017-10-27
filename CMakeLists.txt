@@ -26,7 +26,9 @@ include_directories("${PROJECT_BINARY_DIR}")
 # Define sources and executable
 set(EXECUTABLE_NAME "clientExe")
 
-add_executable(${EXECUTABLE_NAME} Client/main.cpp Client/Dice.cpp Client/Player.cpp Client/GameManager.cpp Server/Server.cpp Client/Lobby.cpp Client/MainMenu.cpp Client/Button.cpp Client/Button.h Client/MainMenu.h Client/Fields.cpp Client/Fields.h Client/constants.h Client/Player.h Server/Server.h Client/Lobby.h)
+
+add_executable(${EXECUTABLE_NAME} Client/main.cpp Client/Dice.cpp Client/Player.cpp Client/GameManager.cpp Server/Server.cpp Client/Lobby.cpp Client/MainMenu.cpp Client/Button.cpp Client/Button.h Client/MainMenu.h Client/Fields.cpp Client/Fields.h Client/constants.h Client/Player.h Server/Server.h Client/Lobby.h Client/FieldAction.cpp Client/FieldAction.h)
+
 
 #set(SERVER_EXECUTABLE "serverExe")
 #add_executable(${SERVER_EXECUTABLE} Server/Server.cpp)
