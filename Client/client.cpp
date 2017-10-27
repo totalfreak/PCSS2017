@@ -61,7 +61,7 @@ bool initGame() {
             amountOfPlayers = menu.getPlayerNum();
             if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
                 //Creating a new server object
-                Server server1(amountOfPlayers);
+                //Server server1(amountOfPlayers);
 
                 server.sin_addr.s_addr = inet_addr("127.0.0.1");
                 server.sin_family = AF_INET;
@@ -69,7 +69,7 @@ bool initGame() {
 
                 //Connect to server
                 if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
-                    error("connect failed. Error");
+                    //error("connect failed. Error");
                 }
                 puts("Connected\n");
                 gameManager = GameManager(1);
@@ -105,6 +105,7 @@ bool initGame() {
             break;
 
     }
+    lobby.start();
     return true;
 }
 
@@ -177,7 +178,7 @@ int main() {
         for (int i = 0; i < 6; i++) {
             window.draw(gameManager.drawPlayer(i));
         }
-        window.draw(lobby.showTitle());
+
         window.display();
 
     }

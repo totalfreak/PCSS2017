@@ -68,13 +68,7 @@ int Lobby::start() {
                         // if mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
-                            switch (i) {
-
-                                case 1: // Join Server
-                                    return 2;
-                                    break;
-
-                            }
+                            return 1;
                         }
                     }
                 }
@@ -87,6 +81,7 @@ int Lobby::start() {
         for (int i = 0; i < numberOfButtons; i++) {
             window.draw(buttons[i].getSprite());
         }
+        window.draw(showTitle());
         window.display();
     }
     return 0;
