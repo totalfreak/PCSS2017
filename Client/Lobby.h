@@ -21,6 +21,7 @@ public:
     Lobby();
 
     Text showTitle();
+    Text showPlayerName(String pName, int yPos);
 
     RenderWindow window;
 

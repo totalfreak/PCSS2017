@@ -20,6 +20,7 @@ void error(const char *msg) {
     exit(0);
 }
 
+
 void setDicePos() {
     gameManager.die.diceSprites[0].setPosition(100, 100);
     gameManager.die.diceSprites[1].setPosition(150, 100);
@@ -87,7 +88,7 @@ int main() {
         for (int i = 0; i < 6; i++) {
             window.draw(gameManager.drawPlayer(i));
         }
-        window.draw(lobby.showTitle());
+
         window.display();
 
     }
