@@ -31,7 +31,7 @@ void Lobby::playMusic(){
     music.play();
 }
 
-Sprite Lobby::spritesShow(Sprite sprite, int yPos){
+Sprite Lobby::spritesShow(Sprite sprite, int yPos) {
     sprite.setPosition(90, yPos);
     return sprite;
 }
@@ -74,7 +74,6 @@ int Lobby::start() {
                     Vector2f mousePosF(static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ));
                     Sprite button;
                     for (int i = 0; i < numberOfButtons; i++) {
-
                         button = buttons[i].getSprite();
                         // if button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
@@ -94,6 +93,7 @@ int Lobby::start() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             music.stop();
+                            window.close();
                             return 1;
                         }
                     }
