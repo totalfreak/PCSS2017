@@ -6,7 +6,7 @@ Text Lobby::showTitle() {
     text.setFont(font);
     text.setString("Lobby");
     text.setCharacterSize(45);
-    text.setColor(Color::Red);
+    text.setFillColor(Color::Red);
     text.setPosition(350, 40);
     return text;
 
@@ -17,9 +17,17 @@ Text Lobby::showPlayerName(String pName, int yPos) {
     text.setFont(font);
     text.setString(pName);
     text.setCharacterSize(30);
-    text.setColor(Color(155, 89, 182));
+    text.setFillColor(Color(155, 89, 182));
     text.setPosition(130, yPos);
     return text;
+}
+
+void Lobby::playMusic(){
+    sf::Music music;
+    if (!music.openFromFile("Audio/lobbymusic.wav")) {
+        // error
+    }
+    music.play();
 }
 
 Sprite Lobby::spritesShow(Sprite sprite, int yPos){
