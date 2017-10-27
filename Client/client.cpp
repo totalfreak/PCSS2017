@@ -72,7 +72,7 @@ bool initGame() {
                     error("connect failed. Error");
                 }
                 puts("Connected\n");
-                gameManager = GameManager(amountOfPlayers);
+                gameManager = GameManager(1);
                 gameManager.currentPlayer = 1;
                 gameManager.players[0].setPlayersTurn();
                 lobbyMade = true;
@@ -117,14 +117,13 @@ void setDicePos() {
 int main() {
     //Seeding random function
     srand (time(NULL));
-    gameManager = GameManager(1);
 
-    /* lobby = Lobby();
+   // lobby = Lobby();
     if(!gameStarted && !lobbyMade) {
          if(!initGame()){
              return 0;
          }
-     }*/
+     }
 
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");

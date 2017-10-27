@@ -39,12 +39,9 @@ public:
         //Setting up the fields
         fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
 
-        //Making the desired amount of players
-        for (int i = 0; i < playersToMake; ++i) {
-            cout << "Enter a name for player " << i+1 <<  endl;
-            string desiredName; cin >> desiredName;
-            players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i, fieldList.getHead());
-        }
+            //cout << "Enter a name for player " << i+1 <<  endl;
+            //string desiredName; cin >> desiredName;
+            //players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i, fieldList.getHead());
 
     }
     //Creating a new player
