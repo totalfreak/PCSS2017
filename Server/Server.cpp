@@ -1,118 +1,127 @@
 
+
 #include "Server.h"
 
-void Server::runServerLoop() {
-    //When a new connection has been accepted, make a thread for it
-    while ((client_sock = accept(socket_desc, (struct sockaddr *) &client, (socklen_t *) &c))) {
-        puts("New connection accepted");
+Server::Server(int maxNrOfPlayers) {
+    maxPlayers = maxNrOfPlayers;
+    clients =  new ClientSock[maxPlayers];
 
-        //pthread_t sniffer_thread;
-        new_sock = (int *) malloc(1);
-        *new_sock = client_sock;
-
-        //Creating the thread
-        //TODO Fix crashing, and fucking fix C++
-        //thread t(&Server::connection_handler, (void *)&client_sock);
-        //t.join();
-        /*if (pthread_create(&sniffer_thread, nullptr, &Server::connection_handler, (void *) new_sock) < 0) {
-            perror("could not create thread");
-        }*/
-        puts("Handler assigned for new thread");
-        connectedSockets.push_back(*new_sock);
+    for(int i = 0 ; i < maxPlayers ; i++){
+        clients[i].client = -1;
     }
-}
 
-Server::Server(int amountOfPlayers) {
-    setupServer(amountOfPlayers);
-}
 
-void *Server::connection_handler(void *socket_desc) {
-    //Get the socket descriptor
-    int sock = *(int *) socket_desc;
-    int readSize;
-    char *message, clientMessage[2000];
-    int playerNumber = 0;
+    //for setting up server
+    struct addrinfo serverHints;
+    struct addrinfo *serverInfo;
+    struct addrinfo *p;
 
-    while ((readSize = static_cast<int>(recv(sock, clientMessage, 2000, 0))) > 0) {
-        //Making a stringstream
-        stringstream ss;
-        // 0 = playerNumber
-        // 1 = action
-        //ACTIONS
-        // r = roll
-        // t = turn taken
-        // p = No action, just sending the player number
-        if(clientMessage[1] == 'r') {
-            ss << "Player " << clientMessage[0] << " has rolled the dices";
-        } else if(clientMessage[1] == 't') {
-            ss << "Player " << clientMessage[0] << " has taken their turn";
-        } else if(clientMessage[1] == 'p'){
-            playerNumber = clientMessage[0];
+
+    memset(&serverHints, 0, sizeof(serverHints)); // get hints about the server
+
+    serverHints.ai_family = AF_UNSPEC;
+    serverHints.ai_socktype = SOCK_STREAM;
+    serverHints.ai_flags = AI_PASSIVE;
+
+    if (getaddrinfo(NULL, port, &serverHints, &serverInfo) != 0) {
+        cout << "could not get addres" << endl;
+    }
+
+    for (p = serverInfo; p != NULL; p = p->ai_next) {
+        if (serverSock = socket(p->ai_family, p->ai_socktype, p->ai_protocol) == -1) {
+            cout << "one addr failed ";
+            continue;
         }
-        //Making a char array with the exact size of the string
-        char msg[ss.str().size()];
-        //Copying the stringstream into the char array
-        strcpy(msg, ss.str().c_str());
-        //Sending the message back
-        write(sock, msg, strlen(msg));
-        //Resetting message
-        bzero(clientMessage, 1999);
+        cout << "One addr worked : ";
+        if (bind(serverSock, p->ai_addr, p->ai_addrlen) == -1) {
+            close(serverSock);
+            cout << "but did not bind " << endl;
+            continue;
+        }
+        cout << "and it did bind " << endl;
+        break;
+    }
+    freeaddrinfo(serverInfo); // all done with this structure
+
+    if (p == NULL) {
+        exit(1);
     }
 
-    if (readSize == 0) {
-        puts("Client disconnected");
-        //Deleting the leaving player from socket vector
-        connectedSockets.erase(connectedSockets.begin() + (playerNumber-1));
-        fflush(stdout);
-    } else if (readSize == -1) {
-        perror("recv failed");
-    }
-
-    //Close the socket
-    //close(sock);
-    //Free the socket pointer
-    free(socket_desc);
-
-    return nullptr;
-}
-
-void Server::setupServer(int amountOfPlayers) {
-    //Creating the socket
-    socket_desc = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (socket_desc == -1) {
-        error("Could not create socket");
-    }
-    puts("Socket created");
-
-    //Prepare the sockaddr_in structure
-    server.sin_family = AF_INET;
-    server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(2222);
-
-    //Bind the socket
-    bind(socket_desc, (struct sockaddr *) &server, sizeof(server));
-
-    puts("bind done");
-
-    listen(socket_desc, 5);
-
-    puts("Waiting for new connections");
-
-    c = sizeof(struct sockaddr_in);
-
-    runServerLoop();
-
-    if (client_sock < 0) {
-        error("Accepting client failed");
+    if (listen(serverSock, 10) == -1) {
+        cout << "listen() fucked up somehow " << endl;
     }
 }
 
-void Server::error(const char *msg) {
-    perror(msg);
-    exit(1);
+void Server::Listner() {
+    int ReceivedBytes;
+    while(started){
+        for(int i = 0; i < maxPlayers; i++) {
+
+            if(clients[i].client != -1 && clients[i].msgSent == true){
+                ReceivedBytes = recv(clients[i].client , clients[i].recvMessage , 1024 ,0);
+                if(ReceivedBytes != 0){
+                    cout << " i received data from client : " << i << " : " << clients[i].recvMessage << endl ;
+                    clients[i].msgSent = false;
+                }
+            }
+        }
+    }
+
 }
 
-void Server::sendActionTakenToEveryone(int playerWhoDidIt, char action) {
+void Server::AcceptClients() {
+    while(started){
+        int emptySpot = -1;
+        for(int i =  0 ; i < maxPlayers ; i++){
+            if(clients[i].client == -1){
+                emptySpot = i;
+                break;
+            }
+        }
 
+        if(emptySpot == -1){
+            continue;
+        }
+        clients[emptySpot].client = accept(serverSock,(struct sockaddr *)& clients[emptySpot],& clients[emptySpot].theriSize);
+        cout << "client connected" << endl;
+    }
 }
+
+void Server::Talker() {
+    while(started) {
+        for (int i = 0; i < maxPlayers; i++) {
+            if (clients[i].client == -1) { continue; }
+            if(clients[i].msgSent == false) {
+
+                //send to all connected clients
+                for(int j = 0 ; j < maxPlayers ; j++) {
+                    if(clients[j].client == -1){ continue; }
+                    send(clients[j].client, clients[i].recvMessage, 1024, 0);
+                }
+
+                clients[i].msgSent = true;
+            }
+        }
+    }
+}
+
+void Server::stop() {
+    started == false;
+}
+
+bool Server::isStarted() {
+    return started;
+}
+
+int Server::start() {
+    started = true;
+    accThread = thread([this] { this->AcceptClients(); });
+    recvThread = thread([this] {this->Listner();});
+    sendThread = thread([this] {this->Talker();});
+
+    accThread.join();
+    recvThread.join();
+    sendThread.join();
+}
+
+
