@@ -1,6 +1,6 @@
-#"Sort of monopoly"
+# "Sort of monopoly"
 
-##Collaborators
+## Collaborators
 - Rasmus Isager Kruuse: rkruus16@student.aau.dk
 - Marcus Alexander Skytt: mask16@student.aau.dk
 - Daniel Glenn Kartin: dkarti16@student.aau.dk
@@ -8,7 +8,7 @@
 - Nicolai Lorits: nlorit16@student.aau.dk
 - Jens Jákup Egholm Gaardbo: jgaard16@student.aau.dk
 
-##Dependencies
+## Dependencies
 
 This is a list of the requirements in order to be able to run this program
 
@@ -19,7 +19,7 @@ This is a list of the requirements in order to be able to run this program
 [This page](https://www.sfml-dev.org/tutorials/2.4/compile-with-cmake.php) describes how to compile sfml using cmake.
 
 
-##How to run
+## How to run
 1. Open a terminal
 
 2. Change into the desired directory on your machine:
@@ -46,7 +46,7 @@ This is a list of the requirements in order to be able to run this program
 
 ```$ ./clientExe```
 
-##How to play
+## How to play
 
 1. First choose if you want to Host a server(a) or Join an existing server(b)
 
