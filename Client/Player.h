@@ -4,7 +4,6 @@
 
 #ifndef PCSS2017_PLAYER_H
 #define PCSS2017_PLAYER_H
-#pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
