@@ -5,48 +5,68 @@
 #ifndef PCSS2017_SERVER_H
 #define PCSS2017_SERVER_H
 #pragma once
-//Main server server
+
+#include <thread>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <thread>
-#include <sstream>
-#include <mutex>
-#include <vector>
-#include <algorithm>
-
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <iostream>
+#include "../Client/constants.h"
 
 using namespace std;
 
+
+
+struct  ClientSock{
+    int client;
+    sockaddr thierAddr;
+    socklen_t theriSize;
+    char recvMessage[1024];
+    bool msgSent = true;
+};
+
 class Server {
 
-    int currentPlayer;
-
-    vector<int> connectedSockets;
-
-    int socket_desc, client_sock, c, *new_sock;
-    struct sockaddr_in server, client;
-
-    //void *connection_handler(void *socket_desc);
-
-    void error(const char *msg);
+    //setting the server up
+    int maxPlayers;
+    int nrOfPlayers = 0;
+    bool started = false;
 
 
+    //internet
+    ClientSock * clients  ;       //all the socket the players connect to
+    int serverSock;
 
-    void setupServer(int amountOfPlayers);
-
+    //sending and receiving
+    char * msg[1024];
+    thread accThread;
+    thread recvThread;
+    thread sendThread;
 
 
 public:
-    explicit Server(int amountOfPlayers);
-    void sendActionTakenToEveryone(int playerWhoDidIt, char action);
-    void *connection_handler(void *socket_desc);
+    Server(int maxNrOfPLayers); // setup server so and start to listen on server socket;
 
-    void runServerLoop();
+    int start();
+    void Listner();
+    void Talker();
+    void stop();
+
+
+    bool isStarted();
+
+    void AcceptClients();
 };
+
 
 
 
