@@ -194,9 +194,9 @@ public:
         sf::Text text;
         text.setString("");
         text.setFont(font);
-        text.setCharacterSize(20);
+        text.setCharacterSize(40);
         text.setFillColor(Color::Black);
-        text.setPosition(350, 200);
+        text.setPosition(320, 200);
         int numberOfButtons = 1;
         Button buttons[1];
         // Create three buttons: Host game, join game, exit game
