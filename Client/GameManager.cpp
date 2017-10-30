@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Dice.cpp"
 #include "Server/Server.h"
+#include "client.h"
 #include<sys/socket.h>    //socket
 #include<arpa/inet.h>
 #include "MainMenu.cpp"
@@ -16,11 +17,14 @@ class GameManager {
 
 public:
 
+    thread serverThread, clientThread;
 
     int sock;
 
     struct sockaddr_in server;
 
+    Server server1 = Server(6);
+    Client client1;
     MainMenu menu;
     Lobby lobby;
 
@@ -40,7 +44,6 @@ public:
 
     int myOwnPlayerNumber = 1;
 
-    //
     GameManager() = default;
 
     explicit GameManager(int playersToMake) {
@@ -54,7 +57,7 @@ public:
         //Setting up the fields
         fieldList.setupFields(fieldList, NUMBER_OF_FIELDS);
 
-
+        //server1.start();
 
         //cout << "Enter a name for player " << i+1 <<  endl;
         //string desiredName; cin >> desiredName;
@@ -101,15 +104,6 @@ public:
 
 
     bool initGame() {
-
-
-        //Temp server connection here
-        sock = socket(AF_INET, SOCK_STREAM, 0);
-        if(sock == -1) {
-            perror("Could not create socket");
-        }
-        puts("Socket created");
-
         int answer;
         answer = menu.start();
 
@@ -123,23 +117,14 @@ public:
                 int amountOfPlayers;
                 amountOfPlayers = menu.getPlayerNum();
                 if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
+                    string ipAddr = "127.0.0.1";
+                    const char* ip = ipAddr.c_str();
+                    //client1.ipAddr = ip;
+                    //server1.ipAddr = ip;
                     //Creating a new server object
-                    //Server server1(amountOfPlayers);
+                    serverThread = thread([this]{ server1.start();});
 
-                    server.sin_addr.s_addr = inet_addr("127.0.0.1");
-                    server.sin_family = AF_INET;
-                    server.sin_port = htons( 2222 );
-
-                    //Connect to server
-                    /*if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
-                        perror("connect failed. Error");
-                    }*/
-                    puts("Connected\n");
-                    //currentPlayer = 1;
-                    players[0].setPlayersTurn();
-                } else {
-                    cout << "Try one more time" << endl;
-                    initGame();
+                    puts("Server started\n");
                 }
                 break;
             case 2:
@@ -150,20 +135,12 @@ public:
                     ipAddr = "127.0.0.1";
                 }
                 const char* ip = ipAddr.c_str();
-                server.sin_addr.s_addr = inet_addr(ip);
-                server.sin_family = AF_INET;
-                server.sin_port = htons( 2222 );
+                //client1.ipAddr = ip;
 
-                //Connect to server
-                if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0) {
-                    perror("connect failed. Error");
-                }
-                puts("Connected\n");
-
-                //Do some server stuff here.
                 break;
 
         }
+        clientThread = thread([this]{ client1.start();});
         lobby.start();
         return true;
     }

@@ -37,7 +37,7 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos) {
 }
 
 int Lobby::start() {
-    playMusic();
+    //playMusic();
     int numberOfButtons = 1;
     Button buttons[1];
     // Create one button to continue to game
