@@ -137,7 +137,7 @@ public:
             case 2:
                 std::string ipAddr;
                 puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
-                std::getline(std::cin, ipAddr);
+                ipAddr = menu.ipAddressGet();
                 if(ipAddr.length() < 7) {
                     ipAddr = "127.0.0.1";
                 }
