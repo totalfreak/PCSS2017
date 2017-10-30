@@ -62,3 +62,6 @@ The program uses TCP (Transmission Control Protocol) to send data to and from th
 The assignment says to make two repositories, one for the client and one for the server, but we have only made one repository.
 This is due to the way the assignment was formulated, that you should be able to host a server, join and 
 see available servers, all from the same lobby (executable). This seems sorely impossible using two different executables, not even to mention two different repositories.
+In addition, the commit activities of each member should be taken with a grain of salt, as a lot of work has been lost (Not commited), because it simply didn't work,
+or it was redundant before it was even committed. We have however tried to make each member active and producing during the entire process, this included evenly distributing
+the tasks, and give tasks to people who weren't necessarily proficient in that area, to maximize learning outcome.
