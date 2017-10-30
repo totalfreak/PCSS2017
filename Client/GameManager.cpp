@@ -99,6 +99,13 @@ public:
         return playerSpr;
     }
 
+    Sprite drawPlayerShadow(int curPlayer) {
+        Sprite playerSpr;
+        if(players[curPlayer].hasPlayer) {
+            playerSpr = players[curPlayer].displayShadow();
+        }
+        return playerSpr;
+    }
 
     bool initGame() {
 

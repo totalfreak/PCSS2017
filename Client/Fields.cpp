@@ -2,6 +2,7 @@
 // Created by rasmus on 10/13/17.
 //
 
+#include <iostream>
 #include "Fields.h"
 
 
@@ -13,9 +14,7 @@ void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
     temp->position = pos;
     temp->next = nullptr;
 
-    for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
-        *(temp->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
-    }
+
 
     if(head == nullptr) {
         head = temp;
@@ -105,6 +104,13 @@ void Fields::setupFields(Fields &fieldListRef, int numberOfFields) {
             }
 
             fieldListRef.createField(i, "regular", tempSize, tempPos);
+        }
+    }
+    //make all the fields empty
+    for(field  * ptr  = fieldListRef.getHead(); ptr != nullptr ; ptr = ptr->next){
+        for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
+            *(ptr->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
+            cout << *(ptr->playersOnField + i) << endl;
         }
     }
 }
