@@ -46,9 +46,9 @@ This is a list of the requirements in order to be able to run this program
 
 1. First choose if you want to Host a server(a) or Join an existing server(b)
 
-    a. When hosting a game you will be asked to set how many players should play
+    a. When hosting a game you will be asked to set how many players should play.
 
-    b. * To be specified
+    b. You will be asked to input an ip address, this will make your client join the server inputted.
 
 2. The lobby is where you wait for the other players to join
 
