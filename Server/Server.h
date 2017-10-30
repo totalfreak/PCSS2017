@@ -54,6 +54,7 @@ class Server {
 
 
 public:
+    const char* ipAddr;
     Server(int maxNrOfPLayers); // setup server so and start to listen on server socket;
 
     int start();

@@ -126,8 +126,8 @@ public:
                 if (amountOfPlayers <= 6 && amountOfPlayers > 0) {
                     string ipAddr = "127.0.0.1";
                     const char* ip = ipAddr.c_str();
-                    //client1.ipAddr = ip;
-                    //server1.ipAddr = ip;
+                    client1.ipAddr = ip;
+                    server1.ipAddr = ip;
                     //Creating a new server object
                     serverThread = thread([this]{ server1.start();});
 
@@ -142,7 +142,7 @@ public:
                     ipAddr = "127.0.0.1";
                 }
                 const char* ip = ipAddr.c_str();
-                //client1.ipAddr = ip;
+                client1.ipAddr = ip;
 
                 break;
 

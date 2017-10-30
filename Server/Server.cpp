@@ -23,7 +23,7 @@ Server::Server(int maxNrOfPlayers) {
     serverHints.ai_socktype = SOCK_STREAM;
     serverHints.ai_flags = AI_PASSIVE;
 
-    if (getaddrinfo(NULL, port, &serverHints, &serverInfo) != 0) {
+    if (getaddrinfo(ipAddr, port, &serverHints, &serverInfo) != 0) {
         cout << "could not get addres" << endl;
     }
 

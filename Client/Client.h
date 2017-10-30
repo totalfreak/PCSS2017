@@ -34,6 +34,7 @@ class Client {
 
 
 public:
+    const char* ipAddr;
     Client();
     void start();
     void listen();
