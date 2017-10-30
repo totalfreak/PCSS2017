@@ -2,10 +2,10 @@
 // Created by rasmus on 10/27/17.
 //
 
-#include "client.h"
+#include "Client.h"
 
-client::client(){
-    cout << "setting up client" << endl;
+Client::Client(){
+    cout << "setting up Client" << endl;
     struct addrinfo *p;
     struct addrinfo socketHints;
     struct addrinfo * ClientInfo;
@@ -39,7 +39,7 @@ client::client(){
     started = true;
 }
 
-void client::talk() {
+void Client::talk() {
     int haha = 0;
     while (started) {
         if(hasMsgBeenSent = true){return ;}
@@ -50,7 +50,7 @@ void client::talk() {
     }
 }
 
-void client::listen() {
+void Client::listen() {
     cout << "im listning " << endl;
     char res[1024];
     int dataReceived;
@@ -66,7 +66,7 @@ void client::listen() {
 
 }
 
-void client::start() {
+void Client::start() {
     sendThread = thread([this]{ talk();});
     recvThread = thread([this]{ listen();});
 
@@ -75,7 +75,7 @@ void client::start() {
 
 }
 
-void client::sendMessage(char * msg, int size) {
+void Client::sendMessage(char * msg, int size) {
     if(size != 1024){
         cout << "msg to large or to small use 1024" << endl;
         return;

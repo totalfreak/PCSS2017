@@ -28,7 +28,7 @@ set(EXECUTABLE_NAME "clientExe")
 
 
 
-add_executable(${EXECUTABLE_NAME} Client/main.cpp Client/Dice.cpp Client/Player.cpp Client/GameManager.cpp Server/Server.cpp Client/Lobby.cpp Client/MainMenu.cpp Client/Button.cpp Client/Button.h Client/MainMenu.h Client/Fields.cpp Client/Fields.h Client/constants.h Client/Player.h Server/Server.h Client/Lobby.h Client/client.h Client/client.cpp)
+add_executable(${EXECUTABLE_NAME} Client/main.cpp Client/Dice.cpp Client/Player.cpp Client/GameManager.cpp Server/Server.cpp Client/Lobby.cpp Client/MainMenu.cpp Client/Button.cpp Client/Button.h Client/MainMenu.h Client/Fields.cpp Client/Fields.h Client/constants.h Client/Player.h Server/Server.h Client/Lobby.h Client/Client.h Client/Client.cpp)
 
 
 #set(SERVER_EXECUTABLE "serverExe")

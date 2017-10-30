@@ -34,13 +34,10 @@ This is a list of the requirements in order to be able to run this program
 
 ```$ cd PCSS2017```
 
-5. Build program using cmake:
+5. Run the script that compiles and builds the program:
 
-```$ cmake .```
+```$ ./make.sh```
 
-6. Make program
-
-```$ make```
 
 7. Run executable file:
 

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Dice.cpp"
 #include "Server/Server.h"
-#include "client.h"
+#include "Client.h"
 #include<sys/socket.h>    //socket
 #include<arpa/inet.h>
 #include "MainMenu.cpp"

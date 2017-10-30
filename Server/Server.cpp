@@ -60,7 +60,7 @@ void Server::Listner() {
             if(clients[i].client != -1 && clients[i].msgSent == true) {
                 ReceivedBytes = recv(clients[i].client , clients[i].recvMessage , 1024 ,0);
                 if(ReceivedBytes != 0){
-                    cout << " i received data from client : " << i << " : " << clients[i].recvMessage << endl ;
+                    cout << " i received data from Client : " << i << " : " << clients[i].recvMessage << endl ;
                     clients[i].msgSent = false;
                 }
             }
@@ -83,7 +83,7 @@ void Server::AcceptClients() {
             continue;
         }
         clients[emptySpot].client = accept(serverSock,(struct sockaddr *)& clients[emptySpot],& clients[emptySpot].theriSize);
-        cout << "client connected" << endl;
+        cout << "Client connected" << endl;
     }
 }
 

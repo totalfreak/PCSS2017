@@ -24,7 +24,7 @@
 
 using namespace std;
 
-class client {
+class Client {
     bool started = false;
     int sock;
     thread sendThread;
@@ -34,7 +34,7 @@ class client {
 
 
 public:
-    client();
+    Client();
     void start();
     void listen();
     void sendMessage(char* msg, int size);
