@@ -57,7 +57,7 @@ void Server::Listner() {
     while(started){
         for(int i = 0; i < maxPlayers; i++) {
 
-            if(clients[i].client != -1 && clients[i].msgSent == true){
+            if(clients[i].client != -1 && clients[i].msgSent == true) {
                 ReceivedBytes = recv(clients[i].client , clients[i].recvMessage , 1024 ,0);
                 if(ReceivedBytes != 0){
                     cout << " i received data from client : " << i << " : " << clients[i].recvMessage << endl ;

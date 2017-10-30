@@ -34,8 +34,7 @@ void Player::setPosition(int tempX, int tempY) {
 }
 
 void Player::physics() {
-    if(!hasPlayer){return;}
-    if( tile == nullptr){return;}
+    if(!hasPlayer || tile == nullptr){return;}
 
     int nrOnField = 0;
     int myNr = 0;
