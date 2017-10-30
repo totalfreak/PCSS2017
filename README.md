@@ -38,8 +38,7 @@ This is a list of the requirements in order to be able to run this program
 
 ```$ ./make.sh```
 
-
-7. Run executable file:
+6. Run executable file:
 
 ```$ ./clientExe```
 
