@@ -22,13 +22,18 @@ public:
     sf::Music music;
     Sprite sprites[6];
     Texture texBrickFrog;
+    Texture texBg;
     Sprite tempSprite;
+    Sprite bgSprite;
     Lobby();
-
+    Text showPlayers();
     void playMusic();
     Text showTitle();
     Text showPlayerName(String pName, int yPos);
     Sprite spritesShow(Sprite sprite, int yPos);
+
+    RectangleShape rectangle;
+
 
     RenderWindow window;
 

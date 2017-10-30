@@ -16,7 +16,7 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     speed = DEFAULTSPEED;
     myID = ID;
     tile = pos;
-    moveTo(pos);
+    moveTo(pos, myID);
 
 }
 
@@ -34,24 +34,25 @@ void Player::setPosition(int tempX, int tempY) {
 }
 
 void Player::physics() {
-    if(!hasPlayer){return;}
-    if( tile == nullptr){return;}
+    if(!hasPlayer || tile == nullptr){return;}
 
     int nrOnField = 0;
     int myNr = 0;
     int playerID;
     for(int i = 0; i < 6 ; i ++){
-        playerID = *tile->playersOnField + i;
+        playerID = *(tile->playersOnField + i);
         if( playerID != FIELD_EMPTY){
             nrOnField++;
             if(playerID == myID){
-                myNr = nrOnField;
+
+            myNr = nrOnField;
             }
         }
     }
     nrOnField++; // we increment to avoid having people at the ends of the tile
     Vector2f goal;
-    goal = Vector2f(tile->position.x + tile->size.x/2 , tile->position.y + tile->size.y  * 0.1 + 0.8 * (myNr/nrOnField) * tile->size.y );
+    goal = Vector2f(tile->position.x + tile->size.x/2 , tile->position.y + (0.1 + 0.8 * ((float)myNr/nrOnField) * tile->size.y) );
+
 
     float dist = distance(goal, getPosition());
 
@@ -99,10 +100,26 @@ void Player::normalize(Vector2f * in) {
 
 Sprite Player::display() {
     playerBrickSpr.setTexture(playerBrickTex);
-    this->playerBrickSpr.setPosition(getPosition().x, getPosition().y);
-    float scaleFactor = (currentSpeed+movescaleAdjust)/(DEFAULTSPEED+movescaleAdjust) ;
+    float playerOffSetX = this->playerBrickTex.getSize().x/2;
+    float playerOffSety = this->playerBrickTex.getSize().y/2;
+    this->playerBrickSpr.setPosition(getPosition().x-playerOffSetX, getPosition().y-playerOffSety);
+    float scaleFactor = (currentSpeed+movescaleAdjust)/(DEFAULTSPEED+movescaleAdjust);
     playerBrickSpr.setScale(scaleFactor,scaleFactor);
     return this->playerBrickSpr;
+}
+
+Sprite Player::displayShadow() {
+    Sprite shadowSprite;
+    shadowSprite.setTexture(playerBrickTex);
+
+    float scaleFactor = (currentSpeed+movescaleAdjust)/(DEFAULTSPEED+movescaleAdjust);
+    float displacement = (-1 + scaleFactor) * 15;
+    float playerOffSetX = this->playerBrickTex.getSize().x/4  ;
+    float playerOffSety = this->playerBrickTex.getSize().y/2;
+    shadowSprite.setPosition((getPosition().x - playerOffSetX) + displacement , getPosition().y-playerOffSety);
+    shadowSprite.setScale(scaleFactor,scaleFactor);
+    shadowSprite.setColor(Color(0,0,0,200 - 50 * (scaleFactor-1)));
+    return shadowSprite;
 }
 
 void Player::movePlayer(int rolled) {
@@ -117,25 +134,26 @@ void Player::movePlayer(int rolled) {
             dest = dest->next;
         }
     }
-    moveTo(dest);
+    moveTo(dest,myID);
 }
 
-void Player::moveTo(field *dest) {
+void Player::moveTo(field *dest, int IDToLookFor) {
+
     if(dest != nullptr) {
         //delete us on the field we are on
         if (tile != nullptr) {
-        for (int i = 0; i < 6; i++) {
-            if (tile && *(tile->playersOnField + i) == myID) {
-                *(tile->playersOnField +
-                  i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
+            for (int i = 0; i < 6; i++) {
+                if (tile && *(tile->playersOnField + i) == IDToLookFor) {
+                    *(tile->playersOnField +
+                      i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
+                }
             }
         }
-    }
         // then add us at the destination
         tile = dest;
-        for(int i = 0 ; i < 6 ; i++) {
-            if ( *(tile->playersOnField + i) == FIELD_EMPTY) {
-                *(tile->playersOnField + i) = myID;
+        for(int j = 0 ; j < 6 ; j++) {
+            if ( *(tile->playersOnField + j) == FIELD_EMPTY) {
+                *(tile->playersOnField + j) = IDToLookFor;
             }
         }
 

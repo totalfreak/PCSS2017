@@ -67,7 +67,7 @@ public:
 
     //displays
     Sprite display();
-
+    Sprite displayShadow();
 
 
     //game things
@@ -75,10 +75,13 @@ public:
     float distance(Vector2f one, Vector2f two); // computes distance
     void normalize(Vector2f * in);    //normalizes a vector
     void movePlayer(int rolled);    //tell a player to move to a place
-    void moveTo(field * dest);      //deletes spot at current tile and gives them a spot at the destinaiton
+    void moveTo(field *dest, int IDToLookFor);      //deletes spot at current tile and gives them a spot at the destinaiton
     double getMoveTime();
 
     Player(string name, Texture picTex, Texture brickTex, int ID, field *pos);
+
+
+
 };
 
 #endif //PCSS2017_PLAYER_H
