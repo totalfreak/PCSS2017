@@ -28,12 +28,12 @@ Server::Server(int maxNrOfPlayers) {
     }
 
     for (p = serverInfo; p != NULL; p = p->ai_next) {
-        if (serverSock = socket(p->ai_family, p->ai_socktype, p->ai_protocol) == -1) {
+        if ((serverSock = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
             cout << "one addr failed ";
             continue;
         }
         cout << "One addr worked : ";
-        if (bind(serverSock, p->ai_addr, p->ai_addrlen) == -1) {
+        if (::bind(serverSock, p->ai_addr, p->ai_addrlen) == -1) {
             close(serverSock);
             cout << "but did not bind " << endl;
             continue;

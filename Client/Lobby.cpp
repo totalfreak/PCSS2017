@@ -5,9 +5,9 @@ Text Lobby::showTitle() {
     Text text;
     text.setFont(font);
     text.setString("Lobby");
-    text.setCharacterSize(45);
+    text.setCharacterSize(35);
     text.setFillColor(Color::Black);
-    text.setPosition(350, 30);
+    text.setPosition(350, 15);
     text.setOutlineThickness(1);
     return text;
 
@@ -51,14 +51,23 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos){
     return sprite;
 }
 
+Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
 
 int Lobby::start() {
-    //playMusic();
-    int numberOfButtons = 1;
-    Button buttons[1];
+    playMusic();
+    int numberOfButtons = 7;
+    Button buttons[7];
     // Create one button to continue to game
     buttons[0].create(580.0f, 530.0f, "continue");
+
+    for(int i = 0; i<numberOfButtons-1; i++){
+        string path = "characters/";
+        path+=std::to_string(i);
+        buttons[i+1].create(400+100*(i%2),100+100*(i/2),path);
+    }
+
     window.create(sf::VideoMode(800, 600), "Lobby");
+
 
     while (window.isOpen()) {
         Event event;
@@ -125,7 +134,7 @@ int Lobby::start() {
             window.draw(buttons[i].getSprite());
         }
         window.draw(rectangle);
-        window.draw(showPlayerName("Jeffery", 120));
+        window.draw(showPlayerName("You", 120));
         window.draw(showPlayerName("Horse Penis", 160));
         window.draw(showPlayerName("Mr. Dick Jail", 200));
         window.draw(spritesShow(tempSprite, 120));
@@ -134,6 +143,17 @@ int Lobby::start() {
         window.draw(showPlayers());
 
         window.draw(showTitle());
+
+            Text text;
+            text.setFont(font);
+            text.setString("Choose a character");
+            text.setCharacterSize(20);
+            text.setFillColor(Color::Black);
+            text.setPosition(400, 70);
+            window.draw(text);
+
+
+
         window.display();
     }
 
@@ -164,5 +184,4 @@ Lobby::Lobby() {
     rectangle.setPosition(50, 100);
     rectangle.setFillColor(sf::Color(255, 255, 255, 100));
     rectangle.setOutlineThickness(1);
-
 }

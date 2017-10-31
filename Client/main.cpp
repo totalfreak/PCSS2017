@@ -68,7 +68,7 @@ int main() {
     //int countto = 3000;
 
     //Loading the background image
-    if(!bgTex.loadFromFile("Client/Sprites/spr_bgFrame.jpg")) {
+    if(!bgTex.loadFromFile("Client/Sprites/board.png")) {
         cout << "Error loading BG texture";
     }
     bgSpr.setTexture(bgTex);
@@ -118,7 +118,6 @@ int main() {
         window.draw(bgSpr);
 
         gameManager.fieldList.display(window, gameManager.fieldList);
-
         //Drawing the dices
         setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
@@ -127,7 +126,6 @@ int main() {
             window.draw(gameManager.drawPlayerShadow(i));
             window.draw(gameManager.drawPlayer(i));
         }
-
 
         window.display();
 
