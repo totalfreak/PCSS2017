@@ -53,7 +53,7 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos){
 
 Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
 int selected = -1;
-Texture Lobby::start() {
+int Lobby::start() {
     playMusic();
     int numberOfButtons = 7;
     Button buttons[7];
@@ -125,8 +125,7 @@ Texture Lobby::start() {
                                         window.close();
                                         music.stop();
                                         std::cout << "Returned texture from button " << selected << endl;
-                                        return buttons[selected].getTex();
-
+                                        return selected-1;
                                     }
                                 } else {
                                     selected = i;
@@ -170,11 +169,8 @@ Texture Lobby::start() {
 
         window.display();
     }
-    if(!texBrickFrog.loadFromFile("Client/Sprites/spr_frogTemp.png")) {
-        cout << "Error loading backup texture";
-    }
-    tempSprite.setTexture(texBrickFrog);
-    return texBrickFrog;
+
+    return 0;
 
 }
 

@@ -61,7 +61,9 @@ public:
 
         //cout << "Enter a name for player " << i+1 <<  endl;
         //string desiredName; cin >> desiredName;
-        //players[0] = createPlayer("Mee", texBrickFrog, texBrickFrog, myOwnPlayerNumber, fieldList.getHead());
+        players[0] = createPlayer("Me", texBrickFrog, texBrickFrog, myOwnPlayerNumber, fieldList.getHead());
+        players[2] = createPlayer("playertwo", texBrickFrog, texBrickFrog, 2, fieldList.getHead());
+        players[1] = createPlayer("playerone", texBrickFrog, texBrickFrog, 1, fieldList.getHead());
 
     }
     //Creating a new player
@@ -156,6 +158,10 @@ public:
         }
         clientThread = thread([this]{ client1.start();});
         players[myOwnPlayerNumber].setPic(lobby.start());
+
+        players[1].setPic(rand()%6);
+        players[2].setPic(rand()%6);
+
         return true;
     }
 

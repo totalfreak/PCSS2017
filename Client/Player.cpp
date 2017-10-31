@@ -187,6 +187,12 @@ void Player::chooseAction() {
 void Player::setPosition(Vector2f pos) {
     this->position = pos;
 }
-void Player::setPic(Texture tex){
-    this->playerTexture = tex;
+void Player::setPic(int num){
+    if(!this->playerTexture.loadFromFile("Client/Sprites/buttons/characters/"+to_string(num)+"/0.png")) {
+        cout << "Error setting character pic";
+    }
+    if(!this->playerBrickTex.loadFromFile("Client/Sprites/player_sprites/"+to_string(num)+".png")) {
+        cout << "Error setting character sprite";
+    }
+    playerBrickSpr.setTexture(playerBrickTex);
 }

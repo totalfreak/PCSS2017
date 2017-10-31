@@ -37,7 +37,7 @@ public:
 
     RenderWindow window;
 
-    Texture start();
+    int start();
 };
 
 
