@@ -18,6 +18,7 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     tile = pos;
     moveTo(pos, myID);
 
+
 }
 
 void Player::setPlayersTurn() {
@@ -107,6 +108,12 @@ Sprite Player::display() {
     playerBrickSpr.setScale(scaleFactor,scaleFactor);
     return this->playerBrickSpr;
 }
+Sprite Player::displayPic() {
+    Sprite playerspr;
+    playerspr.setTexture(playerTexture);
+    playerspr.setPosition(700,100*myID);
+    return playerspr;
+}
 
 Sprite Player::displayShadow() {
     Sprite shadowSprite;
@@ -179,4 +186,7 @@ void Player::chooseAction() {
 
 void Player::setPosition(Vector2f pos) {
     this->position = pos;
+}
+void Player::setPic(Texture tex){
+    this->playerTexture = tex;
 }
