@@ -32,6 +32,8 @@ struct  ClientSock{
     socklen_t theriSize;
     char recvMessage[1024];
     bool msgSent = true;
+
+
 };
 
 class Server {
@@ -40,6 +42,10 @@ class Server {
     int maxPlayers;
     int nrOfPlayers = 0;
     bool started = false;
+    //for setting up server
+    struct addrinfo serverHints;
+    struct addrinfo *serverInfo;
+    struct addrinfo *p;
 
 
     //internet

@@ -6,38 +6,9 @@
 
 Client::Client(){
     cout << "setting up Client" << endl;
-    struct addrinfo *p;
-    struct addrinfo socketHints;
-    struct addrinfo * ClientInfo;
 
 
-    memset(&socketHints, 0, sizeof(socketHints)); // get hints about the server
 
-    socketHints.ai_family = AF_UNSPEC;
-    socketHints.ai_socktype = SOCK_STREAM;
-    socketHints.ai_flags = AI_PASSIVE;
-    socketHints.ai_addr = (sockaddr *) ipAddr;
-
-    if (getaddrinfo(NULL, port, &socketHints, &ClientInfo) != 0) {
-        cout << "could not get addres" << endl;
-    }
-
-    for (p = ClientInfo; p != NULL; p = p->ai_next) {
-        if (sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol) == -1) {
-            cout << "one addr failed ";
-            continue;
-        }
-        cout << "One addr worked trying to connect: ";
-        if (connect(sock , p->ai_addr, p->ai_addrlen) == -1) {
-            close(sock);
-            cout << "but could not connect " << endl;
-            continue;
-        }
-        cout << "connection established " << endl;
-        break;
-    }
-    freeaddrinfo(ClientInfo); // all done with this structure
-    started = true;
 }
 
 void Client::talk() {
@@ -68,6 +39,34 @@ void Client::listen() {
 }
 
 void Client::start() {
+
+    memset(&socketHints, 0, sizeof(socketHints)); // get hints about the server
+
+    socketHints.ai_family = AF_UNSPEC;
+    socketHints.ai_socktype = SOCK_STREAM;
+    socketHints.ai_flags = AI_PASSIVE;
+    socketHints.ai_addr = (sockaddr *) ipAddr;
+
+    if (getaddrinfo(NULL, port, &socketHints, &ClientInfo) != 0) {
+        cout << "could not get addres" << endl;
+    }
+
+    for (p = ClientInfo; p != NULL; p = p->ai_next) {
+        if (sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol) == -1) {
+            cout << "one addr failed ";
+            continue;
+        }
+        cout << "One addr worked trying to connect: ";
+        if (connect(sock , p->ai_addr, p->ai_addrlen) == -1) {
+            close(sock);
+            cout << "but could not connect " << endl;
+            continue;
+        }
+        cout << "connection established " << endl;
+        break;
+    }
+    freeaddrinfo(ClientInfo); // all done with this structure
+    started = true;
     sendThread = thread([this]{ talk();});
     recvThread = thread([this]{ listen();});
 

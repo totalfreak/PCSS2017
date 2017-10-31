@@ -31,6 +31,9 @@ class Client {
     thread recvThread;
     char msgToBeSent[1024];
     bool hasMsgBeenSent = true;
+    struct addrinfo *p;
+    struct addrinfo socketHints;
+    struct addrinfo * ClientInfo;
 
 
 public:
