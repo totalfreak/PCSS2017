@@ -37,8 +37,8 @@ public:
     Fields fieldList;
 
     //Player picture textures
-    Texture texAhmad, texAmanda, texKevin, texCarl, texSteve;
-    Texture texes[6] = {texAhmad, texAmanda, texKevin, texCarl, texSteve};
+    Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
+    //Texture texes[6] = {texAhmad, texAmanda, texKevin, texCarl, texSteve};
 
     Texture texBrickFrog;
 
@@ -47,7 +47,7 @@ public:
     GameManager() = default;
 
     explicit GameManager(int playersToMake) {
-        if(!texAhmad.loadFromFile("Client/Sprites/player_icons/Ahmad.png") || !texAmanda.loadFromFile("Client/Sprites/player_icons/Amanda.png") || !texKevin.loadFromFile("Client/Sprites/player_icons/Kevin.png") || !texCarl.loadFromFile("Client/Sprites/player_icons/Carl.png") ||!texSteve.loadFromFile("Client/Sprites/player_icons/Steve.png")) {
+        if(!texCharA.loadFromFile("Client/Sprites/player_icons/charA.png") || !texCharB.loadFromFile("Client/Sprites/player_icons/charB.png") || !texCharC.loadFromFile("Client/Sprites/player_icons/charC.png") || !texCharD.loadFromFile("Client/Sprites/player_icons/charD.png") ||!texCharE.loadFromFile("Client/Sprites/player_icons/charE.png")||!texCharF.loadFromFile("Client/Sprites/player_icons/charF.png")) {
             cout << "Error loading player textures";
         }
         if(!texBrickFrog.loadFromFile("Client/Sprites/spr_frogTemp.png")) {
@@ -109,7 +109,6 @@ public:
         }
         return playerSpr;
     }
-
     bool initGame() {
         int answer;
         answer = menu.start();
