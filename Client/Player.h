@@ -60,6 +60,7 @@ public:
     void setPlayersTurn();
     void endTurn();
     void chooseAction();
+    void setPic(int num);
 
     Vector2f getPosition();
     void setPosition(Vector2f pos);
@@ -67,6 +68,7 @@ public:
 
     //displays
     Sprite display();
+    Sprite displayPic();
     Sprite displayShadow();
 
 

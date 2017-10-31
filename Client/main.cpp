@@ -11,7 +11,7 @@
 using namespace std;
 using namespace sf;
 
-GameManager gameManager;
+GameManager gameManager(1);
 bool gameStarted = false;
 bool lobbyMade = false;
 
@@ -125,6 +125,7 @@ int main() {
         for (int i = 0; i < 6; i++) {
             window.draw(gameManager.drawPlayerShadow(i));
             window.draw(gameManager.drawPlayer(i));
+            window.draw(gameManager.drawPlayerPic(i));
         }
 
         window.display();

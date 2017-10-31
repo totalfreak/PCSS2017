@@ -20,6 +20,7 @@ public:
     Button();
     void create(float x, float y, string name);
     Sprite getSprite();
+    Texture getTex();
     void setTex(int n);
 
 };

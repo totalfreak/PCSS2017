@@ -42,7 +42,7 @@ public:
 
     Texture texBrickFrog;
 
-    int myOwnPlayerNumber = 1;
+    int myOwnPlayerNumber = 0;
 
     GameManager() = default;
 
@@ -61,7 +61,9 @@ public:
 
         //cout << "Enter a name for player " << i+1 <<  endl;
         //string desiredName; cin >> desiredName;
-        //players[i] = createPlayer(desiredName, texes[i], texBrickFrog, i, fieldList.getHead());
+        players[0] = createPlayer("Me", texBrickFrog, texBrickFrog, myOwnPlayerNumber, fieldList.getHead());
+        players[2] = createPlayer("playertwo", texBrickFrog, texBrickFrog, 2, fieldList.getHead());
+        players[1] = createPlayer("playerone", texBrickFrog, texBrickFrog, 1, fieldList.getHead());
 
     }
     //Creating a new player
@@ -101,6 +103,13 @@ public:
             }
         return playerSpr;
     }
+    Sprite drawPlayerPic(int curPlayer) {
+        Sprite playerSpr;
+        if(players[curPlayer].hasPlayer) {
+            playerSpr = players[curPlayer].displayPic();
+        }
+        return playerSpr;
+    }
 
     Sprite drawPlayerShadow(int curPlayer) {
         Sprite playerSpr;
@@ -109,6 +118,7 @@ public:
         }
         return playerSpr;
     }
+
     bool initGame() {
         int answer;
         answer = menu.start();
@@ -147,7 +157,12 @@ public:
 
         }
         clientThread = thread([this]{ client1.start();});
-        lobby.start();
+        players[myOwnPlayerNumber].setPic(lobby.start());
+
+        players[1].setPic(rand()%6);
+        players[2].setPic(rand()%6);
+
         return true;
     }
+
 };

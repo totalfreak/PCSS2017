@@ -19,7 +19,9 @@ Sprite Button::getSprite() {
     this->button.setPosition(buttonx, buttony);
     return this->button;
 }
-
+Texture Button::getTex(){
+    return this->textures[0];
+}
 void Button::setTex(int n) {
     this->button.setTexture(textures[n]);
 }

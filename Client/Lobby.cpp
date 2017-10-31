@@ -52,7 +52,7 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos){
 }
 
 Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
-
+int selected = -1;
 int Lobby::start() {
     playMusic();
     int numberOfButtons = 7;
@@ -117,9 +117,22 @@ int Lobby::start() {
                         // if mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
-                            music.stop();
-                            window.close();
-                            return 1;
+                            if (button.getGlobalBounds().contains(mousePosF)) {
+                                buttons[i].setTex(2);
+                                if(i==0){
+                                    //continue button
+                                    if(selected!=-1) {
+                                        window.close();
+                                        music.stop();
+                                        std::cout << "Returned texture from button " << selected << endl;
+                                        return selected-1;
+                                    }
+                                } else {
+                                    selected = i;
+                                    std::cout << "Set selected to " << i << endl;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
