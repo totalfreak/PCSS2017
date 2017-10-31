@@ -16,7 +16,7 @@ Client::Client(){
     socketHints.ai_family = AF_UNSPEC;
     socketHints.ai_socktype = SOCK_STREAM;
     socketHints.ai_flags = AI_PASSIVE;
-    socketHints.ai_addr = 
+    socketHints.ai_addr = (sockaddr *) ipAddr;
 
     if (getaddrinfo(NULL, port, &socketHints, &ClientInfo) != 0) {
         cout << "could not get addres" << endl;

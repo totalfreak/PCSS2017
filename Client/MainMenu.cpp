@@ -192,6 +192,14 @@ public:
         }
         string address;
         sf::Text text;
+        sf:Text title;
+
+        title.setFont(font);
+        title.setCharacterSize(40);
+        title.setString("Enter IP address of host");
+        title.setFillColor(Color::Black);
+        title.setPosition(200, 100);
+
         text.setString("");
         text.setFont(font);
         text.setCharacterSize(40);
@@ -289,6 +297,7 @@ public:
             for(int i = 0; i<numberOfButtons; i++) {
                 window.draw(buttons[i].getSprite());
             }
+            window.draw(title);
             window.draw(text);
             window.display();
         }
