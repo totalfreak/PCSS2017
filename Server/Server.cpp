@@ -119,9 +119,9 @@ int Server::start() {
     recvThread = thread([this] {this->Listner();});
     sendThread = thread([this] {this->Talker();});
 
-    accThread.join();
-    recvThread.join();
-    sendThread.join();
+    accThread.detach();
+    recvThread.detach();
+    sendThread.detach();
 }
 
 

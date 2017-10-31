@@ -75,8 +75,7 @@ int main() {
 
 
     // run the program as long as the window is open
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
 
        /* if(++counter > countto){
             for (int i = 0; i < 6; i++) {
