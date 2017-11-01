@@ -6,6 +6,8 @@
 #include "Fields.h"
 
 
+
+
 void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
     field *temp = new field;
     temp->number = n;
@@ -13,8 +15,6 @@ void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
     temp->size = size;
     temp->position = pos;
     temp->next = nullptr;
-
-
 
     if(head == nullptr) {
         head = temp;
@@ -30,6 +30,10 @@ void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
 Fields::Fields() {
     head = nullptr;
     tail = nullptr;
+    startPos = Vector2f(518.f, 518.f);
+    cornerFieldSize = Vector2f(72.f, 72.f);
+    regularFieldSizeX = Vector2f(26.f, 72.f);
+    regularFieldSizeY = Vector2f(72.f, 26.f);
 
 }
 
@@ -63,7 +67,7 @@ void Fields::display(RenderWindow &windowRef, Fields &fieldListRef) {
 }
 
 
-void Fields::setupFields(Fields &fieldListRef, int numberOfFields) {
+void Fields::setupFields(int numberOfFields) {
     int k;
     for(int i = 0; i < numberOfFields; i++){
         k = i % 10;
@@ -85,7 +89,7 @@ void Fields::setupFields(Fields &fieldListRef, int numberOfFields) {
                     tempPos = Vector2f(startPos.x, 10);
                     break;
             }
-            fieldListRef.createField(i, "corner", cornerFieldSize,tempPos);
+           createField(i, "corner", cornerFieldSize,tempPos);
         } else {
             if(i > 0 && i < 10 || i > 20 && i < 30){
                 tempSize = regularFieldSizeX;
@@ -103,13 +107,7 @@ void Fields::setupFields(Fields &fieldListRef, int numberOfFields) {
                 tempPos = Vector2f(startPos.x, cornerFieldSize.y-15 +((tempSize.y*k)*2)-k*6);
             }
 
-            fieldListRef.createField(i, "regular", tempSize, tempPos);
-        }
-    }
-    //make all the fields empty
-    for(field  * ptr  = fieldListRef.getHead(); ptr != nullptr ; ptr = ptr->next){
-        for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
-            *(ptr->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
+            createField(i, "regular", tempSize, tempPos);
         }
     }
 }

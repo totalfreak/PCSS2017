@@ -28,13 +28,6 @@ void setDicePos() {
 
 int main() {
 
-
-    int choice = 0;
-
-
-    cout << "trying to connect to " << endl;
-
-
     //Seeding random function
     srand(time(NULL));
 
@@ -46,16 +39,13 @@ int main() {
          }
      }
 
-
-
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
 
     //Temp background location
     Texture bgTex;
     Sprite bgSpr;
-    int counter = 0;
-    int countto = 3000;
+
 
     //Loading the background image
     if(!bgTex.loadFromFile("Client/Sprites/board.png")) {
@@ -64,13 +54,15 @@ int main() {
     bgSpr.setTexture(bgTex);
 
 
+    int counter = 0;
+    int countto = 3000;
+
     // run the program as long as the window is open
     while (window.isOpen()) {
 
         if(++counter > countto){
             for (int i = 0; i < 3; i++) {
                 gameManager.players[i].moveTo(gameManager.players[i].tile->next,gameManager.players[i].myID);
-
             }
             counter = 0;
         }
@@ -91,6 +83,10 @@ int main() {
             }
         }
 
+        //handle player physics
+        for(int i = 0 ; i < 6; i++){
+            gameManager.players[i].physics();
+        }
 
 
         Sprite dice1Spr, dice2Spr;
@@ -100,7 +96,7 @@ int main() {
 
         gameManager.fieldList.display(window, gameManager.fieldList);
         //Drawing the dices
-        //setDicePos();
+        setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
         window.draw(gameManager.die.diceSprites[1]);
         for (int i = 0; i < 6; i++) {
@@ -108,6 +104,7 @@ int main() {
             window.draw(gameManager.drawPlayer(i));
             window.draw(gameManager.drawPlayerPic(i));
         }
+
 
         window.display();
 

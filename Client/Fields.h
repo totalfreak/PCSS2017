@@ -13,14 +13,12 @@
 using namespace std;
 using namespace sf;
 
-const Vector2f startPos = Vector2f(518.f, 518.f);
-const Vector2f cornerFieldSize = Vector2f(72.f, 72.f);
-const Vector2f regularFieldSizeX = Vector2f(26.f, 72.f);
-const Vector2f regularFieldSizeY = Vector2f(72.f, 26.f);
+
 
 
 struct field {
 public:
+
     int number;
     Vector2f position;
     Vector2f size;
@@ -31,11 +29,19 @@ public:
 
 class Fields {
 
+
 private:
     field *head, *tail;
+
 public:
+    Vector2f startPos;
+    Vector2f cornerFieldSize ;
+    Vector2f regularFieldSizeX;
+    Vector2f regularFieldSizeY;
+
+
     void createField(int n, string s, Vector2f size, Vector2f pos);
-    void setupFields(Fields& fieldListRef, int numberOfFields);
+    void setupFields(int numberOfFields);
 
     void display(RenderWindow &windowRef, Fields &fieldListRef);
     Fields();
