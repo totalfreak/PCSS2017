@@ -27,6 +27,14 @@ void setDicePos() {
 }
 
 int main() {
+
+
+    int choice = 0;
+
+
+    cout << "trying to connect to " << endl;
+
+
     //Seeding random function
     srand(time(NULL));
 
@@ -37,26 +45,8 @@ int main() {
              gameStarted = true;
          }
      }
-/*
-    gameManager.texAmanda.loadFromFile("Client/Sprites/spr_frogTemp.png");
-    gameManager.fieldList.setupFields(gameManager.fieldList, 40);
-    for (int i = 0; i < 6; i++) {
-    gameManager.players[i] = gameManager.createPlayer("Rasmus ", gameManager.texAmanda, gameManager.texAmanda, i,
-                                                      gameManager.fieldList.getHead());
-    }
 
-    for (int i = 0; i < 6; i++) {
-        cout << gameManager.players[i].myID << endl;
-    }
-    gameManager.players[0].setPosition(0,600);
 
-    for(field  * ptr  = gameManager.fieldList.getHead(); ptr != nullptr ; ptr = ptr->next){
-        for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
-            *(ptr->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
-
-        }
-    }
-    */
 
     //Making window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice game");
@@ -64,8 +54,8 @@ int main() {
     //Temp background location
     Texture bgTex;
     Sprite bgSpr;
-    //int counter = 0;
-    //int countto = 3000;
+    int counter = 0;
+    int countto = 3000;
 
     //Loading the background image
     if(!bgTex.loadFromFile("Client/Sprites/board.png")) {
@@ -77,7 +67,7 @@ int main() {
     // run the program as long as the window is open
     while (window.isOpen()) {
 
-       /* if(++counter > countto){
+       if(++counter > countto){
             for (int i = 0; i < 6; i++) {
                 gameManager.players[i].moveTo(gameManager.players[i].tile->next,gameManager.players[i].myID);
 
@@ -91,7 +81,7 @@ int main() {
             cout << "_____________________________________________________________________________________________" << endl; // set all fields to -1
             counter = 0;
         }
-        */
+
         // check all the window's events that were triggered since the last iteration of the loop
         Event event;
         while (window.pollEvent(event))
@@ -110,6 +100,7 @@ int main() {
 
         for(int i = 0 ; i < 6 ; i++) {
             gameManager.players[i].physics();
+            cout << gameManager.fieldList.getHead()->position.x << endl;
         }
 
         Sprite dice1Spr, dice2Spr;
@@ -119,7 +110,7 @@ int main() {
 
         gameManager.fieldList.display(window, gameManager.fieldList);
         //Drawing the dices
-        setDicePos();
+        //setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
         window.draw(gameManager.die.diceSprites[1]);
         for (int i = 0; i < 6; i++) {
@@ -129,8 +120,9 @@ int main() {
         }
 
         window.display();
-
     }
+
+
 
     return 0;
 }

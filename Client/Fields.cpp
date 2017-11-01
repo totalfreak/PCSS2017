@@ -110,7 +110,6 @@ void Fields::setupFields(Fields &fieldListRef, int numberOfFields) {
     for(field  * ptr  = fieldListRef.getHead(); ptr != nullptr ; ptr = ptr->next){
         for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
             *(ptr->playersOnField + i) = FIELD_EMPTY; // set all fields to -1
-            cout << *(ptr->playersOnField + i) << endl;
         }
     }
 }

@@ -5,32 +5,33 @@
 #include "Client.h"
 
 Client::Client(){
-    cout << "setting up Client" << endl;
-
-
-
+    //yea there really isent a lot happening here, creates the object
 }
 
-void Client::talk() {
-    int haha = 0;
-    while (started) {
-        if(hasMsgBeenSent = true){return ;}
+void Client::talk() { // used to send information to the server
+    informOfConnection();   // tell the server that you want to join it
 
-        send(sock, msgToBeSent, 1024, 0);
-        hasMsgBeenSent = true;
-
+    while (started) { // loop as long as the server s started
+        if(hasMsgBeenSent == true){ //check if the mesage has been sent
+            continue ;  // if at has start from the top of the loop
+        }
+        send(sock, msgToBeSent, 1024, 0)!= 0; // if the msg has not been sent, send it
+        hasMsgBeenSent = true;  // then mark that it has been sent
+        cout << "CLIENT: msg sent : " << msgToBeSent<< endl;
     }
 }
 
-void Client::listen() {
-    cout << "im listning " << endl;
-    char res[1024];
-    int dataReceived;
+void Client::listen() {     //look for returned information on your socket
+    char res[1024];         //buffer that will hold the data
+    int dataReceived;       //used to see how many bytes we receive
     while (started){
-        dataReceived = recv(sock, res , 1024 , 0);
-        if(dataReceived != 0){
-            cout << " received data " << res << endl;
-        }
+        dataReceived = recv(sock, res , 1024 , 0);//check if theres any new information on the socket
+
+        if (dataReceived < 1){ continue;} // if there is none return to the top of loop
+
+        // else we received new data
+        cout << "CLIENT: i received data from server: " << res << endl;
+
 
         //listen logic goes here
 
@@ -38,35 +39,39 @@ void Client::listen() {
 
 }
 
-void Client::start() {
+void Client::start() { // used to start the server, (kinda obivous,)
 
-    memset(&socketHints, 0, sizeof(socketHints)); // get hints about the server
+    //setting up socket and establishing connection
 
-    socketHints.ai_family = AF_UNSPEC;
-    socketHints.ai_socktype = SOCK_STREAM;
-    socketHints.ai_flags = AI_PASSIVE;
-    socketHints.ai_addr = (sockaddr *) ipAddr;
+    cout << "CLIENT:setting up client" << endl;
+    cout << "please type the ip you would like to connect to" << endl;
+    char ip[] = "172.30.255.217"; // Server IP
+    cin >> ip ;
+    struct sockaddr_in server_addr;
 
-    if (getaddrinfo(NULL, port, &socketHints, &ClientInfo) != 0) {
-        cout << "could not get addres" << endl;
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (sock < 0) {
+        cout << "\n-Error establishing socket..." << endl;
+        exit(-1);
     }
 
-    for (p = ClientInfo; p != NULL; p = p->ai_next) {
-        if (sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol) == -1) {
-            cout << "one addr failed ";
-            continue;
-        }
-        cout << "One addr worked trying to connect: ";
-        if (connect(sock , p->ai_addr, p->ai_addrlen) == -1) {
-            close(sock);
-            cout << "but could not connect " << endl;
-            continue;
-        }
-        cout << "connection established " << endl;
-        break;
+
+    cout << "\n- Socket client has been created..." << endl;
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port);
+
+    inet_pton(AF_INET, ip, &server_addr.sin_addr);
+
+
+    if (connect(sock, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0){
+        cout << "- Connection to the server port number: " << port << endl;
     }
-    freeaddrinfo(ClientInfo); // all done with this structure
-    started = true;
+
+
+    //starting multithreading
+    started = true; // server is now online, so allow threads to loop
     sendThread = thread([this]{ talk();});
     recvThread = thread([this]{ listen();});
 
@@ -75,13 +80,24 @@ void Client::start() {
 
 }
 
-void Client::sendMessage(char * msg, int size) {
-    if(size != 1024){
+void Client::sendMessage(char * msg, int size) {    // used to send a char array to the server
+    if(size != 1024){   //make sure that you can only send the right size of buffer
         cout << "msg to large or to small use 1024" << endl;
         return;
     }
-    for(int i = 0 ; i < 1024; i++) {
+    for(int i = 0 ; i < 1024; i++) {    // copy the msg into the array that will se send
         *(msgToBeSent + i) = *(msg + i);
     }
-    hasMsgBeenSent = false;
+    hasMsgBeenSent = false; // and tell the client that there is a new message that needs sending
+}
+
+
+void Client::informOfConnection() { // tells the server that you would like to join it
+    char arr[1024];
+    string name = "rasmus";
+    string info = "c " + name + " would like to join the server";
+    strcpy(arr, info.c_str());
+    sendMessage(arr, 1024);
+
+
 }

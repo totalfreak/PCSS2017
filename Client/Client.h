@@ -26,23 +26,20 @@ using namespace std;
 
 class Client {
     bool started = false;
-    int sock;
-    thread sendThread;
-    thread recvThread;
+    int sock;   // tell the computer which socket we are sending on
+    thread sendThread;  // thread used to send to server
+    thread recvThread;  // thread for revcving from server
     char msgToBeSent[1024];
-    bool hasMsgBeenSent = true;
-    struct addrinfo *p;
-    struct addrinfo socketHints;
-    struct addrinfo * ClientInfo;
-
+    bool hasMsgBeenSent = true; // tells the client wheather or not the msg has been sent before
 
 public:
-    const char* ipAddr;
     Client();
     void start();
     void listen();
     void sendMessage(char* msg, int size);
     void talk();
+
+    void informOfConnection();
 };
 
 #endif //PCSS2017_CLIENT_H

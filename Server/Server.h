@@ -30,10 +30,8 @@ struct  ClientSock{
     int client;
     sockaddr thierAddr;
     socklen_t theriSize;
-    char recvMessage[1024];
-    bool msgSent = true;
-
-
+    char * recvMessage = new char[1024];
+    bool * msgSent = new bool;
 };
 
 class Server {
@@ -42,10 +40,6 @@ class Server {
     int maxPlayers;
     int nrOfPlayers = 0;
     bool started = false;
-    //for setting up server
-    struct addrinfo serverHints;
-    struct addrinfo *serverInfo;
-    struct addrinfo *p;
 
 
     //internet
@@ -55,16 +49,14 @@ class Server {
     //sending and receiving
     char * msg[1024];
     thread accThread;
-    thread recvThread;
+    thread * recvThreads;
     thread sendThread;
-
 
 public:
     const char* ipAddr;
     Server(int maxNrOfPLayers); // setup server so and start to listen on server socket;
 
     int start();
-    void Listner();
     void Talker();
     void stop();
 
@@ -72,6 +64,8 @@ public:
     bool isStarted();
 
     void AcceptClients();
+
+    void Listner(ClientSock aClient);
 };
 
 
