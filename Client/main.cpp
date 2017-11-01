@@ -67,18 +67,11 @@ int main() {
     // run the program as long as the window is open
     while (window.isOpen()) {
 
-       if(++counter > countto){
-            for (int i = 0; i < 6; i++) {
+        if(++counter > countto){
+            for (int i = 0; i < 3; i++) {
                 gameManager.players[i].moveTo(gameManager.players[i].tile->next,gameManager.players[i].myID);
 
             }
-            for(field  * ptr  = gameManager.fieldList.getHead(); ptr != nullptr ; ptr = ptr->next){
-                for(int i = 0 ; i < 6 ; i++){//allow players to go to the field
-                    cout << *(ptr->playersOnField + i); // set all fields to -1
-                }
-                cout << " " << endl; // set all fields to -1
-            }
-            cout << "_____________________________________________________________________________________________" << endl; // set all fields to -1
             counter = 0;
         }
 
@@ -98,10 +91,7 @@ int main() {
             }
         }
 
-        for(int i = 0 ; i < 6 ; i++) {
-            gameManager.players[i].physics();
-            cout << gameManager.fieldList.getHead()->position.x << endl;
-        }
+
 
         Sprite dice1Spr, dice2Spr;
 
@@ -120,7 +110,9 @@ int main() {
         }
 
         window.display();
+
     }
+
 
 
 
