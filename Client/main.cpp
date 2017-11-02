@@ -61,7 +61,8 @@ int main() {
     while (window.isOpen()) {
 
         if(++counter > countto){
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 6; i++) {
+                if(!gameManager.players[i].hasPlayer){ continue;}
                 gameManager.players[i].moveTo(gameManager.players[i].tile->next,gameManager.players[i].myID);
             }
             counter = 0;
@@ -85,6 +86,7 @@ int main() {
 
         //handle player physics
         for(int i = 0 ; i < 6; i++){
+            if(!gameManager.players[i].hasPlayer){ continue;}   //if the player is active
             gameManager.players[i].physics();
         }
 
@@ -94,12 +96,12 @@ int main() {
         window.clear(Color::Black);
         window.draw(bgSpr);
 
-        gameManager.fieldList.display(window, gameManager.fieldList);
+        //gameManager.fieldList.display(window, gameManager.fieldList);
         //Drawing the dices
         setDicePos();
         window.draw(gameManager.die.diceSprites[0]);
         window.draw(gameManager.die.diceSprites[1]);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++){
             window.draw(gameManager.drawPlayerShadow(i));
             window.draw(gameManager.drawPlayer(i));
             window.draw(gameManager.drawPlayerPic(i));

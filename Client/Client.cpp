@@ -42,11 +42,16 @@ void Client::listen() {     //look for returned information on your socket
 void Client::start() { // used to start the server, (kinda obivous,)
 
     //setting up socket and establishing connection
+    char ip[] = "127.0.0.1"; // Server IP
+    if(!isHost) {
+        cout << "CLIENT:setting up client" << endl;
+        cout << "please type the ip you would like to connect to" << endl;
+        cin >> ip;
 
-    cout << "CLIENT:setting up client" << endl;
-    cout << "please type the ip you would like to connect to" << endl;
-    char ip[] = "172.30.255.217"; // Server IP
-    cin >> ip ;
+    }else{
+        cout <<"CLIENT: we hosting nah mutherfucker" << endl;
+    }
+
     struct sockaddr_in server_addr;
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -100,4 +105,8 @@ void Client::informOfConnection() { // tells the server that you would like to j
     sendMessage(arr, 1024);
 
 
+}
+
+void Client::iWannaHost() {
+    isHost = true;
 }

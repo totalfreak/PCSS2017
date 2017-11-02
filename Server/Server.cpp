@@ -71,7 +71,7 @@ void Server::Talker() {
                 for(int j = 0 ; j < maxPlayers ; j++) {
 
                     if(clients[j].client == -1){ continue; }
-                    std::cout << "TALKER: i am sending the message " << clients[i].recvMessage << "to client " << i << " to client nr " << j<< std::endl;
+                    std::cout << "TALKER: i am sending the message " << clients[i].recvMessage << " from cli" << i << " -> cli" << j<< std::endl;
 
                     clients[i].recvMessage[0] =  '0' + i;
                     send(clients[j].client, clients[i].recvMessage, 1024, 0);

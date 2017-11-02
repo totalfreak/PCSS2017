@@ -25,6 +25,7 @@
 using namespace std;
 
 class Client {
+    bool isHost = false;
     bool started = false;
     int sock;   // tell the computer which socket we are sending on
     thread sendThread;  // thread used to send to server
@@ -38,6 +39,7 @@ public:
     void listen();
     void sendMessage(char* msg, int size);
     void talk();
+    void iWannaHost();
 
     void informOfConnection();
 };

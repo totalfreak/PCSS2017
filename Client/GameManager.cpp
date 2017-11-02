@@ -140,6 +140,9 @@ public:
 
                     puts("Server started\n");
                 }
+                while(!server1.isStarted()); // wait for server to start
+                client1.iWannaHost(); // allows us to host the game
+
                 break;
             case 2:
                 std::string ipAddr;
