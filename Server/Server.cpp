@@ -1,12 +1,12 @@
 
 
 #include "Server.h"
-
+#include <string>
 Server::Server(int maxNrOfPlayers) {
     //setup a server that can host up to maxNrOfPlayers
     maxPlayers = maxNrOfPlayers;
     clients =  new ClientSock[maxPlayers];
-    recvThreads = new thread[maxPlayers];
+    recvThreads = new std::thread[maxPlayers];
 
     for(int i = 0 ; i < maxNrOfPlayers; i++){   // set all the client spots as empty
         clients[i].client = -1;
@@ -17,7 +17,7 @@ void Server::Listner(ClientSock aClient) {
     //it is a loop that checks if there is a new msg, and if there is, tells the
     //talker thread to send it to all other clients
     int ReceivedBytes;
-    cout << "LISTNER: new listner of a socket:" << aClient.client<< endl;
+    std::cout << "LISTNER: new listner of a socket:" << aClient.client<< std::endl;
     while(started && aClient.client != -1){ // so long as the server is started and the client is connected
             char buffer[1024]; //
             ReceivedBytes = recv(aClient.client , buffer , 1024 ,0);    // recv from the client into a buffer
@@ -28,7 +28,7 @@ void Server::Listner(ClientSock aClient) {
             }
 
     }
-    cout << " i lost connection to" << aClient.client << "or the server is offline"<< endl;
+    std::cout << " i lost connection to" << aClient.client << "or the server is offline"<< std::endl;
 }
 
 void Server::AcceptClients() {
@@ -47,15 +47,15 @@ void Server::AcceptClients() {
         if(emptySpot == -1){    // if we find no spots do nothing
             continue;
         }
-        cout << "ACCEPT: waiting for clients to connect " << endl;
+        std::cout << "ACCEPT: waiting for clients to connect " << std::endl;
 
         //wait for a new client
         clients[emptySpot].client = accept(serverSock,(struct sockaddr *)& clients[emptySpot],& clients[emptySpot].theriSize);
         //wwhen connected make a reference to the client
         ClientSock * test = &clients[emptySpot];
         //start a thread for the new client to recv from it
-        recvThreads[emptySpot] = thread([this, test] {this->Listner(*test); } );
-        cout << "ACCEPT: new client conected they are in spot:" << emptySpot<<  endl;
+        recvThreads[emptySpot] = std::thread([this, test] {this->Listner(*test); } );
+        std::cout << "ACCEPT: new client conected they are in spot:" << emptySpot<<  std::endl;
     }
 }
 
@@ -71,7 +71,7 @@ void Server::Talker() {
                 for(int j = 0 ; j < maxPlayers ; j++) {
 
                     if(clients[j].client == -1){ continue; }
-                    cout << "TALKER: i am sending the message " << clients[i].recvMessage << "to client " << i << " to client nr " << j<< endl;
+                    std::cout << "TALKER: i am sending the message " << clients[i].recvMessage << "to client " << i << " to client nr " << j<< std::endl;
 
                     clients[i].recvMessage[0] =  '0' + i;
                     send(clients[j].client, clients[i].recvMessage, 1024, 0);
@@ -100,30 +100,29 @@ int Server::start() {
     serverSock = socket(AF_INET, SOCK_STREAM,0);    //create TCP socket for ip4
 
     if (serverSock < 0) {
-        cout << "SERVER:Error establishing socket ..." << endl;
+        std::cout << "SERVER:Error establishing socket ..." << std::endl;
         exit(-1);
     }
 
-    cout << "SERVER:Socket server has been created..." << endl;
+    std::cout << "SERVER:Socket server has been created..." << std::endl;
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htons(INADDR_ANY);
     server_addr.sin_port = htons(port);
 
-
-    if ((bind(serverSock, (struct sockaddr*) &server_addr, sizeof(server_addr))) < 0) {
-        cout << "SERVER: Error binding connection, the socket has already been established..." << endl;
+    if (bind(serverSock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+        std::cout << "SERVER: Error binding connection, the socket has already been established..." << std::endl;
         exit(-1);
     }
 
     size = sizeof(server_addr);
     listen(serverSock, 1);
-    cout << "SERVER: Looking for clients..." << endl;
+    std::cout << "SERVER: Looking for clients..." << std::endl;
 
     //then allow the threads to loop
     started = true;
-    accThread = thread([this] { this->AcceptClients(); });  //used to accept clients and start a RECV thread for each of them
-    sendThread = thread([this] {this->Talker();});          // used to send to all clients
+    accThread = std::thread([this] { this->AcceptClients(); });  //used to accept clients and start a RECV thread for each of them
+    sendThread = std::thread([this] {this->Talker();});          // used to send to all clients
 
 }
 

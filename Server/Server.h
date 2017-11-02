@@ -22,7 +22,6 @@
 #include <iostream>
 #include "../Client/constants.h"
 
-using namespace std;
 
 
 
@@ -48,9 +47,9 @@ class Server {
 
     //sending and receiving
     char * msg[1024];
-    thread accThread;
-    thread * recvThreads;
-    thread sendThread;
+    std::thread accThread;
+    std::thread * recvThreads;
+    std::thread sendThread;
 
 public:
     const char* ipAddr;
