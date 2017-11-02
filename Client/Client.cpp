@@ -116,3 +116,7 @@ char * Client::getMsg() {
 
     return lastMsgRecv;
 }
+
+bool Client::isStarted() const {
+    return started;
+}

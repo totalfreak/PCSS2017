@@ -27,6 +27,9 @@ using namespace std;
 class Client {
     bool isHost = false;
     bool started = false;
+
+
+private:
     int sock;   // tell the computer which socket we are sending on
     thread sendThread;  // thread used to send to server
     thread recvThread;  // thread for revcving from server
@@ -46,6 +49,8 @@ public:
     void informOfConnection();
 
     char *getMsg();
+    bool isStarted() const;
+
 };
 
 #endif //PCSS2017_CLIENT_H

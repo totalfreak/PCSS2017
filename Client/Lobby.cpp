@@ -55,7 +55,7 @@ Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
 int selected = -1;
 
 int Lobby::start() {
-    playMusic();
+    //playMusic();
     int numberOfButtons = 7;
     Button buttons[7];
     // Create one button to continue to game
@@ -154,7 +154,7 @@ int Lobby::start() {
         game->network();
         for(int i = 0 ; i < 6 ; i++){   //for each player spot(6) in the game
             if(!game->players[i].hasPlayer){ continue;} // if theres no player there no thing
-            window.draw(showPlayerName(game->players[i].playerName, 120));
+            window.draw(showPlayerName(game->players[i].playerName, 120 + i*40));
         }
 
         window.draw(spritesShow(tempSprite, 120));

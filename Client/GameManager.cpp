@@ -1,30 +1,37 @@
 #include "GameManager.h"
 
 void GameManager::network() {
-    if(client1.recvMsgDealtWith){return;}
+
+    if(!(client1.recvMsgDealtWith == false && client1.isStarted())){return;}
     //otherwise there must be a new msg to deal with
 
+    cout << "we got to char" << endl;
     char msg[1024];
+    cout << "copying" << endl;
     memcpy(msg,client1.getMsg(),1024); // copy the msg
     client1.recvMsgDealtWith = true;    // tell the client that we are ready to receive a new msg
-
+    cout << "stringing" << endl;
     // read the arguments from the received msg
     string arg[3];
+    arg[0] = "%";
+    arg[1] = "%";
+    arg[2] = "%";
+    cout << "reading args" << endl;
     char * reader = strtok(msg,":");
-    arg[0] = reader;
+    if(reader != nullptr){ arg[0] = reader;}
     reader = strtok(NULL,":");
-    arg[1] = reader;
+    if(reader != nullptr){ arg[1] = reader;}
     reader = strtok(NULL,":");
-    arg[2] = reader;
+    if(reader != nullptr){ arg[2] = reader;}
     cout << arg[0] << ":" << arg[1] << ":" << arg[2]<< endl;
 
-    cout << "is it true :" << arg[1].c_str()[0] << endl;
-
+    cout << "got args" << endl;
     switch(arg[1].c_str()[0]){
-        case 'j':{// j means that a player is joining
+        case 'j':{// j means that a player is joininCr
+            cout << "creating new player" << endl;
             int playerNr = stoi(arg[0],0);
             players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
-            cout << "created new player" << endl;
+            cout << "created new player: " << playerNr << endl;
 
             break;
         }
@@ -122,18 +129,21 @@ bool GameManager::initGame() {
             break;
         case 2:
             std::string ipAddr;
-            puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
-            ipAddr = menu.ipAddressGet();
-            if(ipAddr.length() < 7) {
-                ipAddr = "127.0.0.1";
-            }
+            //puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
+            //ipAddr = menu.ipAddressGet();
+            //if(ipAddr.length() < 7) {
+              //  ipAddr = "127.0.0.1";
+            //}
             const char* ip = ipAddr.c_str();
             //client1.ipAddr = ip;
 
             break;
 
     }
+
     clientThread = thread([this]{ client1.start();});
+    while(!client1.isStarted());
+
     players[myOwnPlayerNumber].setPic(lobby->start());
 
     players[1].setPic(rand()%6);
