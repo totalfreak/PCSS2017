@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "GameManager.cpp"
+#include "GameManager.h"
 
 
 using namespace std;
@@ -60,14 +60,6 @@ int main() {
     // run the program as long as the window is open
     while (window.isOpen()) {
 
-        if(++counter > countto){
-            for (int i = 0; i < 6; i++) {
-                if(!gameManager.players[i].hasPlayer){ continue;}
-                gameManager.players[i].moveTo(gameManager.players[i].tile->next,gameManager.players[i].myID);
-            }
-            counter = 0;
-        }
-
         // check all the window's events that were triggered since the last iteration of the loop
         Event event;
         while (window.pollEvent(event))
@@ -110,6 +102,7 @@ int main() {
 
         window.display();
 
+        gameManager.network();
     }
 
 

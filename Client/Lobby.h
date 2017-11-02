@@ -10,14 +10,26 @@
 #include <SFML/Graphics.hpp>
 #include "Client/Button.h"
 #include <SFML/Audio.hpp>
+#include "GameManager.h"
 
 using namespace std;
 using namespace sf;
 
+class GameManager;
 
 class Lobby {
 
+
+
 public:
+
+    Lobby();
+
+    Lobby(GameManager *creator); //use this one it can make changes to the gamemanger that created it
+
+
+
+    GameManager * game;
     sf::Font font;
     sf::Music music;
     Sprite sprites[6];
@@ -25,7 +37,7 @@ public:
     Texture texBg;
     Sprite tempSprite;
     Sprite bgSprite;
-    Lobby();
+
     Text showPlayers();
     void playMusic();
     Text showTitle();

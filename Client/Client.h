@@ -31,9 +31,11 @@ class Client {
     thread sendThread;  // thread used to send to server
     thread recvThread;  // thread for revcving from server
     char msgToBeSent[1024];
+    char lastMsgRecv[1024];
     bool hasMsgBeenSent = true; // tells the client wheather or not the msg has been sent before
 
 public:
+    bool recvMsgDealtWith;
     Client();
     void start();
     void listen();
@@ -42,6 +44,8 @@ public:
     void iWannaHost();
 
     void informOfConnection();
+
+    char *getMsg();
 };
 
 #endif //PCSS2017_CLIENT_H

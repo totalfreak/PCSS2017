@@ -53,6 +53,7 @@ Sprite Lobby::spritesShow(Sprite sprite, int yPos){
 
 Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
 int selected = -1;
+
 int Lobby::start() {
     playMusic();
     int numberOfButtons = 7;
@@ -168,6 +169,7 @@ int Lobby::start() {
 
 
         window.display();
+
     }
 
     return 0;
@@ -175,6 +177,34 @@ int Lobby::start() {
 }
 
 Lobby::Lobby() {
+    game = nullptr;
+
+    if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
+        perror("Font couldn't load");
+    }
+
+    if(!texBrickFrog.loadFromFile("Client/Sprites/spr_frogTemp.png")) {
+        cout << "Error loading player brick textures";
+    }
+    tempSprite.setTexture(texBrickFrog);
+
+    if(!texBg.loadFromFile("Client/Sprites/lobbybg.png")) {
+        cout << "Error loading player brick textures";
+    }
+    bgSprite.setTexture(texBg);
+
+
+    rectangle = RectangleShape(sf::Vector2f(120, 50));
+    rectangle.setOutlineColor(sf::Color(117, 117, 117));
+    rectangle.setSize(sf::Vector2f(300, 400));
+    rectangle.setPosition(50, 100);
+    rectangle.setFillColor(sf::Color(255, 255, 255, 100));
+    rectangle.setOutlineThickness(1);
+}
+
+Lobby::Lobby(GameManager * creator) {
+
+    //this version can make changes to the gamemanager that created it
 
     if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
         perror("Font couldn't load");

@@ -31,8 +31,8 @@ void Client::listen() {     //look for returned information on your socket
 
         // else we received new data
         cout << "CLIENT: i received data from server: " << res << endl;
-
-
+        memcpy(&lastMsgRecv,res,sizeof(lastMsgRecv));
+        recvMsgDealtWith = false;
         //listen logic goes here
 
     }
@@ -100,7 +100,7 @@ void Client::sendMessage(char * msg, int size) {    // used to send a char array
 void Client::informOfConnection() { // tells the server that you would like to join it
     char arr[1024];
     string name = "rasmus";
-    string info = "c " + name + " would like to join the server";
+    string info = "c:js:" + name + ": would like to join the server";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
 
@@ -109,4 +109,10 @@ void Client::informOfConnection() { // tells the server that you would like to j
 
 void Client::iWannaHost() {
     isHost = true;
+}
+
+
+char * Client::getMsg() {
+
+    return lastMsgRecv;
 }
