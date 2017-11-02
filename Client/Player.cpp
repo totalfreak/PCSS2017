@@ -3,6 +3,9 @@
 
 
 Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * pos) {
+    if(name == ""){
+        name = "no name";
+    }
     playerName = name;
     playerTexture = picTex;
     playerSprite.setTexture(playerTexture);

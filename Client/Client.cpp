@@ -100,7 +100,7 @@ void Client::sendMessage(char * msg, int size) {    // used to send a char array
 void Client::informOfConnection() { // tells the server that you would like to join it
     char arr[1024];
     string name = "rasmus";
-    string info = "c:js:" + name + ": would like to join the server";
+    string info = "c:j:" + name + ": would like to join the server";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
 

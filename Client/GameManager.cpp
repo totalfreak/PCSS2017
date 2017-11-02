@@ -4,11 +4,35 @@ void GameManager::network() {
     if(client1.recvMsgDealtWith){return;}
     //otherwise there must be a new msg to deal with
 
-    char * ptr = strtok(client1.getMsg(), ":");
+    char msg[1024];
+    memcpy(msg,client1.getMsg(),1024); // copy the msg
+    client1.recvMsgDealtWith = true;    // tell the client that we are ready to receive a new msg
 
-    while(ptr != NULL){
-        ptr = strtok(nullptr, ":");
-        cout << ptr << endl;
+    // read the arguments from the received msg
+    string arg[3];
+    char * reader = strtok(msg,":");
+    arg[0] = reader;
+    reader = strtok(NULL,":");
+    arg[1] = reader;
+    reader = strtok(NULL,":");
+    arg[2] = reader;
+    cout << arg[0] << ":" << arg[1] << ":" << arg[2]<< endl;
+
+    cout << "is it true :" << arg[1].c_str()[0] << endl;
+
+    switch(arg[1].c_str()[0]){
+        case 'j':{// j means that a player is joining
+            int playerNr = stoi(arg[0],0);
+            players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
+            cout << "created new player" << endl;
+
+            break;
+        }
+        case 'm':{
+
+            break;
+        }
+
     }
 
 }

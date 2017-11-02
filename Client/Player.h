@@ -18,7 +18,7 @@ using namespace std::chrono;
 
 class Player {
 
-    string playerName;
+
     int points;
     Texture playerTexture;
     Sprite playerSprite;
@@ -33,6 +33,7 @@ class Player {
 
 
 public:
+    string playerName;
     Texture playerBrickTex;
     Sprite playerBrickSpr;
     bool turnTaken;

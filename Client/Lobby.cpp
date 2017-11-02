@@ -148,9 +148,15 @@ int Lobby::start() {
             window.draw(buttons[i].getSprite());
         }
         window.draw(rectangle);
-        window.draw(showPlayerName("You", 120));
-        window.draw(showPlayerName("Horse Penis", 160));
-        window.draw(showPlayerName("Mr. Dick Jail", 200));
+
+
+        //networking part
+        game->network();
+        for(int i = 0 ; i < 6 ; i++){   //for each player spot(6) in the game
+            if(!game->players[i].hasPlayer){ continue;} // if theres no player there no thing
+            window.draw(showPlayerName(game->players[i].playerName, 120));
+        }
+
         window.draw(spritesShow(tempSprite, 120));
         window.draw(spritesShow(tempSprite, 160));
         window.draw(spritesShow(tempSprite, 200));
@@ -206,6 +212,7 @@ Lobby::Lobby(GameManager * creator) {
 
     //this version can make changes to the gamemanager that created it
 
+    game = creator;
     if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
         perror("Font couldn't load");
     }
