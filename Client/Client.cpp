@@ -86,7 +86,6 @@ void Client::start() { // used to start the server, (kinda obivous,)
     recvThread.join();
 
 }
-
 void Client::sendMessage(char * msg, int size) {    // used to send a char array to the server
     if(size != 1024){   //make sure that you can only send the right size of buffer
         cout << "msg to large or to small use 1024" << endl;
@@ -98,6 +97,12 @@ void Client::sendMessage(char * msg, int size) {    // used to send a char array
     hasMsgBeenSent = false; // and tell the client that there is a new message that needs sending
 }
 
+void Client::roll(int num){
+    char arr[1024];
+    string info = "c:r:" + to_string(num)+ ":";
+    strcpy(arr, info.c_str());
+    sendMessage(arr, 1024);
+}
 
 void Client::informOfConnection() { // tells the server that you would like to join it
     char arr[1024];

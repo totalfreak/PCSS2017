@@ -54,7 +54,7 @@ public:
     void iWannaHost();
 
     void informOfConnection();
-
+    void roll(int num);
     char *getMsg();
     bool isStarted() const;
 

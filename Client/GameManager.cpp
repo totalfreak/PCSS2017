@@ -47,6 +47,15 @@ void GameManager::network() {
             }
             break;
         }
+        case 'r':{ // new roll
+            int playerNr = stoi(arg[0],0);
+            cout << "Player " << playerNr << " rolled " << arg[2] << endl;
+            break;
+        }
+        case 't':{ // pass turn
+            int playerNr = stoi(arg[0],0);
+            cout << "player " << playerNr << " has ended their turn." << endl;
+        }
 
     }
 
@@ -76,7 +85,7 @@ Player GameManager::createPlayer(string tempName, Texture tempTex, Texture tempB
 
 void GameManager::roll() {
     //Send roll to server
-
+    client1->roll(die.roll());
 }
 
 Sprite GameManager::drawPlayer(int curPlayer) {
