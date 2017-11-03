@@ -49,7 +49,12 @@ void GameManager::network() {
         }
         case 'r':{ // new roll
             int playerNr = stoi(arg[0],0);
-            cout << "Player " << playerNr << " rolled " << arg[2] << endl;
+
+            cout << "Player " << playerNr << " rolled " << arg[2].at(0) << " and " << arg[2].at(1) << " for a total of " << arg[2].at(2) << arg[2].at(3)<< endl;
+            int rolled[2];
+            rolled[0] = arg[2].at(0);
+            rolled[1] = arg[2].at(1);
+            die.setTex(rolled);
             break;
         }
         case 't':{ // pass turn

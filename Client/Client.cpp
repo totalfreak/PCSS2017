@@ -97,10 +97,7 @@ void Client::sendMessage(char * msg, int size) {    // used to send a char array
     hasMsgBeenSent = false; // and tell the client that there is a new message that needs sending
 }
 
-void Client::roll(int num){
-    char arr[1024];
-    string info = "c:r:" + to_string(num)+ ":";
-    strcpy(arr, info.c_str());
+void Client::roll(char* arr){
     sendMessage(arr, 1024);
 }
 

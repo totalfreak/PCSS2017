@@ -24,8 +24,8 @@ public:
     Texture dice1, dice2, dice3, dice4, dice5, dice6;
     //Constructor
     Dice();
-    int roll();;
-
+    char* roll();;
+    void setTex(int* nums);
     Texture chooseDiceTex(int* whatIsRolled);
 
 

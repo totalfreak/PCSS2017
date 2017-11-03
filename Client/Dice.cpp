@@ -49,19 +49,24 @@ Texture Dice::chooseDiceTex(int *whatIsRolled) {
     return *texes;
 }
 
-int Dice::roll() {
+char* Dice::roll() {
 
 
     //Doing two dice rolls
     rolled[0] = rand()%6+1;
     rolled[1] = rand()%6+1;
     //Saving the rolled textures
-    *diceTexes = chooseDiceTex(rolled);
+    char arr[1024];
+    string info = "c:r:" + to_string(rolled[0])+to_string(rolled[1])+to_string(rolled[0]+rolled[1])+" "+":";
+    strcpy(arr, info.c_str());
+    return arr;
+
+}
+void Dice::setTex(int *nums) {
+    *diceTexes = chooseDiceTex(nums);
     diceSprites[0].setTexture(diceTexes[0]);
     diceSprites[1].setTexture(diceTexes[1]);
-    return rolled[0]+rolled[1];
 }
-
 Dice::Dice() {
     if(!dice1.loadFromFile("Client/Sprites/spr_dice1.png") || !dice2.loadFromFile("Client/Sprites/spr_dice2.png") || !dice3.loadFromFile("Client/Sprites/spr_dice3.png") || !dice4.loadFromFile("Client/Sprites/spr_dice4.png") || !dice5.loadFromFile("Client/Sprites/spr_dice5.png") || !dice6.loadFromFile("Client/Sprites/spr_dice6.png")) {
         cout << "Error loading sprites";
