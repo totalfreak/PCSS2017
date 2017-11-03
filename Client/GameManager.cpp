@@ -2,14 +2,14 @@
 
 void GameManager::network() {
 
-    if(!(client1.recvMsgDealtWith == false && client1.isStarted())){return;}
+    if(!(client1->recvMsgDealtWith == false && client1->isStarted())){return;}
     //otherwise there must be a new msg to deal with
 
     cout << "we got to char" << endl;
     char msg[1024];
     cout << "copying" << endl;
-    memcpy(msg,client1.getMsg(),1024); // copy the msg
-    client1.recvMsgDealtWith = true;    // tell the client that we are ready to receive a new msg
+    memcpy(msg,client1->getMsg(),1024); // copy the msg
+    client1->recvMsgDealtWith = true;    // tell the client that we are ready to receive a new msg
     cout << "stringing" << endl;
     // read the arguments from the received msg
     string arg[3];
@@ -32,11 +32,19 @@ void GameManager::network() {
             int playerNr = stoi(arg[0],0);
             players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
             cout << "created new player: " << playerNr << endl;
-
+            client1->tellThatIExist();
             break;
         }
         case 'm':{
 
+            break;
+        }
+        case 'u':{
+            int playerNr = stoi(arg[0],0);
+            if(!players[playerNr].hasPlayer){
+                players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
+                cout << "created new player: " << playerNr << endl;
+            }
             break;
         }
 
@@ -47,6 +55,7 @@ void GameManager::network() {
 GameManager::GameManager(int playersToMake) {
 
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
+    client1 = new Client(this);
 
     if(!texCharA.loadFromFile("Client/Sprites/player_icons/charA.png") || !texCharB.loadFromFile("Client/Sprites/player_icons/charB.png") || !texCharC.loadFromFile("Client/Sprites/player_icons/charC.png") || !texCharD.loadFromFile("Client/Sprites/player_icons/charD.png") ||!texCharE.loadFromFile("Client/Sprites/player_icons/charE.png")||!texCharF.loadFromFile("Client/Sprites/player_icons/charF.png")) {
         cout << "Error loading player textures";
@@ -57,11 +66,6 @@ GameManager::GameManager(int playersToMake) {
 
     //Setting up the fields
     fieldList.setupFields(NUMBER_OF_FIELDS);
-
-
-    //players[0] = createPlayer("Me", texBrickFrog, texBrickFrog, myOwnPlayerNumber, fieldList.getHead());
-    //players[2] = createPlayer("playertwo", texBrickFrog, texBrickFrog, 2, fieldList.getHead());
-    //players[1] = createPlayer("playerone", texBrickFrog, texBrickFrog, 1, fieldList.getHead());
 
 }
 
@@ -124,7 +128,7 @@ bool GameManager::initGame() {
                 puts("Server started\n");
             }
             while(!server1.isStarted()); // wait for server to start
-            client1.iWannaHost(); // allows us to host the game
+            client1->iWannaHost(); // allows us to host the game
 
             break;
         case 2:
@@ -141,8 +145,11 @@ bool GameManager::initGame() {
 
     }
 
-    clientThread = thread([this]{ client1.start();});
-    while(!client1.isStarted());
+    string name;
+    name = menu.ipAddressGet();
+    client1->changeName(name);
+    clientThread = thread([this]{ client1->start();});
+    while(!client1->isStarted());
 
     players[myOwnPlayerNumber].setPic(lobby->start());
 

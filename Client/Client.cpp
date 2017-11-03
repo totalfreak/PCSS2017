@@ -4,8 +4,9 @@
 
 #include "Client.h"
 
-Client::Client(){
+Client::Client(GameManager * creator){
     //yea there really isent a lot happening here, creates the object
+    game = creator;
 }
 
 void Client::talk() { // used to send information to the server
@@ -33,6 +34,7 @@ void Client::listen() {     //look for returned information on your socket
         cout << "CLIENT: i received data from server: " << res << endl;
         memcpy(&lastMsgRecv,res,sizeof(lastMsgRecv));
         recvMsgDealtWith = false;
+        game->network();
         //listen logic goes here
 
     }
@@ -99,8 +101,8 @@ void Client::sendMessage(char * msg, int size) {    // used to send a char array
 
 void Client::informOfConnection() { // tells the server that you would like to join it
     char arr[1024];
-    string name = "rasmus";
-    string info = "c:j:" + name + ": would like to join the server";
+    string myName = name;
+    string info = "c:j:" + myName + ":";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
 
@@ -120,3 +122,17 @@ char * Client::getMsg() {
 bool Client::isStarted() const {
     return started;
 }
+
+void Client::changeName(string newName) {
+    strcpy(name,newName.c_str());
+}
+
+void Client::tellThatIExist() {
+    char arr[1024];
+    string myName = name;
+    string info = "c:u:" + myName + ":";
+    strcpy(arr, info.c_str());
+    sendMessage(arr, 1024);
+}
+
+

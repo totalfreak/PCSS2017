@@ -102,7 +102,6 @@ int main() {
 
         window.display();
 
-        gameManager.network();
     }
 
 

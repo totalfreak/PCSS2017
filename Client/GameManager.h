@@ -19,6 +19,7 @@
 #include "Lobby.h"
 
 class Lobby;
+class Client;
 
 
 class GameManager {
@@ -32,7 +33,7 @@ public:
     struct sockaddr_in server;
 
     Server server1 = Server(6);
-    Client client1;
+    Client * client1;
     MainMenu menu;
     Lobby * lobby;
 
