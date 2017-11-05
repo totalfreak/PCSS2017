@@ -6,8 +6,6 @@
 #include "Fields.h"
 
 
-
-
 void Fields::createField(int n, string s, Vector2f size, Vector2f pos, bool isActive) {
     field *temp = new field;
     temp->number = n;
@@ -114,14 +112,23 @@ void Fields::setupFields(int numberOfFields) {
 }
 
 void Fields::displaySingle(RenderWindow &windowRef, field *displayField) {
-    cout << "Displaying: " << displayField->number << endl;
-    Color color = Color(255,255,255,100);
-    RectangleShape rectangle;
-    rectangle.setSize(displayField->size);
-    rectangle.setPosition(displayField->position);
-    rectangle.setFillColor(color);
-    rectangle.setOutlineColor(color);
-    rectangle.setOutlineThickness(9);
-    windowRef.draw(rectangle);
+    if(displayField->isActive){
+        Color color = Color(255,255,255,130);
+        RectangleShape rectangle;
+        rectangle.setSize(displayField->size);
+        rectangle.setPosition(displayField->position);
+        rectangle.setFillColor(color);
+        rectangle.setOutlineColor(color);
+        rectangle.setOutlineThickness(9);
+        windowRef.draw(rectangle);
+    }
 }
 
+void Fields::displayActiveFields(RenderWindow &windowRef, Fields &fieldListRef) {
+    field *temp;
+    temp = fieldListRef.getHead();
+    while(temp != nullptr) {
+        fieldListRef.displaySingle(windowRef, temp);
+        temp = temp->next;
+    }
+}

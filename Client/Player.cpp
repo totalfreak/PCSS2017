@@ -152,21 +152,22 @@ void Player::moveTo(field *dest, int IDToLookFor) {
     if(dest != nullptr && hasPlayer) {
         //delete us on the field we are on
         if (tile != nullptr) {
+            tile->isActive = false;
             for (int i = 0; i < 6; i++) {
                 if (tile && *(tile->playersOnField + i) == IDToLookFor) {
                     *(tile->playersOnField +
                       i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
-                    tile->isActive = false;
                     break;
                 }
             }
         }
         // then add us at the destination
         tile = dest;
+        tile->isActive = true;
         for(int j = 0 ; j < 6 ; j++) {
             if ( *(tile->playersOnField + j) == FIELD_EMPTY) {
                 *(tile->playersOnField + j) = IDToLookFor;
-                tile->isActive = true;
+                cout << "new field" << endl;
                 break;
             }
         }

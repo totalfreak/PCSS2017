@@ -45,6 +45,7 @@ public:
     void setupFields(int numberOfFields);
 
     void display(RenderWindow &windowRef, Fields &fieldListRef);
+    void displayActiveFields(RenderWindow &windowRef, Fields &fieldListRef);
     void displaySingle(RenderWindow &windowRef, field * displayField);
     Fields();
 
