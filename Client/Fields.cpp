@@ -8,13 +8,14 @@
 
 
 
-void Fields::createField(int n, string s, Vector2f size, Vector2f pos) {
+void Fields::createField(int n, string s, Vector2f size, Vector2f pos, bool isActive) {
     field *temp = new field;
     temp->number = n;
     temp->type = s;
     temp->size = size;
     temp->position = pos;
     temp->next = nullptr;
+    temp->isActive = false;
 
     if(head == nullptr) {
         head = temp;
@@ -89,7 +90,7 @@ void Fields::setupFields(int numberOfFields) {
                     tempPos = Vector2f(startPos.x, 10);
                     break;
             }
-           createField(i, "corner", cornerFieldSize,tempPos);
+           createField(i, "corner", cornerFieldSize,tempPos, false);
         } else {
             if(i > 0 && i < 10 || i > 20 && i < 30){
                 tempSize = regularFieldSizeX;
@@ -107,8 +108,20 @@ void Fields::setupFields(int numberOfFields) {
                 tempPos = Vector2f(startPos.x, cornerFieldSize.y-15 +((tempSize.y*k)*2)-k*6);
             }
 
-            createField(i, "regular", tempSize, tempPos);
+            createField(i, "regular", tempSize, tempPos, false);
         }
     }
+}
+
+void Fields::displaySingle(RenderWindow &windowRef, field *displayField) {
+    cout << "Displaying: " << displayField->number << endl;
+    Color color = Color(255,255,255,100);
+    RectangleShape rectangle;
+    rectangle.setSize(displayField->size);
+    rectangle.setPosition(displayField->position);
+    rectangle.setFillColor(color);
+    rectangle.setOutlineColor(color);
+    rectangle.setOutlineThickness(9);
+    windowRef.draw(rectangle);
 }
 

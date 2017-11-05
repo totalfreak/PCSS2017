@@ -156,6 +156,7 @@ void Player::moveTo(field *dest, int IDToLookFor) {
                 if (tile && *(tile->playersOnField + i) == IDToLookFor) {
                     *(tile->playersOnField +
                       i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
+                    tile->isActive = false;
                     break;
                 }
             }
@@ -165,7 +166,8 @@ void Player::moveTo(field *dest, int IDToLookFor) {
         for(int j = 0 ; j < 6 ; j++) {
             if ( *(tile->playersOnField + j) == FIELD_EMPTY) {
                 *(tile->playersOnField + j) = IDToLookFor;
-            break;
+                tile->isActive = true;
+                break;
             }
         }
 
