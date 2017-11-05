@@ -2,74 +2,93 @@
 
 void GameManager::network() {
 
-    if(!(client1->recvMsgDealtWith == false && client1->isStarted())){return;}
-    //otherwise there must be a new msg to deal with
+    if(lock() == false){
+        cout << "CLIENT NETWORK: i could not get a lock " << endl;
+        return;
+    } // if we cant lock the program to nothing
+    cueNode * ptr = cueHead;
+    while(ptr != nullptr){
+        cout << ptr->msg << endl;
+        ptr = ptr->next;
+    }
+    while(cueHead!= nullptr) { // do this until the cue is empty
 
-    cout << "we got to char" << endl;
-    char msg[1024];
-    cout << "copying" << endl;
-    memcpy(msg,client1->getMsg(),1024); // copy the msg
-    client1->recvMsgDealtWith = true;    // tell the client that we are ready to receive a new msg
-    cout << "stringing" << endl;
-    // read the arguments from the received msg
-    string arg[3];
-    arg[0] = "%";
-    arg[1] = "%";
-    arg[2] = "%";
-    cout << "reading args" << endl;
-    char * reader = strtok(msg,":");
-    if(reader != nullptr){ arg[0] = reader;}
-    reader = strtok(NULL,":");
-    if(reader != nullptr){ arg[1] = reader;}
-    reader = strtok(NULL,":");
-    if(reader != nullptr){ arg[2] = reader;}
-    cout << arg[0] << ":" << arg[1] << ":" << arg[2]<< endl;
+        cueNode * temp = cueHead;
+        //read data at head in cue
+        char msg[1024];
+        memcpy(msg, temp->msg, 1024); // copy the msg
 
-    cout << "got args" << endl;
-    switch(arg[1].c_str()[0]){
-        case 'j':{// j means that a player is joininCr
-            cout << "creating new player" << endl;
-            int playerNr = stoi(arg[0],0);
-            players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
-            cout << "created new player: " << playerNr << endl;
-            client1->tellThatIExist();
-            break;
-        }
-        case 'm':{
+        // read the arguments from the received msg
+        string arg[3];
+        arg[0] = "%";
+        arg[1] = "%";
+        arg[2] = "%";
+        char *reader = strtok(msg, ":");
+        if (reader != nullptr) { arg[0] = reader; }
+        reader = strtok(NULL, ":");
+        if (reader != nullptr) { arg[1] = reader; }
+        reader = strtok(NULL, ":");
+        if (reader != nullptr) { arg[2] = reader; }
+        cout << arg[0] << ":" << arg[1] << ":" << arg[2] << endl;
 
-            break;
-        }
-        case 'u':{
-            int playerNr = stoi(arg[0],0);
-            if(!players[playerNr].hasPlayer){
-                players[playerNr] = createPlayer(arg[2],texBrickFrog,texBrickFrog,playerNr,fieldList.getHead());
+
+        switch (arg[1].c_str()[0]) {
+            case 'j': {// j means that a player is joininCr
+
+                int playerNr = stoi(arg[0], 0);
+                if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
+                players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
                 cout << "created new player: " << playerNr << endl;
+
+                break;
             }
-            break;
-        }
-        case 'r':{ // new roll
-            int playerNr = stoi(arg[0],0);
+            case 'm': {
 
-            cout << "Player " << playerNr << " rolled " << arg[2].at(0) << " and " << arg[2].at(1) << " for a total of " << arg[2].at(2) << arg[2].at(3)<< endl;
-            int rolled[2];
-            rolled[0] = arg[2].at(0)-'0';
-            rolled[1] = arg[2].at(1)-'0';
-            die.setTex(rolled);
-            break;
-        }
-        case 't':{ // pass turn
-            int playerNr = stoi(arg[0],0);
-            cout << "player " << playerNr << " has ended their turn." << endl;
+                break;
+            }
+
+            case 'r': { // new roll
+                int playerNr = stoi(arg[0], 0);
+
+                cout << "Player " << playerNr << " rolled " << arg[2].at(0) << " and " << arg[2].at(1)
+                     << " for a total of " << arg[2].at(2) << arg[2].at(3) << endl;
+                int rolled[2];
+                rolled[0] = arg[2].at(0) - '0';
+                rolled[1] = arg[2].at(1) - '0';
+                die.setTex(rolled);
+                break;
+            }
+            case 't': { // pass turn
+                int playerNr = stoi(arg[0], 0);
+                cout << "player " << playerNr << " has ended their turn." << endl;
+            }
+
         }
 
+        //set a new head in the cue
+        cueHead = cueHead->next;
+        if(cueHead == nullptr){
+            cueTail = nullptr;
+        }
+
+        // free the memmory used to store the nsg
+
+        delete temp;
     }
 
+    // now that the cue is empty we can unlock the cue, so the client can add the things it receives to it
+    unlock();
 }
 
 GameManager::GameManager(int playersToMake) {
 
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
     client1 = new Client(this);
+
+    cueHead = nullptr;
+    cueTail = nullptr;
+
+    locked = false;
 
     if(!texCharA.loadFromFile("Client/Sprites/player_icons/charA.png") || !texCharB.loadFromFile("Client/Sprites/player_icons/charB.png") || !texCharC.loadFromFile("Client/Sprites/player_icons/charC.png") || !texCharD.loadFromFile("Client/Sprites/player_icons/charD.png") ||!texCharE.loadFromFile("Client/Sprites/player_icons/charE.png")||!texCharF.loadFromFile("Client/Sprites/player_icons/charF.png")) {
         cout << "Error loading player textures";
@@ -160,8 +179,7 @@ bool GameManager::initGame() {
     }
 
     string name;
-    name = menu.ipAddressGet();
-    client1->changeName(name);
+
     clientThread = thread([this]{ client1->start();});
     while(!client1->isStarted());
 
@@ -171,4 +189,43 @@ bool GameManager::initGame() {
     players[2].setPic(rand()%6);
 
     return true;
+}
+
+bool GameManager::isLocked() {
+    return locked;
+}
+
+bool GameManager::lock() {
+    if(!locked){
+        locked = true;
+        return true;
+    }
+    return false;
+}
+
+bool GameManager::unlock() {
+    locked = false;
+}
+
+void GameManager::addToCue(char * newMsg, int sizeOfMsg){
+
+    while(lock()); //make sure nobody is messing with the list
+
+    //make a new node and copy the msg into it
+    cueNode * tempNode = new cueNode;
+    tempNode->next = nullptr;
+
+    memcpy(tempNode->msg, newMsg, sizeOfMsg);
+
+    //add it to the list
+    if(cueHead == nullptr && cueTail == nullptr){
+        cueHead = tempNode;
+        cueTail = tempNode;
+    }else{
+        cueTail->next = tempNode;
+        cueTail = tempNode;
+    }
+
+    unlock(); //allow others acess to the list;
+
 }

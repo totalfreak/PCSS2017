@@ -21,17 +21,28 @@
 class Lobby;
 class Client;
 
+struct cueNode{
+    char msg[1024];
+    cueNode * next;
+};
 
 class GameManager {
 
 public:
 
+    bool locked;
     thread serverThread, clientThread;
 
     int sock;
 
     struct sockaddr_in server;
 
+
+    //cue of orders from network
+    cueNode * cueHead;
+    cueNode * cueTail;
+
+    //
     Server server1 = Server(6);
     Client * client1;
     MainMenu menu;
@@ -62,24 +73,6 @@ public:
     //Rolling the dice for the current player
     void roll();
 
-/*
-    //Serverproof recursive nextTurn function
-    void nextTurn(int curPlayer) {
-        //If there are no next player to go to, then go to beginning of array of players
-        if(players[curPlayer].hasPlayer) {
-            currentPlayer++;
-            players[currentPlayer - 1].setPlayersTurn();
-            //If end of array has been reached, then restart
-        } else if(curPlayer > 6){
-            currentPlayer = 1;
-            players[currentPlayer - 1].setPlayersTurn();
-        } else {
-            //If the end hasn't been reached, to make sure that if player 3 leaves, but player 4 and 5 are still playing
-            //it should keep looking for players all the way through the loop, but still only pick up actual players
-            nextTurn(curPlayer+1);
-        }
-    }
-    */
     Sprite drawPlayer(int curPlayer);
     Sprite drawPlayerPic(int curPlayer);
 
@@ -87,11 +80,16 @@ public:
 
     bool initGame();
 
-
+    //simple mutex stuff;
+    bool isLocked();
+    bool lock();
+    bool unlock();
     void network();
     GameManager() = default;
 
 
+
+    void addToCue(char *newMsg, int sizeOfMsg);
 };
 
 

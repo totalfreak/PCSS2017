@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Dice.h"
 
 Texture Dice::chooseDiceTex(int *whatIsRolled) {
@@ -56,7 +57,7 @@ char* Dice::roll() {
     rolled[0] = rand()%6+1;
     rolled[1] = rand()%6+1;
     //Saving the rolled textures
-    char arr[1024];
+    char * arr = new char[1024];
     string info = "c:r:" + to_string(rolled[0])+to_string(rolled[1])+to_string(rolled[0]+rolled[1])+" "+":";
     strcpy(arr, info.c_str());
     return arr;

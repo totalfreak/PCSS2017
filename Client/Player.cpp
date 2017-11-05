@@ -149,7 +149,7 @@ void Player::movePlayer(int rolled) {
 
 void Player::moveTo(field *dest, int IDToLookFor) {
 
-    if(dest != nullptr) {
+    if(dest != nullptr && hasPlayer) {
         //delete us on the field we are on
         if (tile != nullptr) {
             for (int i = 0; i < 6; i++) {

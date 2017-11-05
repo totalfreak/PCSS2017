@@ -24,6 +24,7 @@
 
 
 
+using namespace std;
 
 struct  ClientSock{
     int client;
@@ -31,6 +32,8 @@ struct  ClientSock{
     socklen_t theriSize;
     char * recvMessage = new char[1024];
     bool * msgSent = new bool;
+    bool isConnected = false;
+    string clientName;
 };
 
 class Server {
@@ -39,6 +42,7 @@ class Server {
     int maxPlayers;
     int nrOfPlayers = 0;
     bool started = false;
+    int currentPlayerTurn = -1;
 
 
     //internet
@@ -58,6 +62,7 @@ public:
     int start();
     void Talker();
     void stop();
+    void nextTurn();
 
 
     bool isStarted();

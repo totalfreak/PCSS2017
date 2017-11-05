@@ -32,9 +32,7 @@ void Client::listen() {     //look for returned information on your socket
 
         // else we received new data
         cout << "CLIENT: i received data from server: " << res << endl;
-        memcpy(&lastMsgRecv,res,sizeof(lastMsgRecv));
-        recvMsgDealtWith = false;
-        game->network();
+        game->addToCue(reinterpret_cast<char *>(&res), 1024);
         //listen logic goes here
 
     }
@@ -43,12 +41,17 @@ void Client::listen() {     //look for returned information on your socket
 
 void Client::start() { // used to start the server, (kinda obivous,)
 
+    string tempName = game->menu.getName().c_str();
+    changeName(tempName);
     //setting up socket and establishing connection
     char ip[] = "127.0.0.1"; // Server IP
     if(!isHost) {
-        cout << "CLIENT:setting up client" << endl;
+
+        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));
+
+       /* cout << "CLIENT:setting up client" << endl;
         cout << "please type the ip you would like to connect to" << endl;
-        cin >> ip;
+        cin >> ip;*/
 
     }else{
         cout <<"CLIENT: we hosting nah mutherfucker" << endl;
@@ -75,7 +78,6 @@ void Client::start() { // used to start the server, (kinda obivous,)
     if (connect(sock, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0){
         cout << "- Connection to the server port number: " << port << endl;
     }
-
 
     //starting multithreading
     started = true; // server is now online, so allow threads to loop
@@ -107,19 +109,12 @@ void Client::informOfConnection() { // tells the server that you would like to j
     string info = "c:j:" + myName + ":";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
-
-
 }
 
 void Client::iWannaHost() {
     isHost = true;
 }
 
-
-char * Client::getMsg() {
-
-    return lastMsgRecv;
-}
 
 bool Client::isStarted() const {
     return started;

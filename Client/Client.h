@@ -40,12 +40,12 @@ private:
     thread sendThread;  // thread used to send to server
     thread recvThread;  // thread for revcving from server
     char msgToBeSent[1024];
-    char lastMsgRecv[1024];
+
     bool hasMsgBeenSent = true; // tells the client wheather or not the msg has been sent before
     char name[16] = "no name";
 
 public:
-    bool recvMsgDealtWith;
+
     Client(GameManager *creator);
     void start();
     void listen();
@@ -55,7 +55,7 @@ public:
 
     void informOfConnection();
     void roll(char* arr);
-    char *getMsg();
+
     bool isStarted() const;
 
     void changeName(string newName);

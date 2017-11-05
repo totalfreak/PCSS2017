@@ -25,6 +25,7 @@ class MainMenu {
 
         string ipAddressGet();
 
+    string getName();
 };
 #endif //PCSS2017_MAINMENU_H
 

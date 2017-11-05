@@ -28,6 +28,7 @@ void setDicePos() {
 
 int main() {
 
+
     //Seeding random function
     srand(time(NULL));
 
@@ -59,6 +60,8 @@ int main() {
 
     // run the program as long as the window is open
     while (window.isOpen()) {
+
+        gameManager.network(); // used to take orders received from the server
 
         // check all the window's events that were triggered since the last iteration of the loop
         Event event;

@@ -55,7 +55,7 @@ Texture texCharA, texCharB, texCharC, texCharD, texCharE,texCharF;
 int selected = -1;
 
 int Lobby::start() {
-    //playMusic();
+    playMusic();
     int numberOfButtons = 7;
     Button buttons[7];
     // Create one button to continue to game
@@ -71,6 +71,8 @@ int Lobby::start() {
 
 
     while (window.isOpen()) {
+
+        game->network();
         Event event;
         while (window.pollEvent(event)) {
             switch (event.type) {

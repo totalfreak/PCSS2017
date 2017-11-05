@@ -11,6 +11,8 @@ Server::Server(int maxNrOfPlayers) {
     for(int i = 0 ; i < maxNrOfPlayers; i++){   // set all the client spots as empty
         clients[i].client = -1;
     }
+    currentPlayerTurn = 0;
+    cout << "TRNORD: it is now player : 0's turn"<<endl;
 }
 void Server::Listner(ClientSock aClient) {
     //when ever a new client is connected a listner thread is started for them
@@ -53,17 +55,21 @@ void Server::AcceptClients() {
         clients[emptySpot].client = accept(serverSock,(struct sockaddr *)& clients[emptySpot],& clients[emptySpot].theriSize);
         //wwhen connected make a reference to the client
         ClientSock * test = &clients[emptySpot];
+        clients[emptySpot].isConnected = true;
         //start a thread for the new client to recv from it
         recvThreads[emptySpot] = std::thread([this, test] {this->Listner(*test); } );
         std::cout << "ACCEPT: new client conected they are in spot:" << emptySpot<<  std::endl;
     }
 }
 
+
 void Server::Talker() {
     // while loop, that looks at each client, then if theres a new msg from them, send it to all clients
     while(started) {
         for (int i = 0; i < maxPlayers; i++) {  // loop through all client spots
             if (clients[i].client == -1) { continue; }  // if there is client in the spot do nothing
+
+           // if (clients[i].recvMessage[2] =='r' && currentPlayerTurn != i){ continue;} // if the player want to roll but it is not thier turn do nothing
 
             if(*clients[i].msgSent == false) {  // if theres no new msg form the client do nothing
 
@@ -75,12 +81,26 @@ void Server::Talker() {
 
                     clients[i].recvMessage[0] =  '0' + i;
                     send(clients[j].client, clients[i].recvMessage, 1024, 0);
+
                 }
 
+                //if(clients[i].recvMessage[2] =='r') {nextTurn();}
                 *clients[i].msgSent = true;
             }
         }
     }
+}
+
+
+void Server::nextTurn() {
+    /*bool leaveLoop = false;
+
+    while(!leaveLoop) {
+        currentPlayerTurn++;
+        if (currentPlayerTurn >= maxPlayers) { currentPlayerTurn = 0; }
+        if (!clients[currentPlayerTurn].isConnected){leaveLoop = true;}
+    }
+    cout << "TRNORD:it is now player " << currentPlayerTurn << "'s turn";*/
 }
 
 void Server::stop() {
