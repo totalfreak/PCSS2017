@@ -70,6 +70,8 @@ public:
     //Creating a new player
     Player createPlayer(string tempName, Texture tempTex, Texture tempBrickTex, int playerID, field * pos);
 
+    Player getPlayerByID(int ID);
+
     //Rolling the dice for the current player
     void roll();
 
