@@ -47,7 +47,6 @@ void Lobby::playMusic(){
 
 Sprite Lobby::spritesShow(Sprite sprite, int yPos){
     sprite.setPosition(73, yPos);
-
     return sprite;
 }
 
@@ -58,7 +57,7 @@ int Lobby::start() {
     playMusic();
     int numberOfButtons = 7;
     Button buttons[7];
-    // Create one button to continue to game
+    //Create one button to continue to game
     buttons[0].create(580.0f, 530.0f, "continue");
 
     for(int i = 0; i<numberOfButtons-1; i++){
@@ -91,7 +90,7 @@ int Lobby::start() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                         } else {
-                            //else, change to default texture
+                            //Else, change to default texture
                             buttons[i].setTex(0);
                         }
                     }
@@ -103,7 +102,7 @@ int Lobby::start() {
                     Sprite button;
                     for (int i = 0; i < numberOfButtons; i++) {
                         button = buttons[i].getSprite();
-                        // if button is pressed, change texture to 2 (pushed down)
+                        //If button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(2);
                         }
@@ -117,13 +116,13 @@ int Lobby::start() {
                     for (int i = 0; i < numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if mouse is released, change button texture to 1 (highlighted)
+                        //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             if (button.getGlobalBounds().contains(mousePosF)) {
                                 buttons[i].setTex(2);
                                 if(i==0){
-                                    //continue button
+                                    //Continue button
                                     if(selected!=-1) {
                                         window.close();
                                         music.stop();
@@ -145,6 +144,7 @@ int Lobby::start() {
                     break;
             }
         }
+
         window.clear(Color::White);
         window.draw(bgSprite);
         for (int i = 0; i < numberOfButtons; i++) {
@@ -153,13 +153,12 @@ int Lobby::start() {
         window.draw(rectangle);
 
         for(int i = 0 ; i < 6 ; i++){   //for each player spot(6) in the game
-            if(!game->players[i].hasPlayer){ continue;} // if theres no player there no thing
+            if(!game->players[i].hasPlayer){continue;} // if there is no player there is nothing
             window.draw(showPlayerName(game->players[i].playerName, 120 + i*40));
             window.draw(spritesShow(game->players[i].playerBrickSpr, 120 + i*40));
         }
 
         window.draw(showPlayers());
-
         window.draw(showTitle());
 
         Text text;
@@ -171,11 +170,9 @@ int Lobby::start() {
         window.draw(text);
 
         window.display();
-
     }
 
     return 0;
-
 }
 
 Lobby::Lobby() {
@@ -195,7 +192,6 @@ Lobby::Lobby() {
     }
     bgSprite.setTexture(texBg);
 
-
     rectangle = RectangleShape(sf::Vector2f(120, 50));
     rectangle.setOutlineColor(sf::Color(117, 117, 117));
     rectangle.setSize(sf::Vector2f(300, 400));
@@ -206,7 +202,7 @@ Lobby::Lobby() {
 
 Lobby::Lobby(GameManager * creator) {
 
-    //this version can make changes to the gamemanager that created it
+    //This version can make changes to the gamemanager that created it
 
     game = creator;
     if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {

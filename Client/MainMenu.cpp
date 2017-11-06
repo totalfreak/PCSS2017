@@ -18,8 +18,8 @@ int MainMenu::getPlayerNum() {
                     break;
                 case Event::MouseMoved:
                 {
-                    Vector2i mousePos = Mouse::getPosition( window );
-                    Vector2f mousePosF( static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ) );
+                    Vector2i mousePos = Mouse::getPosition(window);
+                    Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
                     Sprite button;
                     for(int i = 0; i<numberOfButtons; i++) {
@@ -29,7 +29,7 @@ int MainMenu::getPlayerNum() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                         } else {
-                            //else, change to default texture
+                            //Else, change to default texture
                             buttons[i].setTex(0);
                         }
                     }
@@ -43,7 +43,7 @@ int MainMenu::getPlayerNum() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if button is pressed, change texture to 2 (pushed down)
+                        //If button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(2);
                         }
@@ -58,7 +58,7 @@ int MainMenu::getPlayerNum() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if mouse is released, change button texture to 1 (highlighted)
+                        //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             window.close();
@@ -112,7 +112,7 @@ int MainMenu::start() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                         } else {
-                            //else, change to default texture
+                            //Else, change to default texture
                             buttons[i].setTex(0);
                         }
                     }
@@ -126,7 +126,7 @@ int MainMenu::start() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if button is pressed, change texture to 2 (pushed down)
+                        //If button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(2);
                         }
@@ -141,18 +141,18 @@ int MainMenu::start() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if mouse is released, change button texture to 1 (highlighted)
+                        //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             switch (i)
                             {
-                                case 0: // Host Server
+                                case 0: //Host Server
                                     return 1;
                                     break;
-                                case 1: // Join Server
+                                case 1: //Join Server
                                     return 2;
                                     break;
-                                case 2: // Exit Game
+                                case 2: //Exit Game
                                     window.close();
                                     return 0;
                                     break;
@@ -197,7 +197,7 @@ string MainMenu::getName() {
     text.setPosition(320, 200);
     int numberOfButtons = 1;
     Button buttons[1];
-    // Create three buttons: Host game, join game, exit game
+    //Create three buttons: Host game, join game, exit game
     buttons[0].create(300.0f,500.0f,"continue");
     window.create(sf::VideoMode(800, 600), "Menu");
 
@@ -224,7 +224,7 @@ string MainMenu::getName() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                         } else {
-                            //else, change to default texture
+                            //Else, change to default texture
                             buttons[i].setTex(0);
                         }
                     }
@@ -238,7 +238,7 @@ string MainMenu::getName() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if button is pressed, change texture to 2 (pushed down)
+                        //If button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(2);
                         }
@@ -253,12 +253,12 @@ string MainMenu::getName() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if mouse is released, change button texture to 1 (highlighted)
+                        //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             window.close();
                             switch (i) {
-                                case 0: // Host Server
+                                case 0: //Host Server
                                     return address;
                                     break;
                             }
@@ -301,7 +301,7 @@ string MainMenu::ipAddressGet() {
     }
     string address;
     sf::Text text;
-    sf:Text title;
+    sf::Text title;
 
     title.setFont(font);
     title.setCharacterSize(40);
@@ -316,7 +316,7 @@ string MainMenu::ipAddressGet() {
     text.setPosition(320, 200);
     int numberOfButtons = 1;
     Button buttons[1];
-    // Create three buttons: Host game, join game, exit game
+    //Create three buttons: Host game, join game, exit game
     buttons[0].create(300.0f,500.0f,"continue");
     window.create(sf::VideoMode(800, 600), "Menu");
 
@@ -343,7 +343,7 @@ string MainMenu::ipAddressGet() {
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                         } else {
-                            //else, change to default texture
+                            //Else, change to default texture
                             buttons[i].setTex(0);
                         }
                     }
@@ -357,7 +357,7 @@ string MainMenu::ipAddressGet() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if button is pressed, change texture to 2 (pushed down)
+                        //If button is pressed, change texture to 2 (pushed down)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(2);
                         }
@@ -372,12 +372,12 @@ string MainMenu::ipAddressGet() {
                     for(int i = 0; i<numberOfButtons; i++) {
 
                         button = buttons[i].getSprite();
-                        // if mouse is released, change button texture to 1 (highlighted)
+                        //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
                             buttons[i].setTex(1);
                             window.close();
                             switch (i) {
-                                case 0: // Host Server
+                                case 0: //Host Server
                                     return address;
                                     break;
                             }

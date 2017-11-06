@@ -7,10 +7,10 @@ void GameManager::network() {
         return;
     } // if we cant lock the program to nothing
 
-    while(queHead!= nullptr) { // do this until the que is empty
+    while(queueHead!= nullptr) { // do this until the queue is empty
 
-        queNode * temp = queHead;
-        //read data at head in que
+        queueNode * temp = queueHead;
+        //read data at head in queue
         char msg[1024];
         memcpy(msg, temp->msg, 1024); // copy the msg
 
@@ -75,10 +75,10 @@ void GameManager::network() {
             }
         }
 
-        //set a new head in the que
-        queHead = queHead->next;
-        if(queHead == nullptr){
-            queTail = nullptr;
+        //set a new head in the queue
+        queueHead = queueHead->next;
+        if(queueHead == nullptr){
+            queueTail = nullptr;
         }
 
         // free the memmory used to store the nsg
@@ -86,7 +86,7 @@ void GameManager::network() {
         delete temp;
     }
 
-    // now that the que is empty we can unlock the que, so the client can add the things it receives to it
+    // now that the queue is empty we can unlock the queue, so the client can add the things it receives to it
     unlock();
 }
 string GameManager::checkWinCondition() {
@@ -104,8 +104,8 @@ GameManager::GameManager(int playersToMake) {
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
     client1 = new Client(this);
 
-    queHead = nullptr;
-    queTail = nullptr;
+    queueHead = nullptr;
+    queueTail = nullptr;
 
     locked = false;
 
@@ -223,23 +223,23 @@ bool GameManager::unlock() {
     locked = false;
 }
 
-void GameManager::addToQue(char * newMsg, int sizeOfMsg){
+void GameManager::addToQueue(char * newMsg, int sizeOfMsg){
 
     while(lock()); //make sure nobody is messing with the list
 
     //make a new node and copy the msg into it
-    queNode * tempNode = new queNode;
+    queueNode * tempNode = new queueNode;
     tempNode->next = nullptr;
 
     memcpy(tempNode->msg, newMsg, sizeOfMsg);
 
     //add it to the list
-    if(queHead == nullptr && queTail == nullptr){
-        queHead = tempNode;
-        queTail = tempNode;
+    if(queueHead == nullptr && queueTail == nullptr){
+        queueHead = tempNode;
+        queueTail = tempNode;
     }else{
-        queTail->next = tempNode;
-        queTail = tempNode;
+        queueTail->next = tempNode;
+        queueTail = tempNode;
     }
 
     unlock(); //allow others acess to the list;

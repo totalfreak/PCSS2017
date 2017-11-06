@@ -23,7 +23,6 @@ void Fields::createField(int n, string s, Vector2f size, Vector2f pos, bool isAc
         tail->next = temp;
         tail = temp;
     }
-
 }
 
 Fields::Fields() {
@@ -57,14 +56,11 @@ void Fields::display(RenderWindow &windowRef, Fields &fieldListRef) {
         rectangle.setOutlineColor(color);
         rectangle.setOutlineThickness(9);
 
-
         windowRef.draw(rectangle);
 
         temp = temp->next;
     }
-
 }
-
 
 void Fields::setupFields(int numberOfFields) {
     int k;

@@ -32,7 +32,7 @@ void Client::listen() {     //look for returned information on your socket
 
         // else we received new data
         cout << "CLIENT: i received data from server: " << res << endl;
-        game->addToQue(reinterpret_cast<char *>(&res), 1024);
+        game->addToQueue(reinterpret_cast<char *>(&res), 1024);
         //listen logic goes here
 
     }
@@ -99,18 +99,15 @@ void Client::configureClient() {
 
     string tempName = game->menu.getName().c_str();
     changeName(tempName);
-    //setting up socket and establishing connection
+    //Setting up socket and establishing connection
     char ip[] = "127.0.0.1"; // Server IP
     if(!isHost) {
-
         memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));
-
         /* cout << "CLIENT:setting up client" << endl;
          cout << "please type the ip you would like to connect to" << endl;
          cin >> ip;*/
-
     }else{
-        cout <<"CLIENT: we hosting nah mutherfucker" << endl;
+        cout <<"CLIENT: We are hosting now." << endl;
     }
 
     struct sockaddr_in server_addr;

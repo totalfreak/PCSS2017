@@ -36,12 +36,12 @@ class Client {
 
 private:
     GameManager * game;
-    int sock;   // tell the computer which socket we are sending on
-    thread sendThread;  // thread used to send to server
-    thread recvThread;  // thread for revcving from server
+    int sock;   //Tell the computer which socket we are sending on
+    thread sendThread;  //Thread used to send to server
+    thread recvThread;  //Thread for receiving from server
     char msgToBeSent[1024];
 
-    bool hasMsgBeenSent = true; // tells the client wheather or not the msg has been sent before
+    bool hasMsgBeenSent = true; //Tells the client whether or not the msg has been sent before
 
 public:
     char name[16] = "no name";

@@ -28,7 +28,7 @@ class Player {
     float DEFAULTSPEED = 100;
     high_resolution_clock::time_point LastMove = high_resolution_clock::now();
     high_resolution_clock::time_point tempTime;
-    float movescaleAdjust = 100; // prevents the sprite from being to big during move
+    float movescaleAdjust = 100; //Prevent the sprite from being too big during move
 
 
 
@@ -44,21 +44,21 @@ public:
     Vector2f position;
     int hasSelectedPic = -1;
 
-    //physics
+    //Physics
     float speed;//
     float distanceFactor = 1.5;
     float currentSpeed;
     bool reachedEnd = false;
 
     int myID;
-    field * tile; // the current tile this player is heading towards
+    field * tile; //The current tile this player is heading towards
 
 
     //constructors
     Player() = default;
 
 
-    // gamestate actions
+    //Game state actions
     void setPlayersTurn();
     void endTurn();
     void chooseAction();
@@ -74,12 +74,12 @@ public:
     Sprite displayShadow();
 
 
-    //game things
-    void physics();     //move player
-    float distance(Vector2f one, Vector2f two); // computes distance
-    void normalize(Vector2f * in);    //normalizes a vector
-    void movePlayer(int rolled);    //tell a player to move to a place
-    void moveTo(field *dest, int IDToLookFor);      //deletes spot at current tile and gives them a spot at the destinaiton
+    //Game functions
+    void physics();     //Move player
+    float distance(Vector2f one, Vector2f two); //Computes distance
+    void normalize(Vector2f * in);    //Normalizes a vector
+    void movePlayer(int rolled);    //Tells a player to move to a place
+    void moveTo(field *dest, int IDToLookFor);      //Deletes spot at current tile and gives them a spot at the destinaiton
     double getMoveTime();
 
     Player(string name, Texture picTex, Texture brickTex, int ID, field *pos);

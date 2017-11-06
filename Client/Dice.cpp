@@ -2,7 +2,7 @@
 #include "Dice.h"
 
 Texture Dice::chooseDiceTex(int *whatIsRolled) {
-    //Switch case, showing the right dice texture, dependent on what was rolled
+    //Switch case, showing the right dice texture, dependent on what is rolled
 
     Texture texes[2];
     switch (whatIsRolled[0]) {

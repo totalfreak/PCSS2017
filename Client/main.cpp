@@ -1,4 +1,3 @@
-//inet_addr
 #include <cstdlib>
 #include <cstdio>
 #include <sstream>
@@ -57,7 +56,7 @@ int main() {
     }
     bgSpr.setTexture(bgTex);
 
-    // Dice tray
+    //Dice tray
     sf::Texture trayTex;
     sf::Sprite traySpr;
     if(!trayTex.loadFromFile("Client/Sprites/spr_diceTray.png")) {
@@ -131,9 +130,6 @@ int main() {
         window.display();
 
     }
-
-
-
 
     return 0;
 }

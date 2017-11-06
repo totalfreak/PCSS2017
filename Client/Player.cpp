@@ -53,9 +53,9 @@ void Player::physics() {
             }
         }
     }
-    nrOnField++; // we increment to avoid having people at the ends of the tile
+    nrOnField++; //Increment to avoid having people at the ends of the tile
     Vector2f goal;
-    goal = Vector2f(tile->position.x + tile->size.x/2 , tile->position.y + (0.1 + 0.8 * ((float)myNr/nrOnField) * tile->size.y) );
+    goal = Vector2f(tile->position.x + tile->size.x/2 , tile->position.y + (0.1 + 0.8 * ((float)myNr/nrOnField) * tile->size.y));
 
 
     float dist = distance(goal, getPosition());
@@ -64,7 +64,7 @@ void Player::physics() {
 
     currentSpeed = (speed + dist  * distanceFactor);
 
-    float moveSpeed = (float)(timeSinceLastMove * currentSpeed );
+    float moveSpeed = (float)(timeSinceLastMove * currentSpeed);
 
 
 
@@ -80,7 +80,7 @@ void Player::physics() {
     moveDirection *= moveSpeed;
 
 
-    setPosition( getPosition() + moveDirection);
+    setPosition(getPosition() + moveDirection);
 }
 
 double Player::getMoveTime(){// gets time in microseconds since last move
@@ -137,7 +137,7 @@ void Player::movePlayer(int rolled) {
     cout << endl <<  "Player " <<  playerName << " just moved " << rolled << " spaces";
     //TODO Make fit into whatever model we make the doubly linked list of Fields be
     field * dest = tile;
-    //iterate throught he field
+    //Iterate through the field
     for(int i = 0 ; i < rolled ; i++){
         if(dest->next != nullptr) {
             dest = dest->next;
@@ -151,18 +151,18 @@ void Player::movePlayer(int rolled) {
 void Player::moveTo(field *dest, int IDToLookFor) {
 
     if(dest != nullptr && hasPlayer) {
-        //delete us on the field we are on
+        //Delete us on the field we are on
         if (tile != nullptr) {
             tile->isActive = false;
             for (int i = 0; i < 6; i++) {
                 if (tile && *(tile->playersOnField + i) == IDToLookFor) {
                     *(tile->playersOnField +
-                      i) = FIELD_EMPTY; // we use -1 to denote that no players are on the this index of the array
+                      i) = FIELD_EMPTY; //We use -1 to denote that no players are on the this index of the array
                     break;
                 }
             }
         }
-        // then add us at the destination
+        //Then add us at the destination
         tile = dest;
         tile->isActive = true;
         for(int j = 0 ; j < 6 ; j++) {
@@ -179,13 +179,12 @@ void Player::moveTo(field *dest, int IDToLookFor) {
 void Player::endTurn() {
     isPlayersTurn = false;
     cout << endl << this->playerName << "'s turn ended" << endl;
-    //inform the server
+    //Inform the server
 }
 
 void Player::chooseAction() {
     if(isPlayersTurn)
     {
-
         //Do something related to what field you landed on here
 
         endTurn();

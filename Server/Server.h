@@ -34,18 +34,18 @@ struct  ClientSock{
 
 class Server {
 
-    //setting the server up
+    //Setting the server up
     int maxPlayers;
     int nrOfPlayers = 0;
     bool started = false;
     int currentPlayerTurn = -1;
 
 
-    //internet
-    ClientSock * clients  ;       //all the socket the players connect to
+    //Internet
+    ClientSock * clients  ;       //All the socket the players connect to
     int serverSock;
 
-    //sending and receiving
+    //Sending and receiving
     char * msg[1024];
     std::thread accThread;
     std::thread * recvThreads;
@@ -53,7 +53,7 @@ class Server {
 
 public:
     const char* ipAddr;
-    Server(int maxNrOfPLayers); // setup server so and start to listen on server socket;
+    Server(int maxNrOfPLayers); //Setup server so and start to listen on server socket;
 
     int start();
     void Talker();

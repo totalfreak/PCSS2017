@@ -21,9 +21,9 @@
 class Lobby;
 class Client;
 
-struct queNode{
+struct queueNode{
     char msg[1024];
-    queNode * next;
+    queueNode * next;
 };
 
 class GameManager {
@@ -39,8 +39,8 @@ public:
 
 
     //cue of orders from network
-    queNode * queHead;
-    queNode * queTail;
+    queueNode * queueHead;
+    queueNode * queueTail;
 
     //
     Server server1 = Server(6);
@@ -91,7 +91,7 @@ public:
 
 
 
-    void addToQue(char *newMsg, int sizeOfMsg);
+    void addToQueue(char *newMsg, int sizeOfMsg);
 };
 
 
