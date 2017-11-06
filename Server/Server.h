@@ -22,10 +22,6 @@
 #include <iostream>
 #include "../Client/constants.h"
 
-
-
-using namespace std;
-
 struct  ClientSock{
     int client;
     sockaddr thierAddr;
@@ -33,7 +29,7 @@ struct  ClientSock{
     char * recvMessage = new char[1024];
     bool * msgSent = new bool;
     bool isConnected = false;
-    string clientName;
+    std::string clientName;
 };
 
 class Server {
