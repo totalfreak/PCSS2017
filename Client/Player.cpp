@@ -20,7 +20,9 @@ Player::Player(string name, Texture picTex, Texture brickTex, int ID, field * po
     myID = ID;
     tile = pos;
     moveTo(pos, myID);
-
+    if(myID == 0){
+        setPlayersTurn();
+    }
 
 }
 

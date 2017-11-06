@@ -42,7 +42,7 @@ void GameManager::network() {
             }
             case 'r': { // new roll
                 int playerNr = stoi(arg[0], 0);
-
+                if(!players[playerNr].isPlayersTurn){ break;}
                 cout << "Player " << playerNr << " rolled " << arg[2].at(0) << " and " << arg[2].at(1)
                      << " for a total of " << arg[2].at(2) << arg[2].at(3) << endl;
                 int rolled[2];
@@ -50,6 +50,12 @@ void GameManager::network() {
                 rolled[1] = arg[2].at(1) - '0';
                 die.setTex(rolled);
                 players[playerNr].movePlayer(rolled[0]+rolled[1]);
+                players[playerNr].endTurn();
+                if(players[playerNr+1].hasPlayer){
+                    players[playerNr+1].setPlayersTurn();
+                } else {
+                    players[0].setPlayersTurn();
+                }
                 break;
             }
             case 't': { // pass turn
