@@ -103,10 +103,6 @@ void Client::configureClient() {
     const char *ip = "127.0.0.1"; // Server IP
     if(!isHost) {
         ip = getIpAddr();
-/*        cout << "CLIENT:setting up client" << endl;
-        cout << "please type the ip you would like to connect to" << endl;
-        cin >> ip;
-        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));*/
     }else{
         cout <<"CLIENT: We are hosting now." << endl;
     }
