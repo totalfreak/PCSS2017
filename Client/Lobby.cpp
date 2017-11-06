@@ -55,17 +55,17 @@ int selected = -1;
 
 int Lobby::start() {
     playMusic();
-    int numberOfButtons = 7;
-    Button buttons[7];
-    //Create one button to continue to game
+    int numberOfButtons = 8;
+    Button buttons[8];
+    // Create one button to continue to game
     buttons[0].create(580.0f, 530.0f, "continue");
+    buttons[7].create(380.0f, 530.0f, "leave");
 
-    for(int i = 0; i<numberOfButtons-1; i++){
+    for(int i = 0; i<numberOfButtons-2; i++){
         string path = "characters/";
         path+=std::to_string(i);
         buttons[i+1].create(400+100*(i%2),100+100*(i/2),path);
     }
-
     window.create(sf::VideoMode(800, 600), "Lobby");
 
 
@@ -118,23 +118,24 @@ int Lobby::start() {
                         button = buttons[i].getSprite();
                         //If mouse is released, change button texture to 1 (highlighted)
                         if (button.getGlobalBounds().contains(mousePosF)) {
-                            buttons[i].setTex(1);
-                            if (button.getGlobalBounds().contains(mousePosF)) {
-                                buttons[i].setTex(2);
-                                if(i==0){
-                                    //Continue button
-                                    if(selected!=-1) {
-                                        window.close();
-                                        music.stop();
-                                        std::cout << "Returned texture from button " << selected << endl;
-                                        return selected-1;
-                                    }
-                                } else {
-                                    selected = i;
-                                    game->client1->changePic(selected-1);
-                                    std::cout << "Set selected to " << i << endl;
-                                    break;
+                            buttons[i].setTex(2);
+                            if(i==0){
+                                //continue button
+                                if(selected!=-1) {
+                                    window.close();
+                                    music.stop();
+                                    std::cout << "Returned texture from button " << selected << endl;
+                                    return selected-1;
                                 }
+                            } else if(i==7){
+                                window.close();
+                                music.stop();
+                                return -1;
+                            } else {
+                                selected = i;
+                                game->client1->changePic(selected-1);
+                                std::cout << "Set selected to " << i << endl;
+                                break;
                             }
                         }
                     }

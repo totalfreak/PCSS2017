@@ -1,16 +1,21 @@
-FROM patricol/sfml
-#FROM rikorose/gcc-cmake
-
+#FROM lamtev/cxx
+FROM gcc:6.4
+#FROM patricol/sfml
+FROM tonipes/sfml-docker
+FROM rikorose/gcc-cmake
 FROM ubuntu:14.04
+
+#ENV CC /usr/local/bin/gcc
+#ENV CXX /usr/local/bin/g++
 
 RUN apt-get update && apt-get install -y \
     build-essential \
 #    cmake \
     wget \
     git \
-    gcc \
+#    gcc \
     clang \
-    g++ \
+#    g++ \
     libegl1-mesa \
     libgl1-mesa-dev \
     libglu1-mesa \
@@ -25,10 +30,16 @@ RUN apt-get update && apt-get install -y \
     graphviz \
     doxygen \
     xvfb
-
+#run apt-get update
+#run apt-get install gcc
 RUN wget http://www.cmake.org/files/v3.6/cmake-3.6.2.tar.gz
 
 RUN tar -xvf cmake-3.6.2.tar.gz
+
+RUN apt install gcc
+
+#ENV CC /usr/local/bin/gcc
+#ENV CXX /usr/local/bin/g++
 
 RUN cd cmake-3.6.2 && \
     ./bootstrap && \
@@ -42,12 +53,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 # runtime dependencies and basic building setup
-run apt update \
-    && apt upgrade -y \
+#run apt update \
+run apt upgrade -y \
     && apt install -y \
         build-essential \
-        g++ \
-        cmake \
+#        g++ \
+#        cmake \
         git \
         libfreetype6 \
         libjpeg8 \

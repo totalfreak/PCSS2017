@@ -203,12 +203,22 @@ bool GameManager::initGame() {
     }
 
 
-    client1->configureClient();
-    clientThread = thread([this]{ client1->start();});
-    while(!client1->isStarted());
 
-    players[myOwnPlayerNumber].setPic(lobby->start());
-
+    bool ready = false;
+    while(!ready) {
+        client1->configureClient();
+        clientThread = thread([this] { client1->start(); });
+        while (!client1->isStarted());
+        int choice = lobby->start();
+        if(choice!=-1) {
+            players[myOwnPlayerNumber].setPic(choice);
+            ready = true;
+        } else {
+            clientThread.detach();
+            clientThread.~thread();
+            client1 = new Client(this);
+        }
+    }
     return true;
 }
 
