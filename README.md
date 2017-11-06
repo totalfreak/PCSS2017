@@ -26,9 +26,16 @@ This is a list of the requirements in order to be able to run this program
 
 ```$ cd /path/to/the/directory```
 
-3. Clone repository:
+3. Either 
 
-```$ git clone https://github.com/totalfreak/PCSS2017.git```
+    Clone repository:
+
+    ```$ git clone https://github.com/totalfreak/PCSS2017.git```
+
+    or
+    
+    Download the latest release from [here]("https://github.com/totalfreak/PCSS2017/releases")
+
 
 4. Change into the repo folder:
 
