@@ -55,13 +55,15 @@ Download the latest release from [here](https://github.com/totalfreak/PCSS2017/r
 
 1. First choose if you want to Host a server(a) or Join an existing server(b)
 
-    a. When hosting a game you will be asked to set how many players should play.
+    a. When hosting a game you will be asked to enter a name and set set how many players should play
 
-    b. You will be asked to input an ip address, this will make your client join the server inputted.
+    b. You will be asked to input an ip address and your name, this will make your client join the server.
 
-2. The lobby is where you wait for the other players to join
+2. The lobby is where you wait for the other players to join, and choose your character. Click continue when you're ready to play
 
-3. When it's your turn, roll the dice and watch the magic happen
+3. When it's your turn, click anywhere in the window to roll the dice. Your player will then move a number of spaces corresponding to the sum of the number of eyes you rolled
+
+4. The first player to make it once around the board wins
 
 ## Program description
 The program uses TCP (Transmission Control Protocol) to send data to and from the server and clients.
