@@ -44,11 +44,6 @@ void GameManager::network() {
                 client1->tellThatIExist();
                 break;
             }
-            case 'm': {
-
-                break;
-            }
-
             case 'r': { // new roll
                 int playerNr = stoi(arg[0], 0);
 
@@ -63,13 +58,14 @@ void GameManager::network() {
             case 't': { // pass turn
                 int playerNr = stoi(arg[0], 0);
                 cout << "player " << playerNr << " has ended their turn." << endl;
+                break;
             }
             case 'u': { // pass turn
 
                 int playerNr = stoi(arg[0], 0);
                 if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
                 players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
-
+                break;
             }
             case 'p':
                 int playerNr = stoi(arg[0], 0);
