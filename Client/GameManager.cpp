@@ -53,6 +53,7 @@ void GameManager::network() {
                 rolled[0] = arg[2].at(0) - '0';
                 rolled[1] = arg[2].at(1) - '0';
                 die.setTex(rolled);
+                players[playerNr].movePlayer(rolled[0]+rolled[1]);
                 break;
             }
             case 't': { // pass turn
