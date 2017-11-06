@@ -1,4 +1,6 @@
-# "Sort of monopoly"
+# Election Day
+
+Welcome to the final best version of the exciting board game that is taking the world by storm. Its current state is playable and even has a win condition! Still, it is actually possible to improve upon it. The full set of rules, not all of which have been implemented, is available in the ruleset folder.
 
 ## Collaborators
 - Rasmus Isager Kruuse: rkruus16@student.aau.dk
