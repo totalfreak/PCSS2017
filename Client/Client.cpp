@@ -137,4 +137,10 @@ void Client::configureClient() {
 
 }
 
-
+void Client::changePic(int selected) {
+    char arr[1024];
+    string myPic = to_string(selected);
+    string info = "c:p:" + myPic + ":";
+    strcpy(arr, info.c_str());
+    sendMessage(arr, 1024);
+}

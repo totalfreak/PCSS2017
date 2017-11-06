@@ -62,9 +62,7 @@ public:
 
     Texture texBrickFrog;
 
-    int myOwnPlayerNumber = 0;
-
-
+    int myOwnPlayerNumber = -1;
 
     explicit GameManager(int playersToMake);
     //Creating a new player
