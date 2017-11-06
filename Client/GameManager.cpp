@@ -34,10 +34,12 @@ void GameManager::network() {
 
         switch (arg[1].c_str()[0]) {
             case 'j': {// j means that a player is joininCr
-
                 int playerNr = stoi(arg[0], 0);
                 if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
                 players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
+                if(myOwnPlayerNumber == -1 && arg[2] == client1->name){
+                    myOwnPlayerNumber = playerNr;
+                }
                 cout << "created new player: " << playerNr << endl;
                 client1->tellThatIExist();
                 break;
@@ -69,6 +71,12 @@ void GameManager::network() {
                 players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
 
             }
+            case 'p':
+                int playerNr = stoi(arg[0], 0);
+                if (!players[playerNr].hasPlayer) { break; }
+                players[playerNr].setPic(stoi(arg[2], 0));
+                cout << "Player " << playerNr << " changed pic" << endl;
+                break;
 
         }
 

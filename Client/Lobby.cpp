@@ -132,6 +132,7 @@ int Lobby::start() {
                                     }
                                 } else {
                                     selected = i;
+                                    game->client1->changePic(selected-1);
                                     std::cout << "Set selected to " << i << endl;
                                     break;
                                 }

@@ -42,10 +42,9 @@ private:
     char msgToBeSent[1024];
 
     bool hasMsgBeenSent = true; // tells the client wheather or not the msg has been sent before
-    char name[16] = "no name";
 
 public:
-
+    char name[16] = "no name";
     Client(GameManager *creator);
     void start();
     void listen();
@@ -62,6 +61,7 @@ public:
     void tellThatIExist();
 
     void configureClient();
+    void changePic(int selected);
 };
 
 #endif //PCSS2017_CLIENT_H
