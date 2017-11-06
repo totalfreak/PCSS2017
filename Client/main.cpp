@@ -106,7 +106,7 @@ int main() {
             window.draw(gameManager.drawPlayerPic(i));
         }
 
-        if(gameManager.checkWinCondition()!="None"){
+        if(gameManager.checkWinCondition() != "None"){
             window.clear(Color::Black);
             Text text;
             text.setFont(font);

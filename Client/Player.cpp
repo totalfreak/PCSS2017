@@ -139,9 +139,10 @@ void Player::movePlayer(int rolled) {
     field * dest = tile;
     //iterate throught he field
     for(int i = 0 ; i < rolled ; i++){
-
         if(dest->next != nullptr) {
             dest = dest->next;
+        } else {
+            reachedEnd = true;
         }
     }
     moveTo(dest,myID);
@@ -168,7 +169,6 @@ void Player::moveTo(field *dest, int IDToLookFor) {
             if ( *(tile->playersOnField + j) == FIELD_EMPTY) {
                 *(tile->playersOnField + j) = IDToLookFor;
                 cout << "new field" << endl;
-                reachedEnd = true;
                 break;
             }
         }

@@ -90,15 +90,15 @@ void GameManager::network() {
     unlock();
 }
 string GameManager::checkWinCondition() {
-       for(int i = 0; i<6; i++){
-               if (players[i].hasPlayer){
-                        if(players[i].reachedEnd){
-                               return players[i].playerName;
+    for(int i = 0; i<6; i++){
+        if (players[i].hasPlayer){
+            if(players[i].reachedEnd){
+                return players[i].playerName;
             }
-                   }
-           }
-    return "None";
+        }
     }
+    return "None";
+}
 GameManager::GameManager(int playersToMake) {
 
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
