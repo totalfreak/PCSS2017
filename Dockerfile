@@ -6,4 +6,4 @@ ADD . /executable
 
 CMD ["chmod", "+x", "clientExe"]
 
-CMD ["bash", "clientExe"]
+CMD ["./clientExe"]
