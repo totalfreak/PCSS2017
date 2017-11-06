@@ -21,9 +21,9 @@
 class Lobby;
 class Client;
 
-struct cueNode{
+struct queNode{
     char msg[1024];
-    cueNode * next;
+    queNode * next;
 };
 
 class GameManager {
@@ -39,8 +39,8 @@ public:
 
 
     //cue of orders from network
-    cueNode * cueHead;
-    cueNode * cueTail;
+    queNode * queHead;
+    queNode * queTail;
 
     //
     Server server1 = Server(6);
@@ -83,13 +83,15 @@ public:
     //simple mutex stuff;
     bool isLocked();
     bool lock();
+    string checkWinCondition();
+
     bool unlock();
     void network();
     GameManager() = default;
 
 
 
-    void addToCue(char *newMsg, int sizeOfMsg);
+    void addToQue(char *newMsg, int sizeOfMsg);
 };
 
 
