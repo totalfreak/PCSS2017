@@ -14,6 +14,7 @@ using namespace sf;
 GameManager gameManager(1);
 bool gameStarted = false;
 bool lobbyMade = false;
+sf::Font font;
 
 void error(const char *msg) {
     perror(msg);
@@ -27,7 +28,9 @@ void setDicePos() {
 }
 
 int main() {
-
+    if (!font.loadFromFile("Fonts/TheLightFont.ttf")) {
+        perror("Font couldn't load");
+    }
 
     //Seeding random function
     srand(time(NULL));
@@ -103,7 +106,17 @@ int main() {
             window.draw(gameManager.drawPlayerPic(i));
         }
 
-
+        if(gameManager.checkWinCondition()!="None"){
+            window.clear(Color::Black);
+            Text text;
+            text.setFont(font);
+            string winner = gameManager.checkWinCondition();
+            text.setString("Player "+winner+" won!");
+            text.setCharacterSize(60);
+            text.setFillColor(Color::White);
+            text.setPosition(200,200);
+            window.draw(text);
+        }
         window.display();
 
     }

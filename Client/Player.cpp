@@ -168,6 +168,7 @@ void Player::moveTo(field *dest, int IDToLookFor) {
             if ( *(tile->playersOnField + j) == FIELD_EMPTY) {
                 *(tile->playersOnField + j) = IDToLookFor;
                 cout << "new field" << endl;
+                reachedEnd = true;
                 break;
             }
         }

@@ -6,15 +6,11 @@ void GameManager::network() {
         cout << "CLIENT NETWORK: i could not get a lock " << endl;
         return;
     } // if we cant lock the program to nothing
-    cueNode * ptr = cueHead;
-    while(ptr != nullptr){
-        cout << ptr->msg << endl;
-        ptr = ptr->next;
-    }
-    while(cueHead!= nullptr) { // do this until the cue is empty
 
-        cueNode * temp = cueHead;
-        //read data at head in cue
+    while(queHead!= nullptr) { // do this until the que is empty
+
+        queNode * temp = queHead;
+        //read data at head in que
         char msg[1024];
         memcpy(msg, temp->msg, 1024); // copy the msg
 
@@ -79,10 +75,10 @@ void GameManager::network() {
             }
         }
 
-        //set a new head in the cue
-        cueHead = cueHead->next;
-        if(cueHead == nullptr){
-            cueTail = nullptr;
+        //set a new head in the que
+        queHead = queHead->next;
+        if(queHead == nullptr){
+            queTail = nullptr;
         }
 
         // free the memmory used to store the nsg
@@ -90,17 +86,26 @@ void GameManager::network() {
         delete temp;
     }
 
-    // now that the cue is empty we can unlock the cue, so the client can add the things it receives to it
+    // now that the que is empty we can unlock the que, so the client can add the things it receives to it
     unlock();
 }
-
+string GameManager::checkWinCondition() {
+       for(int i = 0; i<6; i++){
+               if (players[i].hasPlayer){
+                        if(players[i].reachedEnd){
+                               return players[i].playerName;
+            }
+                   }
+           }
+    return "None";
+    }
 GameManager::GameManager(int playersToMake) {
 
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
     client1 = new Client(this);
 
-    cueHead = nullptr;
-    cueTail = nullptr;
+    queHead = nullptr;
+    queTail = nullptr;
 
     locked = false;
 
@@ -218,23 +223,23 @@ bool GameManager::unlock() {
     locked = false;
 }
 
-void GameManager::addToCue(char * newMsg, int sizeOfMsg){
+void GameManager::addToQue(char * newMsg, int sizeOfMsg){
 
     while(lock()); //make sure nobody is messing with the list
 
     //make a new node and copy the msg into it
-    cueNode * tempNode = new cueNode;
+    queNode * tempNode = new queNode;
     tempNode->next = nullptr;
 
     memcpy(tempNode->msg, newMsg, sizeOfMsg);
 
     //add it to the list
-    if(cueHead == nullptr && cueTail == nullptr){
-        cueHead = tempNode;
-        cueTail = tempNode;
+    if(queHead == nullptr && queTail == nullptr){
+        queHead = tempNode;
+        queTail = tempNode;
     }else{
-        cueTail->next = tempNode;
-        cueTail = tempNode;
+        queTail->next = tempNode;
+        queTail = tempNode;
     }
 
     unlock(); //allow others acess to the list;
