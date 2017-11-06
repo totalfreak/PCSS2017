@@ -87,7 +87,16 @@ void GameManager::network() {
     // now that the que is empty we can unlock the que, so the client can add the things it receives to it
     unlock();
 }
-
+string GameManager::checkWinCondition() {
+       for(int i = 0; i<6; i++){
+               if (players[i].hasPlayer){
+                        if(players[i].reachedEnd){
+                               return players[i].playerName;
+            }
+                   }
+           }
+    return "None";
+    }
 GameManager::GameManager(int playersToMake) {
 
     lobby = new Lobby(this); //create a new lobby with a reference to this game manger
