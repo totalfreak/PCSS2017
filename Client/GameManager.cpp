@@ -39,7 +39,7 @@ void GameManager::network() {
                 if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
                 players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
                 cout << "created new player: " << playerNr << endl;
-
+                client1->tellThatIExist();
                 break;
             }
             case 'm': {
@@ -61,6 +61,13 @@ void GameManager::network() {
             case 't': { // pass turn
                 int playerNr = stoi(arg[0], 0);
                 cout << "player " << playerNr << " has ended their turn." << endl;
+            }
+            case 'u': { // pass turn
+
+                int playerNr = stoi(arg[0], 0);
+                if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
+                players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
+
             }
 
         }
@@ -178,8 +185,8 @@ bool GameManager::initGame() {
 
     }
 
-    string name;
 
+    client1->configureClient();
     clientThread = thread([this]{ client1->start();});
     while(!client1->isStarted());
 

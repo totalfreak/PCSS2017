@@ -60,6 +60,8 @@ public:
 
     void changeName(string newName);
     void tellThatIExist();
+
+    void configureClient();
 };
 
 #endif //PCSS2017_CLIENT_H

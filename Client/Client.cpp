@@ -41,43 +41,6 @@ void Client::listen() {     //look for returned information on your socket
 
 void Client::start() { // used to start the server, (kinda obivous,)
 
-    string tempName = game->menu.getName().c_str();
-    changeName(tempName);
-    //setting up socket and establishing connection
-    char ip[] = "127.0.0.1"; // Server IP
-    if(!isHost) {
-
-        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));
-
-       /* cout << "CLIENT:setting up client" << endl;
-        cout << "please type the ip you would like to connect to" << endl;
-        cin >> ip;*/
-
-    }else{
-        cout <<"CLIENT: we hosting nah mutherfucker" << endl;
-    }
-
-    struct sockaddr_in server_addr;
-
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (sock < 0) {
-        cout << "\n-Error establishing socket..." << endl;
-        exit(-1);
-    }
-
-
-    cout << "\n- Socket client has been created..." << endl;
-
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(port);
-
-    inet_pton(AF_INET, ip, &server_addr.sin_addr);
-
-
-    if (connect(sock, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0){
-        cout << "- Connection to the server port number: " << port << endl;
-    }
 
     //starting multithreading
     started = true; // server is now online, so allow threads to loop
@@ -130,6 +93,49 @@ void Client::tellThatIExist() {
     string info = "c:u:" + myName + ":";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
+}
+
+void Client::configureClient() {
+
+
+    string tempName = game->menu.getName().c_str();
+    changeName(tempName);
+    //setting up socket and establishing connection
+    char ip[] = "127.0.0.1"; // Server IP
+    if(!isHost) {
+
+        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));
+
+        /* cout << "CLIENT:setting up client" << endl;
+         cout << "please type the ip you would like to connect to" << endl;
+         cin >> ip;*/
+
+    }else{
+        cout <<"CLIENT: we hosting nah mutherfucker" << endl;
+    }
+
+    struct sockaddr_in server_addr;
+
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (sock < 0) {
+        cout << "\n-Error establishing socket..." << endl;
+        exit(-1);
+    }
+
+
+    cout << "\n- Socket client has been created..." << endl;
+
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port);
+
+    inet_pton(AF_INET, ip, &server_addr.sin_addr);
+
+
+    if (connect(sock, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0){
+        cout << "- Connection to the server port number: " << port << endl;
+    }
+
 }
 
 
