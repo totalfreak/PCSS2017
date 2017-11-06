@@ -152,15 +152,15 @@ int Lobby::start() {
         window.draw(rectangle);
 
         for(int i = 0 ; i < 6 ; i++){   //for each player spot(6) in the game
-
             if(!game->players[i].hasPlayer){ continue;} // if theres no player there no thing
             window.draw(showPlayerName(game->players[i].playerName, 120 + i*40));
+            window.draw(spritesShow(game->players[i].playerBrickSpr, 120 + i*40));
         }
-
-
+        
         window.draw(spritesShow(tempSprite, 120));
         window.draw(spritesShow(tempSprite, 160));
         window.draw(spritesShow(tempSprite, 200));
+
         window.draw(showPlayers());
 
         window.draw(showTitle());

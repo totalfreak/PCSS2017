@@ -2,7 +2,7 @@
 
 void GameManager::network() {
 
-    if(lock() == false){
+    if(!lock()){
         cout << "CLIENT NETWORK: i could not get a lock " << endl;
         return;
     } // if we cant lock the program to nothing
@@ -192,9 +192,6 @@ bool GameManager::initGame() {
 
     players[myOwnPlayerNumber].setPic(lobby->start());
 
-    players[1].setPic(rand()%6);
-    players[2].setPic(rand()%6);
-
     return true;
 }
 
@@ -235,4 +232,15 @@ void GameManager::addToCue(char * newMsg, int sizeOfMsg){
 
     unlock(); //allow others acess to the list;
 
+}
+
+Player GameManager::getPlayerByID(int ID) {
+    Player temp;
+    for(int i = 0; i < sizeof(players); i++){
+        if(players[i].myID == ID){
+            temp = players[i];
+            break;
+        }
+    }
+    return temp;
 }

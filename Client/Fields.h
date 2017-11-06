@@ -25,6 +25,7 @@ public:
     int * playersOnField = new int[6];
     string type; //regular - corner
     field *next;
+    bool isActive;
 };
 
 class Fields {
@@ -40,10 +41,12 @@ public:
     Vector2f regularFieldSizeY;
 
 
-    void createField(int n, string s, Vector2f size, Vector2f pos);
+    void createField(int n, string s, Vector2f size, Vector2f pos, bool isActive);
     void setupFields(int numberOfFields);
 
     void display(RenderWindow &windowRef, Fields &fieldListRef);
+    void displayActiveFields(RenderWindow &windowRef, Fields &fieldListRef);
+    void displaySingle(RenderWindow &windowRef, field * displayField);
     Fields();
 
     field *getHead();

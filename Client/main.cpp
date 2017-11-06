@@ -91,7 +91,8 @@ int main() {
         window.clear(Color::Black);
         window.draw(bgSpr);
 
-        //gameManager.fieldList.display(window, gameManager.fieldList);
+        gameManager.fieldList.displayActiveFields(window, gameManager.fieldList);
+
         //Drawing the dices
         setDicePos();
         window.draw(gameManager.die.diceSprites[0]);

@@ -78,7 +78,6 @@ void Client::iWannaHost() {
     isHost = true;
 }
 
-
 bool Client::isStarted() const {
     return started;
 }
