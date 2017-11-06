@@ -42,6 +42,7 @@ private:
     char msgToBeSent[1024];
 
     bool hasMsgBeenSent = true; //Tells the client whether or not the msg has been sent before
+    const char *ipAddr;
 
 public:
     char name[16] = "no name";
@@ -62,6 +63,10 @@ public:
 
     void configureClient();
     void changePic(int selected);
+    const char * getIpAddr();
+    void setIpAddr(const char *ip);
+
+
 };
 
 #endif //PCSS2017_CLIENT_H

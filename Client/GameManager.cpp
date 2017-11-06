@@ -192,13 +192,12 @@ bool GameManager::initGame() {
         case 2:
             std::string ipAddr;
             //puts("What's the ip of the the server you want to join? (xxx.xxx.xxx.xxx)\n");
-            //ipAddr = menu.ipAddressGet();
-            //if(ipAddr.length() < 7) {
-              //  ipAddr = "127.0.0.1";
-            //}
+            ipAddr = menu.ipAddressGet();
+            if(ipAddr.length() < 7) {
+                ipAddr = "127.0.0.1";
+            }
             const char* ip = ipAddr.c_str();
-            //client1.ipAddr = ip;
-
+            client1->setIpAddr(ip);
             break;
 
     }

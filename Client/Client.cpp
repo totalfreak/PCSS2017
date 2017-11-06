@@ -100,12 +100,13 @@ void Client::configureClient() {
     string tempName = game->menu.getName().c_str();
     changeName(tempName);
     //Setting up socket and establishing connection
-    char ip[] = "127.0.0.1"; // Server IP
+    const char *ip = "127.0.0.1"; // Server IP
     if(!isHost) {
-        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));
-        /* cout << "CLIENT:setting up client" << endl;
-         cout << "please type the ip you would like to connect to" << endl;
-         cin >> ip;*/
+        ip = getIpAddr();
+/*        cout << "CLIENT:setting up client" << endl;
+        cout << "please type the ip you would like to connect to" << endl;
+        cin >> ip;
+        memcpy(ip,game->menu.ipAddressGet().c_str(),sizeof(ip));*/
     }else{
         cout <<"CLIENT: We are hosting now." << endl;
     }
@@ -144,4 +145,12 @@ void Client::changePic(int selected) {
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
 
+}
+
+const char * Client::getIpAddr() {
+    return ipAddr;
+}
+
+void Client::setIpAddr(const char *ip) {
+    ipAddr = ip;
 }
