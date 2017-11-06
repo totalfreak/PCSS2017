@@ -65,6 +65,9 @@ This is a list of the requirements in order to be able to run this program
 The program uses TCP (Transmission Control Protocol) to send data to and from the server and clients.
 [*] More info to come
 
+## Class Diagram
+![Class Diagram](https://github.com/totalfreak/PCSS2017/blob/master/classDiagram.png?raw=true)
+
 # Assignment issues
 The assignment says to make two repositories, one for the client and one for the server, but we have only made one repository.
 This is due to the way the assignment was formulated, that you should be able to host a server, join and 
