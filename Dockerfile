@@ -4,4 +4,6 @@ WORKDIR /executable
 
 ADD . /executable
 
+CMD ["chmod", "+x", "clientExe"]
+
 CMD ["bash", "clientExe"]
