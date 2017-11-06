@@ -162,15 +162,13 @@ int Lobby::start() {
 
         window.draw(showTitle());
 
-            Text text;
-            text.setFont(font);
-            text.setString("Choose a character");
-            text.setCharacterSize(20);
-            text.setFillColor(Color::Black);
-            text.setPosition(400, 70);
-            window.draw(text);
-
-
+        Text text;
+        text.setFont(font);
+        text.setString("Choose a character");
+        text.setCharacterSize(20);
+        text.setFillColor(Color::Black);
+        text.setPosition(400, 70);
+        window.draw(text);
 
         window.display();
 

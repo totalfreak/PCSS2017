@@ -138,9 +138,13 @@ void Client::configureClient() {
 }
 
 void Client::changePic(int selected) {
+    if(selected == -1){
+        selected = 0;
+    }
     char arr[1024];
     string myPic = to_string(selected);
     string info = "c:p:" + myPic + ":";
     strcpy(arr, info.c_str());
     sendMessage(arr, 1024);
+
 }

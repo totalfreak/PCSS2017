@@ -61,20 +61,22 @@ void GameManager::network() {
                 cout << "player " << playerNr << " has ended their turn." << endl;
                 break;
             }
-            case 'u': { // pass turn
-
+            case 'u': { // create the other players
                 int playerNr = stoi(arg[0], 0);
-                if (players[playerNr].hasPlayer) { break; } //if the player allready exists, do nothing
-                players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
+                if (!players[playerNr].hasPlayer) {  //if the player allready exists, do nothing
+                    players[playerNr] = createPlayer(arg[2], texBrickFrog, texBrickFrog, playerNr, fieldList.getHead());
+                }
+                client1->changePic(players[myOwnPlayerNumber].hasSelectedPic);
                 break;
             }
-            case 'p':
+            case 'p': {
                 int playerNr = stoi(arg[0], 0);
                 if (!players[playerNr].hasPlayer) { break; }
                 players[playerNr].setPic(stoi(arg[2], 0));
+                players[playerNr].hasSelectedPic = stoi(arg[2], 0);
                 cout << "Player " << playerNr << " changed pic" << endl;
                 break;
-
+            }
         }
 
         //set a new head in the cue

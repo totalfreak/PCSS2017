@@ -42,6 +42,7 @@ public:
     //Will also be used by server
     bool hasPlayer = false;
     Vector2f position;
+    int hasSelectedPic = -1;
 
     //physics
     float speed;//
