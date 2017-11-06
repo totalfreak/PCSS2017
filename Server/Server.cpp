@@ -12,7 +12,7 @@ Server::Server(int maxNrOfPlayers) {
         clients[i].client = -1;
     }
     currentPlayerTurn = 0;
-    cout << "TRNORD: it is now player : 0's turn"<<endl;
+    std::cout << "TRNORD: it is now player : 0's turn"<<std::endl;
 }
 void Server::Listner(ClientSock aClient) {
     //when ever a new client is connected a listner thread is started for them
