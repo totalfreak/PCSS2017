@@ -215,7 +215,16 @@ bool GameManager::lock() {
 bool GameManager::unlock() {
     locked = false;
 }
-
+string GameManager::checkWinCondition() {
+    for(int i = 0; i<6; i++){
+        if (players[i].hasPlayer){
+            if(players[i].reachedEnd){
+                return players[i].playerName;
+            }
+        }
+    }
+return "None";
+}
 void GameManager::addToCue(char * newMsg, int sizeOfMsg){
 
     while(lock()); //make sure nobody is messing with the list

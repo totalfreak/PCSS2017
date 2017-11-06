@@ -47,7 +47,7 @@ public:
     float speed;//
     float distanceFactor = 1.5;
     float currentSpeed;
-
+bool reachedEnd = false;
 
     int myID;
     field * tile; // the current tile this player is heading towards

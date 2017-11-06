@@ -7,5 +7,5 @@
 const int NUMBER_OF_FIELDS = 40;
 //used to declare a field empty
 const int FIELD_EMPTY = -1;
-#define port 35046
+#define port 35051
 #endif //PCSS2017_CONSTANTS_H

@@ -83,6 +83,8 @@ public:
     //simple mutex stuff;
     bool isLocked();
     bool lock();
+    string checkWinCondition();
+
     bool unlock();
     void network();
     GameManager() = default;
