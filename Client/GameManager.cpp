@@ -2,7 +2,7 @@
 
 void GameManager::network() {
 
-    if(lock() == false){
+    if(!lock()){
         cout << "CLIENT NETWORK: i could not get a lock " << endl;
         return;
     } // if we cant lock the program to nothing

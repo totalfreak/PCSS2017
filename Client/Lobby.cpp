@@ -157,7 +157,6 @@ int Lobby::start() {
             window.draw(showPlayerName(game->players[i].playerName, 120 + i*40));
         }
 
-
         window.draw(spritesShow(tempSprite, 120));
         window.draw(spritesShow(tempSprite, 160));
         window.draw(spritesShow(tempSprite, 200));
