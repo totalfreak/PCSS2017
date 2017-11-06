@@ -32,7 +32,7 @@ void Client::listen() {     //look for returned information on your socket
 
         // else we received new data
         cout << "CLIENT: i received data from server: " << res << endl;
-        game->addToCue(reinterpret_cast<char *>(&res), 1024);
+        game->addToQue(reinterpret_cast<char *>(&res), 1024);
         //listen logic goes here
 
     }
